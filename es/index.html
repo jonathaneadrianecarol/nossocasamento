@@ -1,1 +1,857 @@
 
+<!-- =========================
+     index-es.html  (ESPAÑOL)
+     ========================= -->
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7efe7" />
+  <title>Jonathan & Adriane Caroline — Nuestra Boda</title>
+  <meta name="description" content="Sitio de la boda de Jonathan y Adriane Caroline — información, programa, lugar, RSVP y detalles del gran día." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --sand:#f7efe7;
+      --foam:#eef7f6;
+      --coral:#ff6f7a;
+      --hibiscus:#ff4f74;
+      --palm:#2f8f7c;
+      --lagoon:#2aa7a1;
+      --sun:#ffd08a;
+      --ink:#1a1a1a;
+      --muted:rgba(26,26,26,.68);
+      --card:rgba(255,255,255,.78);
+      --stroke:rgba(26,26,26,.10);
+      --shadow:0 20px 50px rgba(26,26,26,.10);
+      --radius:22px;
+
+      --serif:"Playfair Display", ui-serif, Georgia, "Times New Roman", Times, serif;
+      --sans:"Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--ink);
+      font-family:var(--sans);
+      background:
+        radial-gradient(1000px 600px at 15% -10%, rgba(255,208,138,.55), transparent 55%),
+        radial-gradient(800px 500px at 85% 0%, rgba(42,167,161,.26), transparent 55%),
+        radial-gradient(900px 600px at 70% 100%, rgba(255,111,122,.18), transparent 60%),
+        linear-gradient(180deg, var(--sand), var(--foam));
+      overflow-x:hidden;
+    }
+
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+
+    .wrap{max-width:1120px; margin:0 auto; padding:0 20px}
+
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(247,239,231,.72);
+      border-bottom:1px solid var(--stroke);
+    }
+    .topbar-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0;
+      gap:14px;
+    }
+    .brand{
+      display:flex; align-items:baseline; gap:10px; white-space:nowrap;
+    }
+    .brand b{font-family:var(--serif); font-size:18px; letter-spacing:.2px}
+    .brand span{font-size:12px; color:var(--muted)}
+
+    .nav{
+      display:flex; gap:14px; align-items:center; flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav a{
+      font-size:13px;
+      color:rgba(26,26,26,.75);
+      padding:8px 10px;
+      border-radius:999px;
+      transition:background .2s ease, color .2s ease;
+    }
+    .nav a:hover{background:rgba(42,167,161,.12); color:var(--ink)}
+
+    .top-actions{display:flex; align-items:center; gap:12px}
+
+    .cta{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid rgba(26,26,26,.12);
+      background: rgba(255,255,255,.74);
+      font-weight:700;
+      font-size:13px;
+      color:rgba(26,26,26,.85);
+      transition: transform .15s ease, box-shadow .2s ease;
+    }
+    .cta:hover{transform: translateY(-1px); box-shadow: 0 16px 30px rgba(26,26,26,.10)}
+
+    .hero{padding:48px 0 16px}
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    .hero-card{
+      border:1px solid var(--stroke);
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero-card::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(500px 260px at 22% 16%, rgba(255,79,116,.18), transparent 60%),
+        radial-gradient(520px 280px at 85% 10%, rgba(42,167,161,.20), transparent 60%),
+        radial-gradient(520px 280px at 45% 110%, rgba(255,208,138,.26), transparent 60%);
+      pointer-events:none;
+    }
+    .hero-main{padding:28px 26px 24px; position:relative}
+    .kicker{
+      display:inline-flex; gap:8px; align-items:center;
+      font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+      color:rgba(26,26,26,.65);
+      border:1px solid rgba(26,26,26,.10);
+      background: rgba(255,255,255,.55);
+      padding:8px 12px;
+      border-radius:999px;
+    }
+    .title{
+      margin:14px 0 10px;
+      font-family:var(--serif);
+      font-size:48px;
+      line-height:1.04;
+      letter-spacing:.2px;
+    }
+    .subtitle{margin:0 0 16px; color:var(--muted); font-size:16px; max-width:52ch}
+
+    .hero-meta{
+      display:flex; gap:12px; flex-wrap:wrap;
+      margin-top:18px;
+    }
+    .pill{
+      display:flex; gap:10px; align-items:center;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(26,26,26,.10);
+      background: rgba(255,255,255,.6);
+      font-size:13px;
+      color:rgba(26,26,26,.78);
+    }
+    .dot{width:10px; height:10px; border-radius:999px; background:var(--lagoon)}
+    .dot.sun{background:var(--sun)}
+    .dot.coral{background:var(--coral)}
+
+    .hero-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:16px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(26,26,26,.12);
+      background: rgba(255,255,255,.74);
+      font-weight:600;
+      font-size:13px;
+      transition: transform .15s ease, box-shadow .2s ease;
+    }
+    .btn:hover{transform: translateY(-1px); box-shadow: 0 16px 30px rgba(26,26,26,.10)}
+    .btn.primary{background: rgba(255,255,255,.88)}
+    .btn.icon{padding:12px; width:44px; aspect-ratio:1/1}
+    .btn.icon svg{width:18px; height:18px; display:block}
+
+    .photo{
+      min-height: 420px;
+      display:flex;
+      align-items:stretch;
+      justify-content:stretch;
+      position:relative;
+    }
+    .photo .frame{
+      position:absolute; inset:0;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.06)),
+        radial-gradient(900px 520px at 35% 10%, rgba(42,167,161,.10), transparent 60%),
+        radial-gradient(900px 520px at 80% 15%, rgba(255,79,116,.10), transparent 60%),
+        url('images/fotoprincipal.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .photo .frame::after{
+      content:"";
+      position:absolute; inset:18px;
+      border-radius: calc(var(--radius) - 6px);
+      border:1px dashed rgba(26,26,26,.18);
+    }
+    .photo .label{
+      position:absolute;
+      left:18px; right:18px; bottom:18px;
+      border-radius: 18px;
+      border:1px solid rgba(26,26,26,.10);
+      background: rgba(255,255,255,.76);
+      padding:14px 14px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .photo .label b{font-family:var(--serif); font-size:16px}
+    .photo .label span{font-size:12px; color:var(--muted)}
+
+    section{padding:42px 0}
+    .section-head{display:flex; align-items:flex-end; justify-content:space-between; gap:12px; margin-bottom:18px}
+    h2{
+      margin:0;
+      font-family:var(--serif);
+      font-size:30px;
+      letter-spacing:.2px;
+    }
+    .hint{color:var(--muted); font-size:14px; max-width:60ch}
+
+    .grid{display:grid; gap:16px}
+    .grid.cols-3{grid-template-columns: repeat(3, 1fr)}
+    .grid.cols-2{grid-template-columns: repeat(2, 1fr)}
+
+    .card{
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.74);
+      border-radius: var(--radius);
+      box-shadow: 0 18px 40px rgba(26,26,26,.08);
+      padding:18px;
+    }
+    .card h3{margin:0 0 8px; font-size:15px; letter-spacing:.2px}
+    .card p{margin:0; color:var(--muted); font-size:14px; line-height:1.6}
+
+    .timeline{display:grid; gap:10px}
+    .item{
+      display:flex; gap:12px; align-items:flex-start;
+      padding:14px 14px;
+      border-radius: 18px;
+      border:1px solid rgba(26,26,26,.10);
+      background: rgba(255,255,255,.62);
+    }
+    .time{
+      min-width:72px;
+      font-weight:700;
+      font-family:var(--serif);
+      color:rgba(26,26,26,.86);
+    }
+    .what{flex:1}
+    .what b{display:block; font-size:14px; margin-bottom:2px}
+    .what span{display:block; font-size:13px; color:var(--muted)}
+
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:12px;
+    }
+    .ph{
+      border-radius: 22px;
+      border:1px solid rgba(26,26,26,.10);
+      background: linear-gradient(135deg, rgba(255,255,255,.75), rgba(255,255,255,.30));
+      min-height: 160px;
+      position:relative;
+      overflow:hidden;
+    }
+    .ph img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .ph.big{grid-column: span 7; min-height: 290px}
+    .ph.med{grid-column: span 5; min-height: 290px}
+    .ph.sm{grid-column: span 4}
+    .ph.half{grid-column: span 6; min-height: 230px}
+
+    form{display:grid; gap:12px}
+    .row{display:grid; gap:12px; grid-template-columns: 1fr 1fr}
+    label{font-size:12px; color:rgba(26,26,26,.72); display:block; margin:0 0 6px}
+    input, select, textarea{
+      width:100%;
+      border-radius: 14px;
+      border:1px solid rgba(26,26,26,.12);
+      padding:12px 12px;
+      background: rgba(255,255,255,.78);
+      font: inherit;
+      font-size:14px;
+      outline:none;
+    }
+    textarea{min-height: 96px; resize: vertical}
+
+    .form-actions{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    .note{font-size:12px; color:var(--muted); line-height:1.4}
+
+    .toast{
+      position: fixed;
+      left: 50%;
+      bottom: 16px;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,.90);
+      border: 1px solid rgba(26,26,26,.12);
+      box-shadow: 0 18px 40px rgba(26,26,26,.12);
+      padding: 12px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: rgba(26,26,26,.84);
+      display:none;
+      z-index: 60;
+      max-width: min(560px, calc(100vw - 24px));
+      text-align: center;
+    }
+
+    footer{padding:34px 0 44px; color:rgba(26,26,26,.72)}
+    .foot{
+      border-top:1px solid rgba(26,26,26,.10);
+      padding-top:18px;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+    .monogram{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:42px; height:42px;
+      border-radius: 16px;
+      border:1px solid rgba(26,26,26,.12);
+      background: rgba(255,255,255,.70);
+      font-family:var(--serif);
+      font-weight:700;
+      letter-spacing:.6px;
+    }
+
+    @media (max-width: 920px){
+      .hero-grid{grid-template-columns: 1fr;}
+      .photo{min-height: 340px}
+      .grid.cols-3{grid-template-columns: 1fr}
+      .grid.cols-2{grid-template-columns: 1fr}
+      .row{grid-template-columns: 1fr}
+      .title{font-size:40px}
+      .ph.big{grid-column: span 12}
+      .ph.med{grid-column: span 12}
+      .ph.sm{grid-column: span 6}
+    }
+    @media (max-width: 520px){
+      .nav{display:none}
+      .title{font-size:36px}
+      .ph.sm{grid-column: span 12}
+    }
+
+    .wave{
+      height: 54px;
+      background:
+        radial-gradient(45px 28px at 7% 50%, rgba(42,167,161,.22), transparent 70%),
+        radial-gradient(48px 28px at 22% 50%, rgba(255,79,116,.18), transparent 70%),
+        radial-gradient(46px 28px at 37% 50%, rgba(255,208,138,.26), transparent 70%),
+        radial-gradient(44px 28px at 52% 50%, rgba(42,167,161,.18), transparent 70%),
+        radial-gradient(44px 28px at 67% 50%, rgba(255,79,116,.12), transparent 70%),
+        radial-gradient(44px 28px at 82% 50%, rgba(255,208,138,.20), transparent 70%),
+        linear-gradient(180deg, transparent, rgba(255,255,255,.18));
+      opacity:.9;
+      margin-top:10px;
+    }
+
+    .sr{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;}
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#inicio" aria-label="Ir al inicio">
+        <b>Jonathan & Adriane Caroline</b>
+        <span>10 de octubre de 2026 · Espaço Ah, Mar! · Lauro de Freitas/BA</span>
+      </a>
+
+      <nav class="nav" aria-label="Navegación">
+        <a href="#historia">Historia</a>
+        <a href="#programa">Programa</a>
+        <a href="#lugar">Lugar</a>
+        <a href="#galeria">Galería</a>
+        <a href="#faq">Preguntas frecuentes</a>
+      </nav>
+
+      <div class="top-actions">
+        <a class="cta" href="#rsvp">Confirmar asistencia</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="inicio" class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-card">
+          <div class="hero-main">
+            <div class="kicker" aria-label="Tema">
+              <span class="dot coral" aria-hidden="true"></span>
+              Romántico · Tropical · Playa
+            </div>
+
+            <h1 class="title">Un atardecer, dos historias y un “sí”.</h1>
+            <p style="margin:0 0 10px; font-size:14px; color:rgba(26,26,26,.70)"><b>Jonathan Campo Jaimes</b> &amp; <b>Adriane Caroline Teixeira Portela</b></p>
+            <p class="subtitle">
+              Nos hace mucha ilusión celebrar contigo. Aquí tienes todos los detalles del gran día: programa,
+              lugar, consejos de viaje y confirmación de asistencia.
+            </p>
+
+            <div class="hero-meta" role="list">
+              <div class="pill" role="listitem"><span class="dot" aria-hidden="true"></span><span><b>Fecha:</b> 10/10/2026</span></div>
+              <div class="pill" role="listitem"><span class="dot sun" aria-hidden="true"></span><span><b>Hora:</b> 16:30</span></div>
+              <div class="pill" role="listitem"><span class="dot coral" aria-hidden="true"></span><span><b>Vestimenta:</b> playa chic</span></div>
+            </div>
+
+            <div class="hero-actions">
+              <a class="btn primary" href="#programa">Ver programa</a>
+              <a class="btn" href="#lugar">Cómo llegar</a>
+              <a class="btn" href="#rsvp">RSVP</a>
+            </div>
+
+            <div style="margin-top:18px" class="card">
+              <h3 style="margin-bottom:8px">Cuenta regresiva</h3>
+              <p id="countdown" style="margin:0; color:rgba(26,26,26,.78)">Cargando…</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card photo" aria-label="Área de foto">
+          <div class="frame" aria-hidden="true"></div>
+          <div class="label">
+            <div>
+              <b>Jonathan &amp; Adriane</b>
+              <span>10 de octubre de 2026 · Espaço Ah, Mar!</span>
+            </div>
+            <span class="monogram" aria-hidden="true">J&A</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="wave" aria-hidden="true"></div>
+    </div>
+  </main>
+
+  <section id="historia">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Nuestra historia</h2>
+        <div class="hint">Un resumen breve y elegante (ajusta el texto para que refleje su historia).</div>
+      </div>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Cómo empezó todo</h3>
+          <p>
+            Empezó con una conversación sin pretensiones, un café y esa sensación de que algo importante estaba naciendo.
+            Lo demás es historia: encuentros, viajes y una forma serena de construir un “nosotros”.
+          </p>
+        </div>
+        <div class="card">
+          <h3>La propuesta</h3>
+          <p>
+            Un atardecer frente al mar. Sin grandes discursos, pero con toda la certeza del mundo.
+            La respuesta fue simple, completa y definitiva.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="programa">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Programa</h2>
+        <div class="hint">Horarios aproximados. Llega con antelación para disfrutar con calma.</div>
+      </div>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Día de la boda</h3>
+          <div class="timeline" aria-label="Programa">
+            <div class="item"><div class="time">16:00</div><div class="what"><b>Bienvenida</b><span>Recepción y bebidas ligeras</span></div></div>
+            <div class="item"><div class="time">16:30</div><div class="what"><b>Ceremonia</b><span>Pies en la arena, corazón tranquilo</span></div></div>
+            <div class="item"><div class="time">17:15</div><div class="what"><b>Brindis</b><span>Fotos y atardecer</span></div></div>
+            <div class="item"><div class="time">18:00</div><div class="what"><b>Cena</b><span>Menú tropical y opciones vegetarianas</span></div></div>
+            <div class="item"><div class="time">20:00</div><div class="what"><b>Fiesta</b><span>DJ, pista y sorpresas</span></div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Información rápida</h3>
+          <p style="margin-bottom:10px">Consejos para tu comodidad y el clima de playa.</p>
+          <div class="grid" style="gap:10px">
+            <div class="item"><div class="time">Clima</div><div class="what"><b>Brisa y calor</b><span>Lleva un chal ligero para el final de la tarde</span></div></div>
+            <div class="item"><div class="time">Suelo</div><div class="what"><b>Arena</b><span>No se recomiendan tacones finos</span></div></div>
+            <div class="item"><div class="time">Colores</div><div class="what"><b>Claros</b><span>Neutros, coral, verde agua, florales suaves</span></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="lugar">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Lugar</h2>
+        <div class="hint">Dirección, mapa y recomendaciones de alojamiento/transporte.</div>
+      </div>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Ceremonia y fiesta</h3>
+          <p><b>Espaço Ah, Mar!</b><br/>Rua Praia de Arpoador, 157 · Vilas do Atlântico · Lauro de Freitas · BA · 42708-090</p>
+          <p style="margin-top:10px">
+            <b>Contacto del lugar:</b> (71) 99297-6167 · <a href="https://www.instagram.com/espaco_ahmar/?hl=en" target="_blank" rel="noopener">@espaco_ahmar</a><br/>
+            Estacionamiento limitado. Si puedes, prefiere carpool, app o transfer.
+          </p>
+          <div class="hero-actions" style="margin-top:12px">
+            <a class="btn" id="btnMaps" href="#" rel="noopener">Abrir en Google Maps</a>
+            <a class="btn icon" id="btnInsta" href="#" target="_blank" rel="noopener" aria-label="Instagram de Espaço Ah, Mar!">
+              <span class="sr">Instagram</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect>
+                <circle cx="12" cy="12" r="4.2"></circle>
+                <circle cx="17.2" cy="6.8" r="1"></circle>
+              </svg>
+            </a>
+            <a class="btn" href="#rsvp">Confirmar asistencia</a>
+          </div>
+        </div>
+
+        <div class="card" style="padding:0; overflow:hidden">
+          <div style="padding:14px 18px; border-bottom:1px solid rgba(26,26,26,.10); background:rgba(255,255,255,.72)">
+            <h3 style="margin:0">Mapa</h3>
+            <p style="margin:6px 0 0; color:rgba(26,26,26,.62); font-size:13px">Mapa de Espaço Ah, Mar! (toca/arrastra para navegar).</p>
+          </div>
+          <div style="aspect-ratio: 16 / 10; background: rgba(255,255,255,.20);">
+            <iframe
+              title="Mapa - Espaço Ah, Mar!"
+              src="https://www.google.com/maps?q=Rua%20Praia%20de%20Arpoador%2C%20157%20-%20Vilas%20do%20Atl%C3%A2ntico%2C%20Lauro%20de%20Freitas%20-%20BA%2C%2042708-090&output=embed"
+              style="border:0; width:100%; height:100%"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div style="height:16px"></div>
+
+      <div class="grid cols-3">
+        <div class="card">
+          <h3>Alojamiento</h3>
+          <p>Selecciona 3–5 opciones cercanas (posadas/hoteles). Incluye distancia y enlace de reserva.</p>
+        </div>
+        <div class="card">
+          <h3>Transporte</h3>
+          <p>Indica aeropuertos/terminal y tiempo medio hasta el lugar. Informa horarios de transfer si los hay.</p>
+        </div>
+        <div class="card">
+          <h3>Contacto</h3>
+          <p>Para dudas sobre el lugar, habla con <b>Espaço Ah, Mar!</b> (71) 99297-6167 · <a href="https://www.instagram.com/espaco_ahmar/?hl=en" target="_blank" rel="noopener">@espaco_ahmar</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="galeria">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Galería</h2>
+        <div class="hint">Fotos de la pareja y momentos especiales.</div>
+      </div>
+
+      <div class="gallery" aria-label="Galería de fotos">
+        <figure class="ph big"><img src="images/galeria1.jpg" alt="Galería 1" loading="lazy"></figure>
+        <figure class="ph med"><img src="images/galeria2.jpg" alt="Galería 2" loading="lazy"></figure>
+        <figure class="ph sm"><img src="images/galeria3.jpg" alt="Galería 3" loading="lazy"></figure>
+        <figure class="ph sm"><img src="images/galeria4.jpg" alt="Galería 4" loading="lazy"></figure>
+        <figure class="ph sm"><img src="images/galeria5.jpg" alt="Galería 5" loading="lazy"></figure>
+        <figure class="ph half"><img src="images/galeria6.jpg" alt="Galería 6" loading="lazy"></figure>
+        <figure class="ph half"><img src="images/galeria7.jpg" alt="Galería 7" loading="lazy"></figure>
+      </div>
+
+      <div style="height:16px"></div>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Código de vestimenta</h3>
+          <p>
+            <b>Playa chic</b>: telas ligeras, colores claros, estampados suaves y comodidad.
+            Si lo prefieres, un traje formal ligero también funciona perfectamente.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Lista de regalos</h3>
+          <p>
+            Incluye aquí el enlace de la lista (o un Pix para la luna de miel). Si quieres, añade un mensaje breve y delicado.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rsvp">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>RSVP</h2>
+        <div class="hint">Confirma hasta el <b>15/09/2026</b>. Los datos se guardan en tu navegador (demo). Para producción, conéctalo a un formulario real.</div>
+      </div>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Confirmación de asistencia</h3>
+          <form id="rsvpForm">
+            <div class="row">
+              <div>
+                <label for="nombre">Nombre completo</label>
+                <input id="nombre" name="nombre" autocomplete="name" required placeholder="Tu nombre" />
+              </div>
+              <div>
+                <label for="correo">Correo</label>
+                <input id="correo" name="correo" type="email" autocomplete="email" required placeholder="tu@ejemplo.com" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="asistencia">¿Asistirás?</label>
+                <select id="asistencia" name="asistencia" required>
+                  <option value="" selected disabled>Selecciona</option>
+                  <option value="si">Sí, asistiré</option>
+                  <option value="no">No podré asistir</option>
+                </select>
+              </div>
+              <div>
+                <label for="cantidad">Cantidad de personas</label>
+                <select id="cantidad" name="cantidad" required>
+                  <option value="1" selected>1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="restricciones">Restricciones alimentarias / observaciones</label>
+              <textarea id="restricciones" name="restricciones" placeholder="Ej.: vegetariano, sin gluten, alergias…"></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn primary" type="submit">Enviar RSVP</button>
+              <button class="btn" type="button" id="btnLimpiar">Limpiar</button>
+              <span class="note">Este ejemplo guarda localmente. Para recolectar respuestas, conéctalo a Google Forms, Typeform o un backend.</span>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3>Mensajito</h3>
+          <p style="margin-bottom:10px">
+            Tu presencia es el mejor regalo. Gracias por ser parte de nuestra historia.
+          </p>
+          <div class="item" style="margin-top:10px">
+            <div class="time">Dudas</div>
+            <div class="what">
+              <b>Habla con nosotros</b>
+              <span>WhatsApp/Instagram (añade los contactos)</span>
+            </div>
+          </div>
+
+          <div class="item" style="margin-top:10px">
+            <div class="time">Hora</div>
+            <div class="what">
+              <b>Llega temprano</b>
+              <span>Recomendamos llegar 30 minutos antes de la ceremonia.</span>
+            </div>
+          </div>
+
+          <div class="item" style="margin-top:10px">
+            <div class="time">Niños</div>
+            <div class="what">
+              <b>Información</b>
+              <span>Si habrá espacio kids, indícalo aquí con claridad.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Preguntas frecuentes</h2>
+        <div class="hint">Respuestas cortas y claras a las dudas más comunes.</div>
+      </div>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>¿Va a llover?</h3>
+          <p>Tenemos un plan B cubierto en el mismo lugar. Avisaremos a todos si hubiera cambios.</p>
+        </div>
+        <div class="card">
+          <h3>¿Puedo llevar acompañante?</h3>
+          <p>Ten en cuenta la invitación/RSVP. Si tienes dudas, háblanos antes.</p>
+        </div>
+        <div class="card">
+          <h3>¿Cuál es la mejor hora para llegar?</h3>
+          <p>Llega sobre las 16:00 para estacionar con calma y disfrutar de la bienvenida.</p>
+        </div>
+        <div class="card">
+          <h3>¿Hay código de vestimenta obligatorio?</h3>
+          <p>No. La idea es estar cómodo. Recomendamos “playa chic” y colores claros.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap foot">
+      <div style="display:flex; align-items:center; gap:12px">
+        <span class="monogram" aria-hidden="true">J&A</span>
+        <div>
+          <div style="font-weight:700">Jonathan & Adriane Caroline</div>
+          <div style="font-size:12px; color:rgba(26,26,26,.62)">Hecho con cariño · Actualiza nombres/fechas/direcciones según sea necesario</div>
+        </div>
+      </div>
+
+      <div style="font-size:12px; color:rgba(26,26,26,.62)">
+        <div><b>Tip rápido de personalización:</b></div>
+        <div>• Cambia los nombres y la fecha arriba (línea de <code>&lt;title&gt;</code> y en <code>.brand</code>).</div>
+        <div>• Para usar foto en el panel, aplica <code>background-image</code> en <code>.photo</code> o <code>.photo .frame</code>.</div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // ====== CONFIGURACIÓN ======
+    const WEDDING_DATETIME = "2026-10-10T16:30:00";
+    const GOOGLE_MAPS_URL = "https://www.google.com/maps/search/?api=1&query=Espa%C3%A7o%20Ah%2C%20Mar%21%20Rua%20Praia%20de%20Arpoador%20157%20Vilas%20do%20Atl%C3%A2ntico%20Lauro%20de%20Freitas%20BA";
+    const INSTAGRAM_URL = "https://www.instagram.com/espaco_ahmar/?hl=en";
+
+    // ====== UTIL ======
+    const $ = (sel) => document.querySelector(sel);
+    const toast = (msg) => {
+      const el = $("#toast");
+      if (!el) return;
+      el.textContent = msg;
+      el.style.display = "block";
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => { el.style.display = "none"; }, 3200);
+    };
+
+    // ====== MAPS / INSTA ======
+    const btnMaps = $("#btnMaps");
+    if (btnMaps) { btnMaps.href = GOOGLE_MAPS_URL; btnMaps.target = "_blank"; }
+
+    const btnInsta = $("#btnInsta");
+    if (btnInsta) { btnInsta.href = INSTAGRAM_URL; btnInsta.target = "_blank"; }
+
+    // ====== COUNTDOWN ======
+    const countdownEl = $("#countdown");
+    const target = new Date(WEDDING_DATETIME);
+
+    function pad(n){ return String(n).padStart(2, "0"); }
+
+    function updateCountdown(){
+      if (!countdownEl) return;
+
+      if (isNaN(target.getTime())) {
+        countdownEl.textContent = "Fecha inválida. Ajusta WEDDING_DATETIME en el script.";
+        return;
+      }
+
+      const now = new Date();
+      const diff = target - now;
+
+      if (diff <= 0) {
+        countdownEl.textContent = "Es hoy. Nos vemos muy pronto.";
+        return;
+      }
+
+      const totalSeconds = Math.floor(diff / 1000);
+      const days = Math.floor(totalSeconds / (3600 * 24));
+      const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      countdownEl.textContent = `${days} días · ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // ====== RSVP (DEMO - localStorage) ======
+    const form = $("#rsvpForm");
+    const btnLimpiar = $("#btnLimpiar");
+    const STORAGE_KEY = "wedding_rsvp_demo_es";
+
+    function loadForm(){
+      if (!form) return;
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+        if (!saved) return;
+        $("#nombre").value = saved.nombre || "";
+        $("#correo").value = saved.correo || "";
+        $("#asistencia").value = saved.asistencia || "";
+        $("#cantidad").value = saved.cantidad || "1";
+        $("#restricciones").value = saved.restricciones || "";
+      } catch { /* ignore */ }
+    }
+
+    function clearForm(){
+      if (!form) return;
+      form.reset();
+      localStorage.removeItem(STORAGE_KEY);
+      toast("RSVP borrado en este navegador.");
+    }
+
+    if (form) {
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const data = {
+          nombre: $("#nombre").value.trim(),
+          correo: $("#correo").value.trim(),
+          asistencia: $("#asistencia").value,
+          cantidad: $("#cantidad").value,
+          restricciones: $("#restricciones").value.trim(),
+          savedAt: new Date().toISOString(),
+        };
+
+        if (!data.nombre || !data.correo || !data.asistencia) {
+          toast("Completa nombre, correo y asistencia.");
+          return;
+        }
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        toast("RSVP guardado (demostración). Gracias.");
+      });
+    }
+
+    if (btnLimpiar) btnLimpiar.addEventListener("click", clearForm);
+    loadForm();
+  </script>
+</body>
+</html>
