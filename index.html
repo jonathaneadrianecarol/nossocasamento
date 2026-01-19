@@ -1,6 +1,6 @@
 <!-- =========================
-FILE: /index.html  (PT-BR)
-========================= -->
+     index.html  (PORTUGUÊS)
+     ========================= -->
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -9,9 +9,6 @@ FILE: /index.html  (PT-BR)
   <meta name="theme-color" content="#f7efe7" />
   <title>Jonathan & Adriane Caroline — Nosso Casamento</title>
   <meta name="description" content="Site do casamento de Jonathan e Adriane Caroline — informações, programação, local, RSVP e detalhes do grande dia." />
-
-  <link rel="alternate" hreflang="pt-BR" href="./" />
-  <link rel="alternate" hreflang="es" href="./es/" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -53,7 +50,6 @@ FILE: /index.html  (PT-BR)
 
     a{color:inherit; text-decoration:none}
     img{max-width:100%; display:block}
-    code{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
 
     .wrap{max-width:1120px; margin:0 auto; padding:0 20px}
 
@@ -89,39 +85,16 @@ FILE: /index.html  (PT-BR)
 
     .top-actions{display:flex; align-items:center; gap:12px}
 
-    .lang{
-      display:flex; gap:8px; align-items:center; padding:2px;
-      border-radius:999px;
-      border:1px solid rgba(26,26,26,.10);
-      background: rgba(255,255,255,.55)
-    }
-    .lang-btn{
-      display:inline-flex;
-      appearance:none; border:0; cursor:pointer;
-      font: inherit; font-weight:700; font-size:12px;
-      padding:7px 10px; border-radius:999px;
-      color:rgba(26,26,26,.70);
-      background: transparent;
-      transition: background .2s ease, color .2s ease, transform .15s ease;
-    }
-    .lang-btn:hover{background:rgba(42,167,161,.12); color:rgba(26,26,26,.88)}
-    .lang-btn.active{
-      background: rgba(255,255,255,.85);
-      color: rgba(26,26,26,.92);
-      box-shadow: 0 10px 22px rgba(26,26,26,.08)
-    }
-
     .cta{
       display:inline-flex; align-items:center; justify-content:center;
-      padding:10px 12px;
+      padding:9px 12px;
       border-radius:999px;
       border:1px solid rgba(26,26,26,.12);
-      background: rgba(255,255,255,.80);
+      background: rgba(255,255,255,.74);
       font-weight:700;
-      font-size:12px;
-      color:rgba(26,26,26,.86);
+      font-size:13px;
+      color:rgba(26,26,26,.85);
       transition: transform .15s ease, box-shadow .2s ease;
-      white-space:nowrap;
     }
     .cta:hover{transform: translateY(-1px); box-shadow: 0 16px 30px rgba(26,26,26,.10)}
 
@@ -195,13 +168,10 @@ FILE: /index.html  (PT-BR)
       background: rgba(255,255,255,.74);
       font-weight:600;
       font-size:13px;
-      transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
+      transition: transform .15s ease, box-shadow .2s ease;
     }
     .btn:hover{transform: translateY(-1px); box-shadow: 0 16px 30px rgba(26,26,26,.10)}
-    .btn.primary{
-      background: rgba(42,167,161,.15);
-      border-color: rgba(42,167,161,.22);
-    }
+    .btn.primary{background: rgba(255,255,255,.88)}
     .btn.icon{padding:12px; width:44px; aspect-ratio:1/1}
     .btn.icon svg{width:18px; height:18px; display:block}
 
@@ -416,11 +386,7 @@ FILE: /index.html  (PT-BR)
       </nav>
 
       <div class="top-actions">
-        <div class="lang" role="group" aria-label="Idioma">
-          <a class="lang-btn active" href="./" hreflang="pt-BR" lang="pt-BR" aria-label="Português">PT</a>
-          <a class="lang-btn" href="./es/" hreflang="es" lang="es" aria-label="Español">ES</a>
-        </div>
-        <a class="cta" href="#rsvp" aria-label="Confirmar presença">Confirmar presença</a>
+        <a class="cta" href="#rsvp">Confirmar presença</a>
       </div>
     </div>
   </header>
@@ -436,9 +402,7 @@ FILE: /index.html  (PT-BR)
             </div>
 
             <h1 class="title">Um pôr do sol, duas histórias e um “sim”.</h1>
-            <p style="margin:0 0 10px; font-size:14px; color:rgba(26,26,26,.70)">
-              <b>Jonathan Campo Jaimes</b> &amp; <b>Adriane Caroline Teixeira Portela</b>
-            </p>
+            <p style="margin:0 0 10px; font-size:14px; color:rgba(26,26,26,.70)"><b>Jonathan Campo Jaimes</b> &amp; <b>Adriane Caroline Teixeira Portela</b></p>
             <p class="subtitle">
               Estamos muito felizes em celebrar com você. Aqui estão todos os detalhes do nosso grande dia: programação,
               local, dicas de viagem e confirmação de presença.
@@ -701,7 +665,6 @@ FILE: /index.html  (PT-BR)
           <p style="margin-bottom:10px">
             Sua presença é o melhor presente. Obrigado por fazer parte da nossa história.
           </p>
-
           <div class="item" style="margin-top:10px">
             <div class="time">Dúvidas</div>
             <div class="what">
@@ -786,16 +749,6 @@ FILE: /index.html  (PT-BR)
     const GOOGLE_MAPS_URL = "https://www.google.com/maps/search/?api=1&query=Espa%C3%A7o%20Ah%2C%20Mar%21%20Rua%20Praia%20de%20Arpoador%20157%20Vilas%20do%20Atl%C3%A2ntico%20Lauro%20de%20Freitas%20BA";
     const INSTAGRAM_URL = "https://www.instagram.com/espaco_ahmar/?hl=en";
 
-    const STR = {
-      countdownLoading: "Carregando…",
-      countdownInvalid: "Data inválida. Ajuste WEDDING_DATETIME no script.",
-      countdownToday: "É hoje. Nos vemos já já.",
-      unitDays: "dias",
-      toastFill: "Preencha nome, e-mail e presença.",
-      toastSaved: "RSVP salvo (demonstração). Obrigado.",
-      toastCleared: "RSVP limpo neste navegador."
-    };
-
     // ====== UTIL ======
     const $ = (sel) => document.querySelector(sel);
     const toast = (msg) => {
@@ -823,11 +776,18 @@ FILE: /index.html  (PT-BR)
     function updateCountdown(){
       if (!countdownEl) return;
 
+      if (isNaN(target.getTime())) {
+        countdownEl.textContent = "Data inválida. Ajuste WEDDING_DATETIME no script.";
+        return;
+      }
+
       const now = new Date();
       const diff = target - now;
 
-      if (isNaN(target.getTime())) { countdownEl.textContent = STR.countdownInvalid; return; }
-      if (diff <= 0) { countdownEl.textContent = STR.countdownToday; return; }
+      if (diff <= 0) {
+        countdownEl.textContent = "É hoje. Nos vemos já já.";
+        return;
+      }
 
       const totalSeconds = Math.floor(diff / 1000);
       const days = Math.floor(totalSeconds / (3600 * 24));
@@ -835,17 +795,16 @@ FILE: /index.html  (PT-BR)
       const minutes = Math.floor((totalSeconds % 3600) / 60);
       const seconds = totalSeconds % 60;
 
-      countdownEl.textContent = `${days} ${STR.unitDays} · ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+      countdownEl.textContent = `${days} dias · ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
     }
 
-    if (countdownEl) countdownEl.textContent = STR.countdownLoading;
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
     // ====== RSVP (DEMO - localStorage) ======
     const form = $("#rsvpForm");
     const btnLimpar = $("#btnLimpar");
-    const STORAGE_KEY = "wedding_rsvp_demo";
+    const STORAGE_KEY = "wedding_rsvp_demo_pt";
 
     function loadForm(){
       if (!form) return;
@@ -864,7 +823,7 @@ FILE: /index.html  (PT-BR)
       if (!form) return;
       form.reset();
       localStorage.removeItem(STORAGE_KEY);
-      toast(STR.toastCleared);
+      toast("RSVP limpo neste navegador.");
     }
 
     if (form) {
@@ -880,15 +839,17 @@ FILE: /index.html  (PT-BR)
           savedAt: new Date().toISOString(),
         };
 
-        if (!data.nome || !data.email || !data.presenca) { toast(STR.toastFill); return; }
+        if (!data.nome || !data.email || !data.presenca) {
+          toast("Preencha nome, e-mail e presença.");
+          return;
+        }
 
         localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-        toast(STR.toastSaved);
+        toast("RSVP salvo (demonstração). Obrigado.");
       });
     }
 
     if (btnLimpar) btnLimpar.addEventListener("click", clearForm);
-
     loadForm();
   </script>
 </body>
