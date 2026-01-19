@@ -84,7 +84,6 @@
     }
     .nav a:hover{background:rgba(42,167,161,.12); color:var(--ink)}
 
-    $1
     .top-actions{display:flex; align-items:center; gap:12px}
     .lang{display:flex; gap:8px; align-items:center; padding:2px; border-radius:999px; border:1px solid rgba(26,26,26,.10); background: rgba(255,255,255,.55)}
     .lang-btn{
@@ -764,7 +763,9 @@
     // Link do Google Maps (substitua pelo endereço real)
     const GOOGLE_MAPS_URL = "https://www.google.com/maps/search/?api=1&query=Espa%C3%A7o%20Ah%2C%20Mar%21%20Rua%20Praia%20de%20Arpoador%20157%20Vilas%20do%20Atl%C3%A2ntico%20Lauro%20de%20Freitas%20BA";
 
-    $1
+    // Instagram (evita ReferenceError)
+    const INSTAGRAM_URL = "https://www.instagram.com/espaco_ahmar/?hl=en";
+
     // ====== IDIOMA (PT/ES) ======
     const LANG_KEY = "wedding_lang";
     let currentLang = (localStorage.getItem(LANG_KEY) || "pt").toLowerCase().startsWith("es") ? "es" : "pt";
@@ -895,6 +896,7 @@
     const $ = (sel) => document.querySelector(sel);
     const toast = (msg) => {
       const el = $("#toast");
+      if (!el) return;
       el.textContent = msg;
       el.style.display = "block";
       clearTimeout(window.__toastTimer);
@@ -903,8 +905,10 @@
 
     // ====== MAPS ======
     const btnMaps = $("#btnMaps");
-    btnMaps.href = GOOGLE_MAPS_URL;
-    btnMaps.target = "_blank";
+    if (btnMaps) {
+      btnMaps.href = GOOGLE_MAPS_URL;
+      btnMaps.target = "_blank";
+    }
 
     const btnInsta = $("#btnInsta");
     if (btnInsta) {
@@ -919,6 +923,8 @@
     function pad(n){ return String(n).padStart(2, "0"); }
 
     function updateCountdown(){
+      if (!countdownEl) return;
+
       const now = new Date();
       const diff = target - now;
 
@@ -951,6 +957,7 @@
     const STORAGE_KEY = "wedding_rsvp_demo";
 
     function loadForm(){
+      if (!form) return;
       try {
         const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
         if (!saved) return;
@@ -963,36 +970,41 @@
     }
 
     function clearForm(){
+      if (!form) return;
       form.reset();
       localStorage.removeItem(STORAGE_KEY);
       toast(t("toast_cleared"));
     }
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
+    if (form) {
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
 
-      const data = {
-        nome: $("#nome").value.trim(),
-        email: $("#email").value.trim(),
-        presenca: $("#presenca").value,
-        qtd: $("#qtd").value,
-        restricoes: $("#restricoes").value.trim(),
-        savedAt: new Date().toISOString(),
-      };
+        const data = {
+          nome: $("#nome").value.trim(),
+          email: $("#email").value.trim(),
+          presenca: $("#presenca").value,
+          qtd: $("#qtd").value,
+          restricoes: $("#restricoes").value.trim(),
+          savedAt: new Date().toISOString(),
+        };
 
-      if (!data.nome || !data.email || !data.presenca) {
-        toast(t("toast_fill"));
-        return;
-      }
+        if (!data.nome || !data.email || !data.presenca) {
+          toast(t("toast_fill"));
+          return;
+        }
 
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-      toast(t("toast_saved"));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        toast(t("toast_saved"));
 
-      // Para produção: envie para backend/Google Form aqui.
-      // Exemplo: fetch("/api/rsvp", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(data) })
-    });
+        // Para produção: envie para backend/Google Form aqui.
+        // fetch("/api/rsvp", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(data) })
+      });
+    }
 
-    btnLimpar.addEventListener("click", clearForm);
+    if (btnLimpar) {
+      btnLimpar.addEventListener("click", clearForm);
+    }
 
     loadForm();
   </script>
