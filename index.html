@@ -84,17 +84,19 @@
     }
     .nav a:hover{background:rgba(42,167,161,.12); color:var(--ink)}
 
-    .cta{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:10px;
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid rgba(255,79,116,.28);
-      background: linear-gradient(135deg, rgba(255,79,116,.22), rgba(255,208,138,.25));
-      box-shadow: 0 10px 30px rgba(255,79,116,.12);
-      font-weight:600;
-      font-size:13px;
+    $1
+    .top-actions{display:flex; align-items:center; gap:12px}
+    .lang{display:flex; gap:8px; align-items:center; padding:2px; border-radius:999px; border:1px solid rgba(26,26,26,.10); background: rgba(255,255,255,.55)}
+    .lang-btn{
+      appearance:none; border:0; cursor:pointer;
+      font: inherit; font-weight:700; font-size:12px;
+      padding:7px 10px; border-radius:999px;
+      color:rgba(26,26,26,.70);
+      background: transparent;
+      transition: background .2s ease, color .2s ease, transform .15s ease;
     }
+    .lang-btn:hover{background:rgba(42,167,161,.12); color:rgba(26,26,26,.88)}
+    .lang-btn.active{background: rgba(255,255,255,.85); color: rgba(26,26,26,.92); box-shadow: 0 10px 22px rgba(26,26,26,.08)}
 
     /* Hero */
     .hero{padding:48px 0 16px}
@@ -384,14 +386,20 @@
       </a>
 
       <nav class="nav" aria-label="Navegação">
-        <a href="#historia">História</a>
-        <a href="#programacao">Programação</a>
-        <a href="#local">Local</a>
-        <a href="#galeria">Galeria</a>
-        <a href="#faq">FAQ</a>
+        <a href="#historia" data-i18n="nav_story">História</a>
+        <a href="#programacao" data-i18n="nav_schedule">Programação</a>
+        <a href="#local" data-i18n="nav_location">Local</a>
+        <a href="#galeria" data-i18n="nav_gallery">Galeria</a>
+        <a href="#faq" data-i18n="nav_faq">FAQ</a>
       </nav>
 
-      <a class="cta" href="#rsvp">Confirmar presença</a>
+      <div class="top-actions">
+        <div class="lang" role="group" aria-label="Idioma">
+          <button type="button" class="lang-btn" data-lang="pt" aria-label="Português">PT</button>
+          <button type="button" class="lang-btn" data-lang="es" aria-label="Español">ES</button>
+        </div>
+        <a class="cta" href="#rsvp" data-i18n="cta_rsvp">Confirmar presença</a>
+      </div>
     </div>
   </header>
 
@@ -405,9 +413,9 @@
               Romântico · Tropical · Praia
             </div>
 
-            <h1 class="title">Um pôr do sol, duas histórias e um “sim”.</h1>
+            <h1 class="title" data-i18n="hero_title">Um pôr do sol, duas histórias e um “sim”.</h1>
             <p style="margin:0 0 10px; font-size:14px; color:rgba(26,26,26,.70)"><b>Jonathan Campo Jaimes</b> &amp; <b>Adriane Caroline Teixeira Portela</b></p>
-            <p class="subtitle">
+            <p class="subtitle" data-i18n="hero_subtitle">
               Estamos muito felizes em celebrar com você. Aqui estão todos os detalhes do nosso grande dia: programação,
               local, dicas de viagem e confirmação de presença.
             </p>
@@ -419,13 +427,13 @@
             </div>
 
             <div class="hero-actions">
-              <a class="btn primary" href="#programacao">Ver programação</a>
-              <a class="btn" href="#local">Como chegar</a>
-              <a class="btn" href="#rsvp">RSVP</a>
+              <a class="btn primary" href="#programacao" data-i18n="btn_view_schedule">Ver programação</a>
+              <a class="btn" href="#local" data-i18n="btn_how_to_get">Como chegar</a>
+              <a class="btn" href="#rsvp" data-i18n="btn_rsvp">RSVP</a>
             </div>
 
             <div style="margin-top:18px" class="card">
-              <h3 style="margin-bottom:8px">Contagem regressiva</h3>
+              <h3 style="margin-bottom:8px" data-i18n="countdown_title">Contagem regressiva</h3>
               <p id="countdown" style="margin:0; color:rgba(26,26,26,.78)">Carregando…</p>
             </div>
           </div>
@@ -450,7 +458,7 @@
   <section id="historia">
     <div class="wrap">
       <div class="section-head">
-        <h2>Nossa história</h2>
+        <h2 data-i18n="sec_story_title">Nossa história</h2>
         <div class="hint">Um resumo breve e elegante (ajuste o texto para refletir vocês).</div>
       </div>
 
@@ -476,7 +484,7 @@
   <section id="programacao">
     <div class="wrap">
       <div class="section-head">
-        <h2>Programação</h2>
+        <h2 data-i18n="sec_schedule_title">Programação</h2>
         <div class="hint">Horários aproximados. Chegue com antecedência para aproveitar com calma.</div>
       </div>
 
@@ -509,7 +517,7 @@
   <section id="local">
     <div class="wrap">
       <div class="section-head">
-        <h2>Local</h2>
+        <h2 data-i18n="sec_location_title">Local</h2>
         <div class="hint">Endereço, mapa e recomendações de hospedagem/transporte.</div>
       </div>
 
@@ -522,7 +530,7 @@
             Estacionamento limitado. Se puder, prefira carona, aplicativo ou transfer.
           </p>
           <div class="hero-actions" style="margin-top:12px">
-            <a class="btn" id="btnMaps" href="#" rel="noopener">Abrir no Google Maps</a>
+            <a class="btn" id="btnMaps" href="#" rel="noopener" data-i18n="btn_open_maps">Abrir no Google Maps</a>
             <a class="btn icon" id="btnInsta" href="#" target="_blank" rel="noopener" aria-label="Instagram do Espaço Ah, Mar!">
               <span class="sr">Instagram</span>
               <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -576,7 +584,7 @@
   <section id="galeria">
     <div class="wrap">
       <div class="section-head">
-        <h2>Galeria</h2>
+        <h2 data-i18n="sec_gallery_title">Galeria</h2>
         <div class="hint">Fotos do casal e momentos especiais.</div>
       </div>
 
@@ -613,36 +621,36 @@
   <section id="rsvp">
     <div class="wrap">
       <div class="section-head">
-        <h2>RSVP</h2>
+        <h2 data-i18n="sec_rsvp_title">RSVP</h2>
         <div class="hint">Confirme até <b>15/09/2026</b>. Os dados ficam no seu navegador (exemplo). Para produção, conecte a um formulário real.</div>
       </div>
 
       <div class="grid cols-2">
         <div class="card">
-          <h3>Confirmação de presença</h3>
+          <h3 data-i18n="rsvp_form_title">Confirmação de presença</h3>
           <form id="rsvpForm">
             <div class="row">
               <div>
-                <label for="nome">Nome completo</label>
-                <input id="nome" name="nome" autocomplete="name" required placeholder="Seu nome" />
+                <label for="nome" data-i18n="lbl_name">Nome completo</label>
+                <input id="nome" name="nome" autocomplete="name" required placeholder="Seu nome" data-i18n-placeholder="ph_name" />
               </div>
               <div>
-                <label for="email">E-mail</label>
-                <input id="email" name="email" type="email" autocomplete="email" required placeholder="voce@exemplo.com" />
+                <label for="email" data-i18n="lbl_email">E-mail</label>
+                <input id="email" name="email" type="email" autocomplete="email" required placeholder="voce@exemplo.com" data-i18n-placeholder="ph_email" />
               </div>
             </div>
 
             <div class="row">
               <div>
-                <label for="presenca">Você irá?</label>
+                <label for="presenca" data-i18n="lbl_attend">Você irá?</label>
                 <select id="presenca" name="presenca" required>
-                  <option value="" selected disabled>Selecione</option>
-                  <option value="sim">Sim, estarei presente</option>
-                  <option value="nao">Não poderei ir</option>
+                  <option value="" selected disabled data-i18n="opt_select">Selecione</option>
+                  <option value="sim" data-i18n="opt_yes">Sim, estarei presente</option>
+                  <option value="nao" data-i18n="opt_no">Não poderei ir</option>
                 </select>
               </div>
               <div>
-                <label for="qtd">Quantidade de pessoas</label>
+                <label for="qtd" data-i18n="lbl_qty">Quantidade de pessoas</label>
                 <select id="qtd" name="qtd" required>
                   <option value="1" selected>1</option>
                   <option value="2">2</option>
@@ -653,14 +661,14 @@
             </div>
 
             <div>
-              <label for="restricoes">Restrições alimentares / observações</label>
-              <textarea id="restricoes" name="restricoes" placeholder="Ex.: vegetariano, sem glúten, alergias…"></textarea>
+              <label for="restricoes" data-i18n="lbl_diet">Restrições alimentares / observações</label>
+              <textarea id="restricoes" name="restricoes" placeholder="Ex.: vegetariano, sem glúten, alergias…" data-i18n-placeholder="ph_diet"></textarea>
             </div>
 
             <div class="form-actions">
-              <button class="btn primary" type="submit">Enviar RSVP</button>
-              <button class="btn" type="button" id="btnLimpar">Limpar</button>
-              <span class="note">Este exemplo salva localmente. Para coletar respostas, conecte a um Google Form, Typeform ou backend.</span>
+              <button class="btn primary" type="submit" data-i18n="btn_send_rsvp">Enviar RSVP</button>
+              <button class="btn" type="button" id="btnLimpar" data-i18n="btn_clear">Limpar</button>
+              <span class="note" data-i18n="rsvp_note">Este exemplo salva localmente. Para coletar respostas, conecte a um Google Form, Typeform ou backend.</span>
             </div>
           </form>
         </div>
@@ -702,7 +710,7 @@
   <section id="faq">
     <div class="wrap">
       <div class="section-head">
-        <h2>FAQ</h2>
+        <h2 data-i18n="sec_faq_title">FAQ</h2>
         <div class="hint">Respostas curtas e objetivas para as dúvidas mais comuns.</div>
       </div>
 
@@ -756,8 +764,132 @@
     // Link do Google Maps (substitua pelo endereço real)
     const GOOGLE_MAPS_URL = "https://www.google.com/maps/search/?api=1&query=Espa%C3%A7o%20Ah%2C%20Mar%21%20Rua%20Praia%20de%20Arpoador%20157%20Vilas%20do%20Atl%C3%A2ntico%20Lauro%20de%20Freitas%20BA";
 
-    // Instagram do local
-    const INSTAGRAM_URL = "https://www.instagram.com/espaco_ahmar/?hl=en";
+    $1
+    // ====== IDIOMA (PT/ES) ======
+    const LANG_KEY = "wedding_lang";
+    let currentLang = (localStorage.getItem(LANG_KEY) || "pt").toLowerCase().startsWith("es") ? "es" : "pt";
+
+    const I18N = {
+      pt: {
+        nav_story: "História",
+        nav_schedule: "Programação",
+        nav_location: "Local",
+        nav_gallery: "Galeria",
+        nav_faq: "FAQ",
+        cta_rsvp: "Confirmar presença",
+        hero_title: "Um pôr do sol, duas histórias e um “sim”.",
+        hero_subtitle: "Estamos muito felizes em celebrar com você. Aqui estão todos os detalhes do nosso grande dia: programação, local, dicas de viagem e confirmação de presença.",
+        btn_view_schedule: "Ver programação",
+        btn_how_to_get: "Como chegar",
+        btn_rsvp: "RSVP",
+        countdown_title: "Contagem regressiva",
+        countdown_loading: "Carregando…",
+        countdown_invalid: "Data inválida. Ajuste WEDDING_DATETIME no script.",
+        countdown_today: "É hoje. Nos vemos já já.",
+        unit_days: "dias",
+        sec_story_title: "Nossa história",
+        sec_schedule_title: "Programação",
+        sec_location_title: "Local",
+        sec_gallery_title: "Galeria",
+        sec_rsvp_title: "RSVP",
+        sec_faq_title: "FAQ",
+        rsvp_form_title: "Confirmação de presença",
+        lbl_name: "Nome completo",
+        ph_name: "Seu nome",
+        lbl_email: "E-mail",
+        ph_email: "voce@exemplo.com",
+        lbl_attend: "Você irá?",
+        opt_select: "Selecione",
+        opt_yes: "Sim, estarei presente",
+        opt_no: "Não poderei ir",
+        lbl_qty: "Quantidade de pessoas",
+        lbl_diet: "Restrições alimentares / observações",
+        ph_diet: "Ex.: vegetariano, sem glúten, alergias…",
+        btn_send_rsvp: "Enviar RSVP",
+        btn_clear: "Limpar",
+        rsvp_note: "Este exemplo salva localmente. Para coletar respostas, conecte a um Google Form, Typeform ou backend.",
+        btn_open_maps: "Abrir no Google Maps",
+        toast_fill: "Preencha nome, e-mail e presença.",
+        toast_saved: "RSVP salvo (demonstração). Obrigado.",
+        toast_cleared: "RSVP limpo neste navegador.",
+      },
+      es: {
+        nav_story: "Historia",
+        nav_schedule: "Programa",
+        nav_location: "Lugar",
+        nav_gallery: "Galería",
+        nav_faq: "Preguntas frecuentes",
+        cta_rsvp: "Confirmar asistencia",
+        hero_title: "Un atardecer, dos historias y un “sí”.",
+        hero_subtitle: "Nos hace mucha ilusión celebrar contigo. Aquí tienes todos los detalles del gran día: programa, lugar, consejos de viaje y confirmación de asistencia.",
+        btn_view_schedule: "Ver programa",
+        btn_how_to_get: "Cómo llegar",
+        btn_rsvp: "RSVP",
+        countdown_title: "Cuenta regresiva",
+        countdown_loading: "Cargando…",
+        countdown_invalid: "Fecha inválida. Ajusta WEDDING_DATETIME en el script.",
+        countdown_today: "Es hoy. Nos vemos muy pronto.",
+        unit_days: "días",
+        sec_story_title: "Nuestra historia",
+        sec_schedule_title: "Programa",
+        sec_location_title: "Lugar",
+        sec_gallery_title: "Galería",
+        sec_rsvp_title: "RSVP",
+        sec_faq_title: "Preguntas frecuentes",
+        rsvp_form_title: "Confirmación de asistencia",
+        lbl_name: "Nombre completo",
+        ph_name: "Tu nombre",
+        lbl_email: "Correo",
+        ph_email: "tu@ejemplo.com",
+        lbl_attend: "¿Asistirás?",
+        opt_select: "Selecciona",
+        opt_yes: "Sí, asistiré",
+        opt_no: "No podré asistir",
+        lbl_qty: "Cantidad de personas",
+        lbl_diet: "Restricciones alimentarias / observaciones",
+        ph_diet: "Ej.: vegetariano, sin gluten, alergias…",
+        btn_send_rsvp: "Enviar RSVP",
+        btn_clear: "Limpiar",
+        rsvp_note: "Este ejemplo guarda localmente. Para recolectar respuestas, conéctalo a Google Forms, Typeform o un backend.",
+        btn_open_maps: "Abrir en Google Maps",
+        toast_fill: "Completa nombre, correo y asistencia.",
+        toast_saved: "RSVP guardado (demostración). Gracias.",
+        toast_cleared: "RSVP borrado en este navegador.",
+      }
+    };
+
+    const t = (key) => (I18N[currentLang] && I18N[currentLang][key]) || I18N.pt[key] || "";
+
+    function applyLang(lang){
+      currentLang = (lang === "es") ? "es" : "pt";
+      localStorage.setItem(LANG_KEY, currentLang);
+      document.documentElement.lang = (currentLang === "es") ? "es" : "pt-BR";
+
+      document.querySelectorAll(".lang-btn").forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.lang === currentLang);
+      });
+
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        el.textContent = t(el.getAttribute("data-i18n"));
+      });
+
+      document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+        el.setAttribute("placeholder", t(el.getAttribute("data-i18n-placeholder")));
+      });
+
+      document.querySelectorAll("option[data-i18n]").forEach((opt) => {
+        opt.textContent = t(opt.getAttribute("data-i18n"));
+      });
+
+      const cd = document.querySelector("#countdown");
+      if (cd) cd.textContent = t("countdown_loading");
+    }
+
+    document.querySelectorAll(".lang-btn").forEach((btn) => {
+      btn.addEventListener("click", () => applyLang(btn.dataset.lang));
+    });
+
+    applyLang(currentLang);
 
     // ====== UTIL ======
     const $ = (sel) => document.querySelector(sel);
@@ -791,12 +923,12 @@
       const diff = target - now;
 
       if (isNaN(target.getTime())) {
-        countdownEl.textContent = "Data inválida. Ajuste WEDDING_DATETIME no script.";
+        countdownEl.textContent = t("countdown_invalid");
         return;
       }
 
       if (diff <= 0) {
-        countdownEl.textContent = "É hoje. Nos vemos já já.";
+        countdownEl.textContent = t("countdown_today");
         return;
       }
 
@@ -806,7 +938,7 @@
       const minutes = Math.floor((totalSeconds % 3600) / 60);
       const seconds = totalSeconds % 60;
 
-      countdownEl.textContent = `${days} dias · ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+      countdownEl.textContent = `${days} ${t("unit_days")} · ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
     }
 
     updateCountdown();
@@ -833,7 +965,7 @@
     function clearForm(){
       form.reset();
       localStorage.removeItem(STORAGE_KEY);
-      toast("RSVP limpo neste navegador.");
+      toast(t("toast_cleared"));
     }
 
     form.addEventListener("submit", (e) => {
@@ -849,12 +981,12 @@
       };
 
       if (!data.nome || !data.email || !data.presenca) {
-        toast("Preencha nome, e-mail e presença.");
+        toast(t("toast_fill"));
         return;
       }
 
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-      toast("RSVP salvo (demonstração). Obrigado.");
+      toast(t("toast_saved"));
 
       // Para produção: envie para backend/Google Form aqui.
       // Exemplo: fetch("/api/rsvp", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(data) })
