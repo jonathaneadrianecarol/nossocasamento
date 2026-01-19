@@ -1,0 +1,866 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7efe7" />
+  <title>Marina & Gabriel — Nosso Casamento</title>
+  <meta name="description" content="Site do casamento — informações, programação, local, RSVP e detalhes do grande dia." />
+
+  <!-- Fontes (opcional). Se preferir sem dependências externas, remova as duas linhas abaixo. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      /* Paleta: claro/neutro + tropical suave */
+      --sand:#f7efe7;
+      --foam:#eef7f6;
+      --coral:#ff6f7a;
+      --hibiscus:#ff4f74;
+      --palm:#2f8f7c;
+      --lagoon:#2aa7a1;
+      --sun:#ffd08a;
+      --ink:#1a1a1a;
+      --muted:rgba(26,26,26,.68);
+      --card:rgba(255,255,255,.78);
+      --stroke:rgba(26,26,26,.10);
+      --shadow:0 20px 50px rgba(26,26,26,.10);
+      --radius:22px;
+
+      --serif:"Playfair Display", ui-serif, Georgia, "Times New Roman", Times, serif;
+      --sans:"Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--ink);
+      font-family:var(--sans);
+      background:
+        radial-gradient(1000px 600px at 15% -10%, rgba(255,208,138,.55), transparent 55%),
+        radial-gradient(800px 500px at 85% 0%, rgba(42,167,161,.26), transparent 55%),
+        radial-gradient(900px 600px at 70% 100%, rgba(255,111,122,.18), transparent 60%),
+        linear-gradient(180deg, var(--sand), var(--foam));
+      overflow-x:hidden;
+    }
+
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+
+    /* Layout */
+    .wrap{max-width:1120px; margin:0 auto; padding:0 20px}
+
+    /* Top bar */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: rgba(247,239,231,.72);
+      border-bottom:1px solid var(--stroke);
+    }
+    .topbar-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0;
+      gap:14px;
+    }
+    .brand{
+      display:flex; align-items:baseline; gap:10px; white-space:nowrap;
+    }
+    .brand b{font-family:var(--serif); font-size:18px; letter-spacing:.2px}
+    .brand span{font-size:12px; color:var(--muted)}
+
+    .nav{
+      display:flex; gap:14px; align-items:center; flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav a{
+      font-size:13px;
+      color:rgba(26,26,26,.75);
+      padding:8px 10px;
+      border-radius:999px;
+      transition:background .2s ease, color .2s ease;
+    }
+    .nav a:hover{background:rgba(42,167,161,.12); color:var(--ink)}
+
+    .cta{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,79,116,.28);
+      background: linear-gradient(135deg, rgba(255,79,116,.22), rgba(255,208,138,.25));
+      box-shadow: 0 10px 30px rgba(255,79,116,.12);
+      font-weight:600;
+      font-size:13px;
+    }
+
+    /* Hero */
+    .hero{padding:48px 0 16px}
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    .hero-card{
+      border:1px solid var(--stroke);
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero-card::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(500px 260px at 22% 16%, rgba(255,79,116,.18), transparent 60%),
+        radial-gradient(520px 280px at 85% 10%, rgba(42,167,161,.20), transparent 60%),
+        radial-gradient(520px 280px at 45% 110%, rgba(255,208,138,.26), transparent 60%);
+      pointer-events:none;
+    }
+    .hero-main{padding:28px 26px 24px; position:relative}
+    .kicker{
+      display:inline-flex; gap:8px; align-items:center;
+      font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+      color:rgba(26,26,26,.65);
+      border:1px solid rgba(26,26,26,.10);
+      background: rgba(255,255,255,.55);
+      padding:8px 12px;
+      border-radius:999px;
+    }
+    .title{
+      margin:14px 0 10px;
+      font-family:var(--serif);
+      font-size:48px;
+      line-height:1.04;
+      letter-spacing:.2px;
+    }
+    .subtitle{margin:0 0 16px; color:var(--muted); font-size:16px; max-width:52ch}
+
+    .hero-meta{
+      display:flex; gap:12px; flex-wrap:wrap;
+      margin-top:18px;
+    }
+    .pill{
+      display:flex; gap:10px; align-items:center;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(26,26,26,.10);
+      background: rgba(255,255,255,.6);
+      font-size:13px;
+      color:rgba(26,26,26,.78);
+    }
+    .dot{width:10px; height:10px; border-radius:999px; background:var(--lagoon)}
+    .dot.sun{background:var(--sun)}
+    .dot.coral{background:var(--coral)}
+
+    .hero-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:16px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(26,26,26,.12);
+      background: rgba(255,255,255,.74);
+      font-weight:600;
+      font-size:13px;
+      transition: transform .15s ease, box-shadow .2s ease;
+    }
+    .btn:hover{transform: translateY(-1px); box-shadow: 0 16px 30px rgba(26,26,26,.10)}
+    .btn.primary{
+      border-color: rgba(255,79,116,.28);
+      background: linear-gradient(135deg, rgba(255,79,116,.22), rgba(42,167,161,.18), rgba(255,208,138,.20));
+    }
+
+    /* Photo panel (decorative) */
+    .photo{
+      min-height: 420px;
+      display:flex;
+      align-items:stretch;
+      justify-content:stretch;
+      position:relative;
+    }
+    .photo .frame{
+      position:absolute; inset:0;
+      background:
+        radial-gradient(800px 420px at 60% 10%, rgba(42,167,161,.18), transparent 60%),
+        radial-gradient(720px 400px at 30% 20%, rgba(255,79,116,.16), transparent 60%),
+        radial-gradient(860px 520px at 50% 110%, rgba(255,208,138,.22), transparent 60%),
+        linear-gradient(135deg, rgba(255,255,255,.55), rgba(255,255,255,.25));
+    }
+    .photo .frame::after{
+      content:"";
+      position:absolute; inset:18px;
+      border-radius: calc(var(--radius) - 6px);
+      border:1px dashed rgba(26,26,26,.18);
+    }
+    .photo .label{
+      position:absolute;
+      left:18px; right:18px; bottom:18px;
+      border-radius: 18px;
+      border:1px solid rgba(26,26,26,.10);
+      background: rgba(255,255,255,.76);
+      padding:14px 14px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .photo .label b{font-family:var(--serif); font-size:16px}
+    .photo .label span{font-size:12px; color:var(--muted)}
+
+    /* Sections */
+    section{padding:42px 0}
+    .section-head{display:flex; align-items:flex-end; justify-content:space-between; gap:12px; margin-bottom:18px}
+    h2{
+      margin:0;
+      font-family:var(--serif);
+      font-size:30px;
+      letter-spacing:.2px;
+    }
+    .hint{color:var(--muted); font-size:14px; max-width:60ch}
+
+    .grid{display:grid; gap:16px}
+    .grid.cols-3{grid-template-columns: repeat(3, 1fr)}
+    .grid.cols-2{grid-template-columns: repeat(2, 1fr)}
+
+    .card{
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.74);
+      border-radius: var(--radius);
+      box-shadow: 0 18px 40px rgba(26,26,26,.08);
+      padding:18px;
+    }
+    .card h3{margin:0 0 8px; font-size:15px; letter-spacing:.2px}
+    .card p{margin:0; color:var(--muted); font-size:14px; line-height:1.6}
+
+    .timeline{display:grid; gap:10px}
+    .item{
+      display:flex; gap:12px; align-items:flex-start;
+      padding:14px 14px;
+      border-radius: 18px;
+      border:1px solid rgba(26,26,26,.10);
+      background: rgba(255,255,255,.62);
+    }
+    .time{
+      min-width:72px;
+      font-weight:700;
+      font-family:var(--serif);
+      color:rgba(26,26,26,.86);
+    }
+    .what{flex:1}
+    .what b{display:block; font-size:14px; margin-bottom:2px}
+    .what span{display:block; font-size:13px; color:var(--muted)}
+
+    /* Gallery */
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:12px;
+    }
+    .ph{
+      border-radius: 22px;
+      border:1px solid rgba(26,26,26,.10);
+      background:
+        radial-gradient(500px 280px at 20% 20%, rgba(255,79,116,.18), transparent 55%),
+        radial-gradient(520px 320px at 85% 35%, rgba(42,167,161,.20), transparent 55%),
+        linear-gradient(135deg, rgba(255,255,255,.75), rgba(255,255,255,.30));
+      min-height: 160px;
+      position:relative;
+      overflow:hidden;
+    }
+    .ph::after{
+      content:"Substitua por fotos";
+      position:absolute; left:14px; bottom:12px;
+      font-size:12px; color:rgba(26,26,26,.55);
+      background: rgba(255,255,255,.70);
+      border:1px solid rgba(26,26,26,.10);
+      padding:6px 10px;
+      border-radius:999px;
+    }
+    .ph.big{grid-column: span 7; min-height: 290px}
+    .ph.med{grid-column: span 5; min-height: 290px}
+    .ph.sm{grid-column: span 4}
+
+    /* RSVP */
+    form{display:grid; gap:12px}
+    .row{display:grid; gap:12px; grid-template-columns: 1fr 1fr}
+    label{font-size:12px; color:rgba(26,26,26,.72); display:block; margin:0 0 6px}
+    input, select, textarea{
+      width:100%;
+      border-radius: 14px;
+      border:1px solid rgba(26,26,26,.12);
+      padding:12px 12px;
+      background: rgba(255,255,255,.78);
+      font: inherit;
+      font-size:14px;
+      outline:none;
+    }
+    textarea{min-height: 96px; resize: vertical}
+
+    .form-actions{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    .note{font-size:12px; color:var(--muted); line-height:1.4}
+
+    .toast{
+      position: fixed;
+      left: 50%;
+      bottom: 16px;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,.90);
+      border: 1px solid rgba(26,26,26,.12);
+      box-shadow: 0 18px 40px rgba(26,26,26,.12);
+      padding: 12px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: rgba(26,26,26,.84);
+      display:none;
+      z-index: 60;
+      max-width: min(560px, calc(100vw - 24px));
+      text-align: center;
+    }
+
+    /* Footer */
+    footer{padding:34px 0 44px; color:rgba(26,26,26,.72)}
+    .foot{
+      border-top:1px solid rgba(26,26,26,.10);
+      padding-top:18px;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+    .monogram{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:42px; height:42px;
+      border-radius: 16px;
+      border:1px solid rgba(26,26,26,.12);
+      background: rgba(255,255,255,.70);
+      font-family:var(--serif);
+      font-weight:700;
+      letter-spacing:.6px;
+    }
+
+    /* Responsive */
+    @media (max-width: 920px){
+      .hero-grid{grid-template-columns: 1fr;}
+      .photo{min-height: 340px}
+      .grid.cols-3{grid-template-columns: 1fr}
+      .grid.cols-2{grid-template-columns: 1fr}
+      .row{grid-template-columns: 1fr}
+      .title{font-size:40px}
+      .ph.big{grid-column: span 12}
+      .ph.med{grid-column: span 12}
+      .ph.sm{grid-column: span 6}
+    }
+    @media (max-width: 520px){
+      .nav{display:none}
+      .title{font-size:36px}
+      .ph.sm{grid-column: span 12}
+    }
+
+    /* Small decorative "wave" */
+    .wave{
+      height: 54px;
+      background:
+        radial-gradient(45px 28px at 7% 50%, rgba(42,167,161,.22), transparent 70%),
+        radial-gradient(48px 28px at 22% 50%, rgba(255,79,116,.18), transparent 70%),
+        radial-gradient(46px 28px at 37% 50%, rgba(255,208,138,.26), transparent 70%),
+        radial-gradient(44px 28px at 52% 50%, rgba(42,167,161,.18), transparent 70%),
+        radial-gradient(44px 28px at 67% 50%, rgba(255,79,116,.12), transparent 70%),
+        radial-gradient(44px 28px at 82% 50%, rgba(255,208,138,.20), transparent 70%),
+        linear-gradient(180deg, transparent, rgba(255,255,255,.18));
+      opacity:.9;
+      margin-top:10px;
+    }
+
+    /* Accessibility */
+    .sr{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;}
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#inicio" aria-label="Ir para o início">
+        <b>Marina & Gabriel</b>
+        <span>17 de Outubro de 2026 · Praia do Rosa</span>
+      </a>
+
+      <nav class="nav" aria-label="Navegação">
+        <a href="#historia">História</a>
+        <a href="#programacao">Programação</a>
+        <a href="#local">Local</a>
+        <a href="#galeria">Galeria</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <a class="cta" href="#rsvp">Confirmar presença</a>
+    </div>
+  </header>
+
+  <main id="inicio" class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-card">
+          <div class="hero-main">
+            <div class="kicker" aria-label="Tema">
+              <span class="dot coral" aria-hidden="true"></span>
+              Romântico · Tropical · Praia
+            </div>
+
+            <h1 class="title">Um pôr do sol, duas histórias e um “sim”.</h1>
+            <p class="subtitle">
+              Estamos muito felizes em celebrar com você. Aqui estão todos os detalhes do nosso grande dia: programação,
+              local, dicas de viagem e confirmação de presença.
+            </p>
+
+            <div class="hero-meta" role="list">
+              <div class="pill" role="listitem"><span class="dot" aria-hidden="true"></span><span><b>Data:</b> 17/10/2026</span></div>
+              <div class="pill" role="listitem"><span class="dot sun" aria-hidden="true"></span><span><b>Horário:</b> 16h30</span></div>
+              <div class="pill" role="listitem"><span class="dot coral" aria-hidden="true"></span><span><b>Traje:</b> praia chique</span></div>
+            </div>
+
+            <div class="hero-actions">
+              <a class="btn primary" href="#programacao">Ver programação</a>
+              <a class="btn" href="#local">Como chegar</a>
+              <a class="btn" href="#rsvp">RSVP</a>
+            </div>
+
+            <div style="margin-top:18px" class="card">
+              <h3 style="margin-bottom:8px">Contagem regressiva</h3>
+              <p id="countdown" style="margin:0; color:rgba(26,26,26,.78)">Carregando…</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card photo" aria-label="Área de foto">
+          <div class="frame" aria-hidden="true"></div>
+          <div class="label">
+            <div>
+              <b>Insira a foto do casal aqui</b>
+              <span>Troque o fundo por uma imagem (ver instruções no código)</span>
+            </div>
+            <span class="monogram" aria-hidden="true">M&G</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="wave" aria-hidden="true"></div>
+    </div>
+  </main>
+
+  <section id="historia">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Nossa história</h2>
+        <div class="hint">Um resumo breve e elegante (ajuste o texto para refletir vocês).</div>
+      </div>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Como tudo começou</h3>
+          <p>
+            Começou com uma conversa despretensiosa, um café e aquela sensação de que algo importante estava nascendo.
+            O resto é história: encontros, viagens e um jeito calmo de construir um “nós”.
+          </p>
+        </div>
+        <div class="card">
+          <h3>O pedido</h3>
+          <p>
+            Um fim de tarde à beira-mar. Sem grandes discursos, mas com toda a certeza do mundo.
+            A resposta foi simples, inteira e definitiva.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="programacao">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Programação</h2>
+        <div class="hint">Horários aproximados. Chegue com antecedência para aproveitar com calma.</div>
+      </div>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Dia do casamento</h3>
+          <div class="timeline" aria-label="Programação">
+            <div class="item"><div class="time">16:00</div><div class="what"><b>Boas-vindas</b><span>Recepção e drinks leves</span></div></div>
+            <div class="item"><div class="time">16:30</div><div class="what"><b>Cerimônia</b><span>Pé na areia, coração tranquilo</span></div></div>
+            <div class="item"><div class="time">17:15</div><div class="what"><b>Brinde</b><span>Fotos e pôr do sol</span></div></div>
+            <div class="item"><div class="time">18:00</div><div class="what"><b>Jantar</b><span>Menu tropical e opções vegetarianas</span></div></div>
+            <div class="item"><div class="time">20:00</div><div class="what"><b>Festa</b><span>DJ, pista e surpresas</span></div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Informações rápidas</h3>
+          <p style="margin-bottom:10px">Dicas para o conforto e para o clima de praia.</p>
+          <div class="grid" style="gap:10px">
+            <div class="item"><div class="time">Clima</div><div class="what"><b>Brisa e calor</b><span>Traga um xale leve para o fim da tarde</span></div></div>
+            <div class="item"><div class="time">Piso</div><div class="what"><b>Areia</b><span>Saltos finos não são recomendados</span></div></div>
+            <div class="item"><div class="time">Cores</div><div class="what"><b>Claras</b><span>Neutros, coral, verde água, florais suaves</span></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="local">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Local</h2>
+        <div class="hint">Endereço, mapa e recomendações de hospedagem/transporte.</div>
+      </div>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Cerimônia e festa</h3>
+          <p><b>Espaço Maré Serena</b><br/>Av. Beira Mar, 1234 · Praia do Rosa · SC</p>
+          <p style="margin-top:10px">
+            Estacionamento limitado. Se puder, prefira carona, aplicativo ou transfer.
+          </p>
+          <div class="hero-actions" style="margin-top:12px">
+            <a class="btn" id="btnMaps" href="#" rel="noopener">Abrir no Google Maps</a>
+            <a class="btn" href="#rsvp">Confirmar presença</a>
+          </div>
+        </div>
+
+        <div class="card" style="padding:0; overflow:hidden">
+          <!-- Mapa incorporado (troque a URL abaixo por um embed do Google Maps). -->
+          <div style="padding:14px 18px; border-bottom:1px solid rgba(26,26,26,.10); background:rgba(255,255,255,.72)">
+            <h3 style="margin:0">Mapa</h3>
+            <p style="margin:6px 0 0; color:rgba(26,26,26,.62); font-size:13px">Substitua este embed pelo mapa real do local.</p>
+          </div>
+          <div style="aspect-ratio: 16 / 10; background: linear-gradient(135deg, rgba(42,167,161,.18), rgba(255,79,116,.14), rgba(255,208,138,.20)); display:flex; align-items:center; justify-content:center; padding:18px">
+            <div style="max-width: 52ch; text-align:center; color: rgba(26,26,26,.72)">
+              <b>Embed do mapa</b>
+              <div style="font-size:13px; margin-top:6px">
+                Dica: no Google Maps, clique em “Compartilhar” → “Incorporar um mapa” e cole o <i>iframe</i> aqui.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height:16px"></div>
+
+      <div class="grid cols-3">
+        <div class="card">
+          <h3>Hospedagem</h3>
+          <p>Selecione 3–5 opções próximas (pousadas/hotéis). Inclua distância e link de reserva.</p>
+        </div>
+        <div class="card">
+          <h3>Transporte</h3>
+          <p>Indique aeroportos/rodoviária e tempo médio até o local. Informe horários de transfer, se houver.</p>
+        </div>
+        <div class="card">
+          <h3>Contato</h3>
+          <p>Para dúvidas, fale com <b>Nome do contato</b> (WhatsApp: (00) 00000-0000).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="galeria">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Galeria</h2>
+        <div class="hint">Troque os placeholders por fotos reais (pré-wedding, viagens, família).</div>
+      </div>
+
+      <div class="gallery" aria-label="Galeria de fotos">
+        <div class="ph big" aria-label="Foto 1"></div>
+        <div class="ph med" aria-label="Foto 2"></div>
+        <div class="ph sm" aria-label="Foto 3"></div>
+        <div class="ph sm" aria-label="Foto 4"></div>
+        <div class="ph sm" aria-label="Foto 5"></div>
+      </div>
+
+      <div style="height:16px"></div>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Dress code</h3>
+          <p>
+            <b>Praia chique</b>: tecidos leves, cores claras, estampas suaves e conforto.
+            Para quem preferir, traje social leve também funciona perfeitamente.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Lista de presentes</h3>
+          <p>
+            Inclua aqui o link da lista (ou um Pix para cota de lua de mel). Se quiser, adicione uma mensagem curta e delicada.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rsvp">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>RSVP</h2>
+        <div class="hint">Confirme até <b>15/09/2026</b>. Os dados ficam no seu navegador (exemplo). Para produção, conecte a um formulário real.</div>
+      </div>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Confirmação de presença</h3>
+          <form id="rsvpForm">
+            <div class="row">
+              <div>
+                <label for="nome">Nome completo</label>
+                <input id="nome" name="nome" autocomplete="name" required placeholder="Seu nome" />
+              </div>
+              <div>
+                <label for="email">E-mail</label>
+                <input id="email" name="email" type="email" autocomplete="email" required placeholder="voce@exemplo.com" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="presenca">Você irá?</label>
+                <select id="presenca" name="presenca" required>
+                  <option value="" selected disabled>Selecione</option>
+                  <option value="sim">Sim, estarei presente</option>
+                  <option value="nao">Não poderei ir</option>
+                </select>
+              </div>
+              <div>
+                <label for="qtd">Quantidade de pessoas</label>
+                <select id="qtd" name="qtd" required>
+                  <option value="1" selected>1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="restricoes">Restrições alimentares / observações</label>
+              <textarea id="restricoes" name="restricoes" placeholder="Ex.: vegetariano, sem glúten, alergias…"></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn primary" type="submit">Enviar RSVP</button>
+              <button class="btn" type="button" id="btnLimpar">Limpar</button>
+              <span class="note">Este exemplo salva localmente. Para coletar respostas, conecte a um Google Form, Typeform ou backend.</span>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3>Mensagenzinha</h3>
+          <p style="margin-bottom:10px">
+            Sua presença é o melhor presente. Obrigado por fazer parte da nossa história.
+          </p>
+          <div class="item" style="margin-top:10px">
+            <div class="time">Dúvidas</div>
+            <div class="what">
+              <b>Fale com a gente</b>
+              <span>WhatsApp/Instagram (insira os contatos)</span>
+            </div>
+          </div>
+
+          <div class="item" style="margin-top:10px">
+            <div class="time">Horário</div>
+            <div class="what">
+              <b>Chegue cedo</b>
+              <span>Recomendamos chegar 30 minutos antes da cerimônia.</span>
+            </div>
+          </div>
+
+          <div class="item" style="margin-top:10px">
+            <div class="time">Kids</div>
+            <div class="what">
+              <b>Informação</b>
+              <span>Se haverá espaço kids, informe aqui com clareza.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>FAQ</h2>
+        <div class="hint">Respostas curtas e objetivas para as dúvidas mais comuns.</div>
+      </div>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Vai chover?</h3>
+          <p>Temos um plano B coberto no próprio espaço. Mantemos todos informados se houver mudança.</p>
+        </div>
+        <div class="card">
+          <h3>Posso levar acompanhante?</h3>
+          <p>Considere o convite/RSVP. Se tiver dúvida, fale conosco antes.</p>
+        </div>
+        <div class="card">
+          <h3>Qual o melhor horário para chegar?</h3>
+          <p>Chegue por volta de 16:00 para estacionar com calma e aproveitar as boas-vindas.</p>
+        </div>
+        <div class="card">
+          <h3>Tem dress code obrigatório?</h3>
+          <p>Não. A ideia é estar confortável. Recomendamos “praia chique” e cores claras.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap foot">
+      <div style="display:flex; align-items:center; gap:12px">
+        <span class="monogram" aria-hidden="true">M&G</span>
+        <div>
+          <div style="font-weight:700">Marina & Gabriel</div>
+          <div style="font-size:12px; color:rgba(26,26,26,.62)">Feito com carinho · Atualize nomes/datas/endereços conforme necessário</div>
+        </div>
+      </div>
+
+      <div style="font-size:12px; color:rgba(26,26,26,.62)">
+        <div><b>Dica rápida de customização:</b></div>
+        <div>• Troque os nomes e a data no topo (linha do <code>&lt;title&gt;</code> e na <code>.brand</code>).</div>
+        <div>• Para usar foto no painel, aplique <code>background-image</code> em <code>.photo</code> ou <code>.photo .frame</code>.</div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // ====== CONFIGURAÇÕES ======
+    // Ajuste para a data/hora do casamento (YYYY-MM-DDTHH:mm:ss) no fuso local do navegador
+    const WEDDING_DATETIME = "2026-10-17T16:30:00";
+
+    // Link do Google Maps (substitua pelo endereço real)
+    const GOOGLE_MAPS_URL = "https://www.google.com/maps/search/?api=1&query=Praia+do+Rosa+SC";
+
+    // ====== UTIL ======
+    const $ = (sel) => document.querySelector(sel);
+    const toast = (msg) => {
+      const el = $("#toast");
+      el.textContent = msg;
+      el.style.display = "block";
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => { el.style.display = "none"; }, 3200);
+    };
+
+    // ====== MAPS ======
+    const btnMaps = $("#btnMaps");
+    btnMaps.href = GOOGLE_MAPS_URL;
+    btnMaps.target = "_blank";
+
+    // ====== COUNTDOWN ======
+    const countdownEl = $("#countdown");
+    const target = new Date(WEDDING_DATETIME);
+
+    function pad(n){ return String(n).padStart(2, "0"); }
+
+    function updateCountdown(){
+      const now = new Date();
+      const diff = target - now;
+
+      if (isNaN(target.getTime())) {
+        countdownEl.textContent = "Data inválida. Ajuste WEDDING_DATETIME no script.";
+        return;
+      }
+
+      if (diff <= 0) {
+        countdownEl.textContent = "É hoje. Nos vemos já já.";
+        return;
+      }
+
+      const totalSeconds = Math.floor(diff / 1000);
+      const days = Math.floor(totalSeconds / (3600 * 24));
+      const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      countdownEl.textContent = `${days} dias · ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // ====== RSVP (DEMO - localStorage) ======
+    const form = $("#rsvpForm");
+    const btnLimpar = $("#btnLimpar");
+
+    const STORAGE_KEY = "wedding_rsvp_demo";
+
+    function loadForm(){
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+        if (!saved) return;
+        $("#nome").value = saved.nome || "";
+        $("#email").value = saved.email || "";
+        $("#presenca").value = saved.presenca || "";
+        $("#qtd").value = saved.qtd || "1";
+        $("#restricoes").value = saved.restricoes || "";
+      } catch { /* ignore */ }
+    }
+
+    function clearForm(){
+      form.reset();
+      localStorage.removeItem(STORAGE_KEY);
+      toast("RSVP limpo neste navegador.");
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const data = {
+        nome: $("#nome").value.trim(),
+        email: $("#email").value.trim(),
+        presenca: $("#presenca").value,
+        qtd: $("#qtd").value,
+        restricoes: $("#restricoes").value.trim(),
+        savedAt: new Date().toISOString(),
+      };
+
+      if (!data.nome || !data.email || !data.presenca) {
+        toast("Preencha nome, e-mail e presença.");
+        return;
+      }
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      toast("RSVP salvo (demonstração). Obrigado.");
+
+      // Para produção: envie para backend/Google Form aqui.
+      // Exemplo: fetch("/api/rsvp", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(data) })
+    });
+
+    btnLimpar.addEventListener("click", clearForm);
+
+    loadForm();
+  </script>
+
+  <!--
+    ====== COMO COLOCAR FOTO NO PAINEL ======
+    Opção A (CSS):
+      .photo .frame{ background-image:url('sua-foto.jpg'); background-size:cover; background-position:center; }
+      Remova/ajuste os gradientes acima.
+
+    Opção B (HTML):
+      Substitua o bloco .photo por:
+        <div class="hero-card photo" style="background:url('sua-foto.jpg') center/cover no-repeat;">
+          ...
+        </div>
+
+    ====== COMO PUBLICAR RÁPIDO ======
+    1) Salve este arquivo como index.html
+    2) Abra no navegador, ou suba no GitHub Pages / Netlify / Vercel (site estático)
+  -->
+</body>
+</html>
