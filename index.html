@@ -170,10 +170,9 @@
       transition: transform .15s ease, box-shadow .2s ease;
     }
     .btn:hover{transform: translateY(-1px); box-shadow: 0 16px 30px rgba(26,26,26,.10)}
-    .btn.primary{
-      border-color: rgba(255,79,116,.28);
-      background: linear-gradient(135deg, rgba(255,79,116,.22), rgba(42,167,161,.18), rgba(255,208,138,.20));
-    }
+    $1
+    .btn.icon{padding:12px; width:44px; aspect-ratio:1/1}
+    .btn.icon svg{width:18px; height:18px; display:block}
 
     /* Photo panel (decorative) */
     .photo{
@@ -527,6 +526,14 @@
           </p>
           <div class="hero-actions" style="margin-top:12px">
             <a class="btn" id="btnMaps" href="#" rel="noopener">Abrir no Google Maps</a>
+            <a class="btn icon" id="btnInsta" href="#" target="_blank" rel="noopener" aria-label="Instagram do Espaço Ah, Mar!">
+              <span class="sr">Instagram</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3.5" y="3.5" width="17" height="17" rx="5"></rect>
+                <circle cx="12" cy="12" r="4.2"></circle>
+                <circle cx="17.2" cy="6.8" r="1"></circle>
+              </svg>
+            </a>
             <a class="btn" href="#rsvp">Confirmar presença</a>
           </div>
         </div>
@@ -535,15 +542,18 @@
           <!-- Mapa incorporado (troque a URL abaixo por um embed do Google Maps). -->
           <div style="padding:14px 18px; border-bottom:1px solid rgba(26,26,26,.10); background:rgba(255,255,255,.72)">
             <h3 style="margin:0">Mapa</h3>
-            <p style="margin:6px 0 0; color:rgba(26,26,26,.62); font-size:13px">Substitua este embed pelo mapa real do local.</p>
+            <p style="margin:6px 0 0; color:rgba(26,26,26,.62); font-size:13px">Mapa do Espaço Ah, Mar! (toque/arraste para navegar).</p>
           </div>
-          <div style="aspect-ratio: 16 / 10; background: linear-gradient(135deg, rgba(42,167,161,.18), rgba(255,79,116,.14), rgba(255,208,138,.20)); display:flex; align-items:center; justify-content:center; padding:18px">
-            <div style="max-width: 52ch; text-align:center; color: rgba(26,26,26,.72)">
-              <b>Embed do mapa</b>
-              <div style="font-size:13px; margin-top:6px">
-                Dica: no Google Maps, clique em “Compartilhar” → “Incorporar um mapa” e cole o <i>iframe</i> aqui.
-              </div>
-            </div>
+          <div style="aspect-ratio: 16 / 10; background: rgba(255,255,255,.20);">
+            <iframe
+              title="Mapa - Espaço Ah, Mar!"
+              src="https://www.google.com/maps?q=Rua%20Praia%20de%20Arpoador%2C%20157%20-%20Vilas%20do%20Atl%C3%A2ntico%2C%20Lauro%20de%20Freitas%20-%20BA%2C%2042708-090&output=embed"
+              style="border:0; width:100%; height:100%"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen
+            ></iframe>
+          </div>
           </div>
         </div>
       </div>
@@ -746,7 +756,10 @@
     const WEDDING_DATETIME = "2026-10-10T16:30:00";
 
     // Link do Google Maps (substitua pelo endereço real)
-    const GOOGLE_MAPS_URL = "https://www.google.com/maps/search/?api=1&query=Espa%C3%A7o%20Ah%2C%20Mar%21%20Rua%20Praia%20de%20Arpoador%20157%20Vilas%20do%20Atl%C3%A2ntico%20Lauro%20de%20Freitas%20BA";
+    $1
+
+    // Instagram do local
+    const INSTAGRAM_URL = "https://www.instagram.com/espaco_ahmar/?hl=en";
 
     // ====== UTIL ======
     const $ = (sel) => document.querySelector(sel);
@@ -762,6 +775,12 @@
     const btnMaps = $("#btnMaps");
     btnMaps.href = GOOGLE_MAPS_URL;
     btnMaps.target = "_blank";
+
+    const btnInsta = $("#btnInsta");
+    if (btnInsta) {
+      btnInsta.href = INSTAGRAM_URL;
+      btnInsta.target = "_blank";
+    }
 
     // ====== COUNTDOWN ======
     const countdownEl = $("#countdown");
