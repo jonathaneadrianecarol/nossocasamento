@@ -445,7 +445,7 @@ blockquote footer {
     }
 
     .date {
-        margin-top: 10rem !important;
+        margin-top: 5rem !important;
         /* Sobe o texto e o botão no celular */
         font-size: 1.2rem !important;
         /* Fonte menor no celular */
@@ -454,7 +454,7 @@ blockquote footer {
     }
 
     .btn {
-        padding: 0.8rem 1.5rem;
+        padding: 0.6rem 1.3rem;
         /* Botão menor */
         font-size: 0.9rem;
         /* Fonte do botão menor */
