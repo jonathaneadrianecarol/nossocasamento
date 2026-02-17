@@ -131,7 +131,8 @@ ul {
 
 .logo {
     font-family: var(--font-heading);
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+    /* Diminua este número (ex: 1.2rem) para ficar menor */
     font-weight: 700;
     color: var(--heading-color);
     letter-spacing: 2px;
@@ -423,6 +424,11 @@ blockquote footer {
 @media (max-width: 768px) {
     .main-title {
         font-size: 3.5rem;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+        /* Tamanho da fonte no celular */
     }
 
     .nav-links {
