@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 10s: Volta para o MEIO (Center)
         const timeline = [
             { start: 0, position: '50% 50%' },   // Começacentro 
-            { start: 1, position: '50% 30%' },   // depois mostrando o topo
+            { start: 1, position: '50% 40%' },   // depois mostrando o topo
             { start: 15, position: '50% 50%' }  // Aos 10s centraliza
         ];
 
