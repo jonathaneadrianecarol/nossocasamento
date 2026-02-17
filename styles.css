@@ -734,3 +734,189 @@ blockquote footer {
         font-size: 0.9rem;
     }
 }
+
+/* --- New Story Section Layout --- */
+.story-content-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.story-video {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.story-video video {
+    width: 100%;
+    max-width: 350px;
+    /* Reduced size as requested */
+    border-radius: 12px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.story-text {
+    flex: 1.5;
+    text-align: left;
+}
+
+.story-text p {
+    margin-bottom: 1.2rem;
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+    .story-content-wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .story-text {
+        text-align: center;
+    }
+
+    .story-video video {
+        max-width: 80%;
+        /* Smaller on mobile */
+    }
+}
+
+/* --- Music Hint Tooltip --- */
+.music-wrapper {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    /* Button right, text left */
+}
+
+.music-control {
+    position: relative;
+    /* Reset fixed positioning as it's now in wrapper */
+    bottom: auto;
+    right: auto;
+    flex-shrink: 0;
+}
+
+.music-hint {
+    background-color: var(--white);
+    color: var(--text-color);
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    margin-right: 15px;
+    font-size: 0.9rem;
+    max-width: 250px;
+    line-height: 1.4;
+    position: relative;
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 0.5s ease;
+    pointer-events: none;
+    /* Let clicks pass through */
+}
+
+/* Arrow for the tooltip */
+.music-hint::after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: 6px 0 6px 6px;
+    border-style: solid;
+    border-color: transparent transparent transparent var(--white);
+}
+
+.music-hint.hidden {
+    opacity: 0;
+    transform: translateX(20px);
+}
+
+/* --- Scroll Down Indicator (Hero) --- */
+.scroll-down {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    color: var(--white);
+    animation: bounce 2s infinite;
+    cursor: pointer;
+    text-align: center;
+}
+
+.scroll-down i {
+    width: 40px;
+    height: 40px;
+}
+
+.scroll-text {
+    display: block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: -5px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    40% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+
+    60% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+/* --- Back To Top Button --- */
+.back-to-top {
+    position: fixed;
+    bottom: 90px;
+    /* Above music control */
+    right: 25px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 9999;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background-color: #bfa030;
+    transform: translateY(-3px);
+}
