@@ -445,7 +445,7 @@ blockquote footer {
     }
 
     .date {
-        margin-top: 15rem !important;
+        margin-top: 20rem !important;
         /* Sobe o texto e o botão no celular */
         font-size: 1.0rem !important;
         /* Fonte menor no celular */
