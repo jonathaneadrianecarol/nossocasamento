@@ -1,170 +1,322 @@
-// script.js
-(() => {
-  // ===== Config =====
-  const WEDDING_DATETIME = "2026-10-10T16:30:00";
-  const GOOGLE_MAPS_URL =
-    "https://www.google.com/maps/search/?api=1&query=Espa%C3%A7o%20Ah%2C%20Mar%21%20Rua%20Praia%20de%20Arpoador%20157%20Vilas%20do%20Atl%C3%A2ntico%20Lauro%20de%20Freitas%20BA";
-  const STORAGE_KEY = "wedding_rsvp_demo_pt";
+/* styles.css */
+:root {
+  --primary-color: #D4AF37; /* Gold */
+  --secondary-color: #fdfbf7; /* Cream */
+  --text-color: #4a4a4a;
+  --heading-color: #2c2c2c;
+  --white: #ffffff;
+  --transition: all 0.3s ease;
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Lato", sans-serif;
+}
 
-  // ===== Helpers =====
-  const $ = (sel) => document.querySelector(sel);
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-  const toast = (msg) => {
-    const el = $("#toast");
-    if (!el) return;
-    el.textContent = msg;
-    el.style.display = "block";
-    clearTimeout(window.__toastTimer);
-    window.__toastTimer = setTimeout(() => (el.style.display = "none"), 3200);
-  };
+html { scroll-behavior: smooth; }
 
-  // ===== Smooth scroll =====
-  document.querySelectorAll('a[href^="#"]').forEach((a) => {
-    a.addEventListener("click", (e) => {
-      const href = a.getAttribute("href");
-      if (!href || href === "#") return;
-      const target = document.querySelector(href);
-      if (!target) return;
+body {
+  font-family: var(--font-body);
+  color: var(--text-color);
+  line-height: 1.6;
+  background-color: var(--secondary-color);
+}
 
-      e.preventDefault();
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
+/* Typography */
+h1,h2,h3,h4,h5,h6 {
+  font-family: var(--font-heading);
+  color: var(--heading-color);
+  margin-bottom: 1rem;
+}
 
-      // fecha menu mobile ao clicar
-      document.body.classList.remove("nav-open");
-      const toggle = $(".nav-toggle");
-      if (toggle) toggle.setAttribute("aria-expanded", "false");
-    });
-  });
+a { text-decoration: none; color: inherit; transition: var(--transition); }
+ul { list-style: none; }
 
-  // ===== Mobile menu =====
-  const toggle = $(".nav-toggle");
-  if (toggle) {
-    toggle.addEventListener("click", () => {
-      const open = document.body.classList.toggle("nav-open");
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
-    });
-  }
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
 
-  // ===== Maps button =====
-  const btnMaps = $("#btnMaps");
-  if (btnMaps) btnMaps.href = GOOGLE_MAPS_URL;
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: var(--transition);
+  background: transparent;
+}
 
-  // ===== Countdown =====
-  const countdownEl = $("#countdown");
-  const target = new Date(WEDDING_DATETIME);
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--white);
+  border-color: var(--primary-color);
+}
 
-  const pad = (n) => String(n).padStart(2, "0");
+.btn-primary:hover {
+  background-color: transparent;
+  color: var(--primary-color);
+}
 
-  function updateCountdown() {
-    if (!countdownEl) return;
+.btn-block { display: block; width: 100%; }
 
-    if (isNaN(target.getTime())) {
-      countdownEl.textContent = "Data inválida. Ajuste WEDDING_DATETIME.";
-      return;
-    }
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 1.5rem 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  transition: var(--transition);
+}
 
-    const now = new Date();
-    const diff = target - now;
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
 
-    if (diff <= 0) {
-      countdownEl.textContent = "É hoje. Nos vemos já já.";
-      return;
-    }
+.logo {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--heading-color);
+  letter-spacing: 2px;
+}
 
-    const totalSeconds = Math.floor(diff / 1000);
-    const days = Math.floor(totalSeconds / (3600 * 24));
-    const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
+.nav-links { display: flex; gap: 2rem; }
 
-    countdownEl.textContent = `${days} dias · ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
-  }
+.nav-links a {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 400;
+}
 
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
+.nav-links a:hover { color: var(--primary-color); }
 
-  // ===== RSVP (demo localStorage) =====
-  const form = $("#rsvpForm");
-  const btnLimpar = $("#btnLimpar");
+.hamburger {
+  display: none;
+  cursor: pointer;
+  border: 0;
+  background: transparent;
+  padding: 0.25rem;
+}
 
-  function loadForm() {
-    if (!form) return;
-    try {
-      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
-      if (!saved) return;
-      $("#nome").value = saved.nome || "";
-      $("#email").value = saved.email || "";
-      $("#presenca").value = saved.presenca || "";
-      $("#qtd").value = saved.qtd || "1";
-      $("#restricoes").value = saved.restricoes || "";
-    } catch {
-      /* ignore */
-    }
-  }
+/* Hero Section (video background) */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  color: var(--white);
+  overflow: hidden;
+}
 
-  function clearForm() {
-    if (!form) return;
-    form.reset();
-    localStorage.removeItem(STORAGE_KEY);
-    toast("RSVP limpo neste navegador.");
-  }
+.hero-video{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.01); /* evita borda branca em alguns devices */
+}
 
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+}
 
-      const data = {
-        nome: $("#nome").value.trim(),
-        email: $("#email").value.trim(),
-        presenca: $("#presenca").value,
-        qtd: $("#qtd").value,
-        restricoes: $("#restricoes").value.trim(),
-        savedAt: new Date().toISOString(),
-      };
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 2rem;
+  animation: fadeInUp 1.5s ease-out;
+}
 
-      if (!data.nome || !data.email || !data.presenca) {
-        toast("Preencha nome, e-mail e presença.");
-        return;
-      }
+.pre-title {
+  font-size: 1.2rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  font-weight: 300;
+}
 
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-      toast("RSVP salvo (demonstração). Obrigado.");
-    });
-  }
+.main-title {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+  font-weight: 400;
+  line-height: 1.1;
+}
 
-  if (btnLimpar) btnLimpar.addEventListener("click", clearForm);
-  loadForm();
+.date {
+  font-size: 1.5rem;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+  font-family: var(--font-heading);
+  font-style: italic;
+}
 
-  // ===== Galeria: arrastar horizontalmente (pointer) =====
-  (function () {
-    const strip = document.querySelector(".gallery-strip");
-    if (!strip) return;
+/* Sections General */
+.section { padding: 6rem 0; }
 
-    let isDown = false;
-    let startX = 0;
-    let startScroll = 0;
+.section-title {
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 3rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
 
-    strip.addEventListener("pointerdown", (e) => {
-      isDown = true;
-      strip.classList.add("dragging");
-      strip.setPointerCapture(e.pointerId);
-      startX = e.clientX;
-      startScroll = strip.scrollLeft;
-    });
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background-color: var(--primary-color);
+}
 
-    strip.addEventListener("pointermove", (e) => {
-      if (!isDown) return;
-      const dx = e.clientX - startX;
-      strip.scrollLeft = startScroll - dx;
-    });
+/* Story Section */
+.story { background-color: var(--white); text-align: center; }
 
-    const end = () => {
-      isDown = false;
-      strip.classList.remove("dragging");
-    };
+.story-text {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  color: #666;
+}
 
-    strip.addEventListener("pointerup", end);
-    strip.addEventListener("pointercancel", end);
-    strip.addEventListener("pointerleave", end);
-  })();
-})();
+.story-text p { margin-bottom: 1.5rem; }
+
+/* Details Section */
+.details { background-color: var(--secondary-color); }
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  text-align: center;
+}
+
+.detail-card {
+  background: var(--white);
+  padding: 3rem 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  transition: var(--transition);
+}
+
+.detail-card:hover { transform: translateY(-10px); }
+
+.detail-icon {
+  color: var(--primary-color);
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1.5rem;
+}
+
+.detail-card h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+.detail-card p { color: #666; margin-bottom: 0.5rem; }
+
+/* Quote Section */
+.quote-section {
+  background-color: var(--primary-color);
+  color: var(--white);
+  text-align: center;
+  padding: 4rem 0;
+}
+
+blockquote {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-style: italic;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+blockquote footer {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  margin-top: 1.5rem;
+  font-style: normal;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* RSVP Section */
+.rsvp { background-color: var(--white); text-align: center; }
+
+.rsvp-text { margin-bottom: 3rem; font-size: 1.2rem; }
+
+.rsvp-form {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.form-group { margin-bottom: 1.5rem; }
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  transition: var(--transition);
+  background-color: #fcfcfc;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background-color: var(--white);
+}
+
+/* Footer */
+.footer {
+  background-color: #222;
+  color: #aaa;
+  text-align: center;
+  padding: 3rem 0;
+  font-size: 0.9rem;
+}
+
+.footer p { margin-bottom: 0.5rem; }
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .main-title { font-size: 3.5rem; }
+  .nav-links { display: none; }
+  .hamburger { display: block; }
+  .section { padding: 4rem 0; }
+}
