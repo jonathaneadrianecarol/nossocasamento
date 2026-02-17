@@ -249,6 +249,79 @@ ul {
     animation: fadeInUp 1.5s ease-out;
 }
 
+/* Welcome Section Style */
+.welcome {
+    background-color: var(--secondary-color);
+    padding: 6rem 0;
+}
+
+.welcome-container {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    flex-direction: row;
+    /* Texto esquerda, Foto direita */
+}
+
+@media (max-width: 768px) {
+    .welcome-container {
+        flex-direction: column-reverse;
+        /* No celular, um em cima do outro */
+        text-align: center;
+    }
+
+    .casual-photo {
+        width: 250px;
+        /* <<< TAMANHO NO CELULAR: Mude este valor para ficar maior ou menor */
+    }
+}
+
+.welcome-text p {
+    margin-bottom: 2rem;
+    font-size: 1.3rem;
+    line-height: 1.8;
+    color: #555;
+    font-style: italic;
+    font-family: var(--font-heading);
+}
+
+.casual-photo {
+    max-width: 100%;
+    width: 350px;
+    /* <<< TAMANHO NO PC: Mude este valor */
+    border-radius: 4px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    background: #fff;
+    padding: 10px;
+    /* Efeito moldura */
+    transform: rotate(3deg);
+    /* Foto tortinha */
+    transition: all 0.5s ease;
+}
+
+.casual-photo:hover {
+    transform: rotate(0deg) scale(1.02);
+}
+
+@media (min-width: 768px) {
+
+    /* Layout já é row por padrão agora */
+    .welcome-container {
+        text-align: left;
+    }
+
+    .welcome-text {
+        flex: 1;
+        padding-right: 2rem;
+    }
+
+    .welcome-photo {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+    }
+}
+
 .pre-title {
     font-size: 1.2rem;
     letter-spacing: 3px;
