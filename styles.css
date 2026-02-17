@@ -129,13 +129,46 @@ ul {
     align-items: center;
 }
 
+/* ... (main css) ... */
+
 .logo {
     font-family: var(--font-heading);
     font-size: 1.5rem;
-    /* Diminua este número (ex: 1.2rem) para ficar menor */
+    /* <<< MUDE AQUI O TAMANHO DA FONTE NO PC */
     font-weight: 700;
     color: var(--heading-color);
     letter-spacing: 2px;
+}
+
+/* ... (rest of css) ... */
+
+/* Responsive Mobile Fix */
+@media (max-width: 768px) {
+    .hero {
+        align-items: flex-end;
+        /* Alinha o conteúdo no final (fundo) */
+        padding-bottom: 20vh;
+        /* Espaço do fundo (20% da tela) */
+    }
+
+    /* Removemos o position absolute que quebrou antes */
+    .hero-content {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        width: 100%;
+    }
+
+    .date {
+        margin-top: 0 !important;
+        font-size: 1.2rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    .btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
 }
 
 .nav-links {
