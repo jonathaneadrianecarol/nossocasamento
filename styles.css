@@ -420,8 +420,8 @@ ul {
 }
 
 .gallery-img {
-    height: 400px;
-    /* Altura fixa para padrão */
+    height: 500px;
+    /* Altura aumentada conforme pedido */
     width: auto;
     flex: 0 0 auto;
     /* Não encolher */
@@ -461,8 +461,8 @@ ul {
 
 @media (max-width: 768px) {
     .gallery-img {
-        height: 300px;
-        /* Menor no celular */
+        height: 380px;
+        /* Menor no celular, mas aumentado conforme pedido */
     }
 }
 
