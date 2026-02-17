@@ -75,8 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
             { start: 0, position: '50% center', zoom: 1.0 },   // Normal no meio
             { start: 26, position: '10% center', zoom: 1.0 },   // 4s: Vai para Esquerda (Mostra o que estava escondido)
             { start: 27, position: '90% center', zoom: 1.0 },   // 9s: Vai para Direita
-            { start: 14, position: '50% center', zoom: 1.5 },  // 14s: Foca no Meio bem de perto (Zoom)
-            { start: 19, position: '50% center', zoom: 1.0 }   // 19s: Volta ao normal
+            { start: 29, position: '50% center', zoom: 1.5 },  // 14s: Foca no Meio bem de perto (Zoom)
+            { start: 31, position: '50% center', zoom: 1.0 }   // 19s: Volta ao normal
         ];
 
         function updateVideoFocus() {
