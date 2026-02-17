@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 10s: Volta para o MEIO (Center)
         const timeline = [
             { start: 0, position: '50% 15%' },   // Começa mostrando o topo
-            { start: 13, position: '50% 50%' }  // Aos 10s centraliza
+            { start: 10, position: '50% 50%' }  // Aos 10s centraliza
         ];
 
         function updateVideoFocus() {
@@ -130,4 +130,49 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }, 1000);
+    // --- MUSIC CONTROL ---
+    const musicControl = document.getElementById('music-control');
+    const bgMusic = document.getElementById('bg-music');
+    const musicIcon = document.getElementById('music-icon');
+    let isPlaying = false;
+
+    if (musicControl && bgMusic && musicIcon) {
+        musicControl.addEventListener('click', () => {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicIcon.setAttribute('data-lucide', 'volume-x');
+                musicControl.classList.remove('playing');
+                isPlaying = false;
+            } else {
+                bgMusic.play().then(() => {
+                    isPlaying = true;
+                    musicIcon.setAttribute('data-lucide', 'music');
+                    musicControl.classList.add('playing');
+                    // Re-render icons to update the change
+                    lucide.createIcons();
+                }).catch(error => {
+                    console.log("Playback failed:", error);
+                });
+            }
+            lucide.createIcons();
+        });
+
+        // Optional: Try to auto-play on first interaction if user doesn't click button first
+        document.body.addEventListener('click', function firstClick() {
+            if (!isPlaying) {
+                // Remove this listener so it doesn't run every click
+                document.body.removeEventListener('click', firstClick);
+                // Try to play
+                bgMusic.play().then(() => {
+                    isPlaying = true;
+                    musicIcon.setAttribute('data-lucide', 'music');
+                    musicControl.classList.add('playing');
+                    lucide.createIcons();
+                }).catch(error => {
+                    // Autoplay likely blocked, wait for manual button click
+                    console.log("Autoplay blocked, waiting for user interaction on button");
+                });
+            }
+        }, { once: true });
+    }
 });
