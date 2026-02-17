@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 0s: Foca no TETO/CÉU (Top)
         // 10s: Volta para o MEIO (Center)
         const timeline = [
-            { start: 0, position: '50% 0%' },   // Começa mostrando o topo
+            { start: 0, position: '50% 15%' },   // Começa mostrando o topo
             { start: 10, position: '50% 50%' }  // Aos 10s centraliza
         ];
 
