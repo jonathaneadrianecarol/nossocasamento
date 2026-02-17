@@ -76,7 +76,10 @@ fetch(form.action, {
 .then(response => {
     // Se a resposta for OK (200), sucesso
     if (response.ok) {
-        alert(`Obrigado, ${name}! Sua presença foi confirmada. Mal podemos esperar para celebrar com você!`);
+        // ... dentro do if (response.ok) ...
+        const primeiroNome = name.split(' ')[0]; // Pega tudo antes do primeiro espaço
+        alert(`Obrigado, ${primeiroNome}! Sua presença foi confirmada. Mal podemos esperar para celebrar com você!`);
+        
         form.reset();
     } else {
         // Se der erro, tenta ler a mensagem do servidor
