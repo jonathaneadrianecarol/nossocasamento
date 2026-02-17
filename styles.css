@@ -466,6 +466,64 @@ ul {
     }
 }
 
+/* Story Section - Masonry Layout */
+.story {
+    background-color: var(--white);
+    padding: 6rem 0;
+}
+
+.story-grid {
+    column-count: 5;
+    /* More columns = smaller images */
+    column-gap: 0.8rem;
+}
+
+@media (max-width: 1024px) {
+    .story-grid {
+        column-count: 4;
+    }
+}
+
+@media (max-width: 768px) {
+    .story-grid {
+        column-count: 3;
+        /* Smaller on mobile too */
+        column-gap: 0.5rem;
+    }
+}
+
+.story-item {
+    break-inside: avoid;
+    margin-bottom: 0.8rem;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+    /* Animation Initial State */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease-out;
+}
+
+.story-item img {
+    width: 100%;
+    /* Strict height limit */
+    max-height: 250px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.story-item:hover img {
+    transform: scale(1.05);
+}
+
+/* Class added by JS to trigger animation */
+.story-item.reveal {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* Details Section */
 .details {
     background-color: var(--secondary-color);
@@ -605,6 +663,32 @@ blockquote footer {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* Music Control Button */
+.music-control {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--white);
+    color: var(--primary-color);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    z-index: 10000;
+    transition: all 0.3s ease;
+    border: 2px solid var(--primary-color);
+}
+
+.music-control:hover {
+    transform: scale(1.1);
+    background-color: var(--primary-color);
+    color: var(--white);
 }
 
 /* Responsive */
