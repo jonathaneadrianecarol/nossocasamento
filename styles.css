@@ -133,7 +133,7 @@ ul {
 
 .logo {
     font-family: var(--font-heading);
-    font-size: 2.0rem;
+    font-size: 1.5rem;
     /* <<< MUDE AQUI O TAMANHO DA FONTE NO PC */
     font-weight: 700;
     color: var(--heading-color);
@@ -178,6 +178,7 @@ ul {
 
 .nav-links a {
     font-size: 0.9rem;
+    /* <<< MUDE AQUI O TAMANHO DOS LINKS */
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 400;
