@@ -1,71 +1,55 @@
-document.addEventListener("DOMContentLoaded", () => {
-  // ====== CONFIG ======
+// script.js
+(() => {
+  // ===== Config =====
   const WEDDING_DATETIME = "2026-10-10T16:30:00";
-  const GOOGLE_MAPS_URL = "https://www.google.com/maps/search/?api=1&query=Espa%C3%A7o%20Ah%2C%20Mar%21%20Rua%20Praia%20de%20Arpoador%20157%20Vilas%20do%20Atl%C3%A2ntico%20Lauro%20de%20Freitas%20BA";
-  const INSTAGRAM_URL = "https://www.instagram.com/espaco_ahmar/?hl=en";
+  const GOOGLE_MAPS_URL =
+    "https://www.google.com/maps/search/?api=1&query=Espa%C3%A7o%20Ah%2C%20Mar%21%20Rua%20Praia%20de%20Arpoador%20157%20Vilas%20do%20Atl%C3%A2ntico%20Lauro%20de%20Freitas%20BA";
   const STORAGE_KEY = "wedding_rsvp_demo_pt";
 
+  // ===== Helpers =====
   const $ = (sel) => document.querySelector(sel);
 
-  // ====== Toast ======
   const toast = (msg) => {
     const el = $("#toast");
     if (!el) return;
     el.textContent = msg;
     el.style.display = "block";
     clearTimeout(window.__toastTimer);
-    window.__toastTimer = setTimeout(() => { el.style.display = "none"; }, 3200);
+    window.__toastTimer = setTimeout(() => (el.style.display = "none"), 3200);
   };
 
-  // ====== Smooth scroll ======
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
+  // ===== Smooth scroll =====
+  document.querySelectorAll('a[href^="#"]').forEach((a) => {
     a.addEventListener("click", (e) => {
       const href = a.getAttribute("href");
+      if (!href || href === "#") return;
       const target = document.querySelector(href);
       if (!target) return;
 
       e.preventDefault();
-      target.scrollIntoView({ behavior: "smooth" });
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
 
-      // se menu mobile estiver aberto, fecha
-      const navLinks = $("#navLinks");
-      const hamburger = $(".hamburger");
-      if (navLinks && navLinks.classList.contains("open")) {
-        navLinks.classList.remove("open");
-        if (hamburger) hamburger.setAttribute("aria-expanded", "false");
-      }
+      // fecha menu mobile ao clicar
+      document.body.classList.remove("nav-open");
+      const toggle = $(".nav-toggle");
+      if (toggle) toggle.setAttribute("aria-expanded", "false");
     });
   });
 
-  // ====== Navbar shrink on scroll ======
-  const navbar = $(".navbar");
-  const onScroll = () => {
-    if (!navbar) return;
-    navbar.classList.toggle("scrolled", window.scrollY > 50);
-  };
-  window.addEventListener("scroll", onScroll);
-  onScroll();
-
-  // ====== Mobile menu toggle (class) ======
-  const hamburger = $(".hamburger");
-  const navLinks = $("#navLinks");
-  if (hamburger && navLinks) {
-    hamburger.addEventListener("click", () => {
-      const open = navLinks.classList.toggle("open");
-      hamburger.setAttribute("aria-expanded", open ? "true" : "false");
+  // ===== Mobile menu =====
+  const toggle = $(".nav-toggle");
+  if (toggle) {
+    toggle.addEventListener("click", () => {
+      const open = document.body.classList.toggle("nav-open");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
     });
   }
 
-  // ====== Map / Insta links ======
+  // ===== Maps button =====
   const btnMaps = $("#btnMaps");
-  const btnMaps2 = $("#btnMaps2");
-  const btnInsta = $("#btnInsta");
-
   if (btnMaps) btnMaps.href = GOOGLE_MAPS_URL;
-  if (btnMaps2) btnMaps2.href = GOOGLE_MAPS_URL;
-  if (btnInsta) btnInsta.href = INSTAGRAM_URL;
 
-  // ====== Countdown ======
+  // ===== Countdown =====
   const countdownEl = $("#countdown");
   const target = new Date(WEDDING_DATETIME);
 
@@ -75,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!countdownEl) return;
 
     if (isNaN(target.getTime())) {
-      countdownEl.textContent = "Data inválida. Ajuste WEDDING_DATETIME no script.";
+      countdownEl.textContent = "Data inválida. Ajuste WEDDING_DATETIME.";
       return;
     }
 
@@ -93,52 +77,52 @@ document.addEventListener("DOMContentLoaded", () => {
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = totalSeconds % 60;
 
-    const dayLabel = (days === 1) ? "dia" : "dias";
-    countdownEl.textContent = `${days} ${dayLabel} · ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    countdownEl.textContent = `${days} dias · ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
   }
 
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  // ====== RSVP (demo localStorage) ======
+  // ===== RSVP (demo localStorage) =====
   const form = $("#rsvpForm");
-  const btnClear = $("#btnClearRsvp");
+  const btnLimpar = $("#btnLimpar");
 
-  const loadForm = () => {
+  function loadForm() {
     if (!form) return;
     try {
       const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
       if (!saved) return;
+      $("#nome").value = saved.nome || "";
+      $("#email").value = saved.email || "";
+      $("#presenca").value = saved.presenca || "";
+      $("#qtd").value = saved.qtd || "1";
+      $("#restricoes").value = saved.restricoes || "";
+    } catch {
+      /* ignore */
+    }
+  }
 
-      $("#rsvpName").value = saved.name || "";
-      $("#rsvpEmail").value = saved.email || "";
-      $("#rsvpPresence").value = saved.presence || "";
-      $("#rsvpGuests").value = saved.guests || "1";
-      $("#rsvpNotes").value = saved.notes || "";
-    } catch {}
-  };
-
-  const clearForm = () => {
+  function clearForm() {
     if (!form) return;
     form.reset();
     localStorage.removeItem(STORAGE_KEY);
     toast("RSVP limpo neste navegador.");
-  };
+  }
 
   if (form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
 
       const data = {
-        name: $("#rsvpName").value.trim(),
-        email: $("#rsvpEmail").value.trim(),
-        presence: $("#rsvpPresence").value,
-        guests: $("#rsvpGuests").value,
-        notes: $("#rsvpNotes").value.trim(),
+        nome: $("#nome").value.trim(),
+        email: $("#email").value.trim(),
+        presenca: $("#presenca").value,
+        qtd: $("#qtd").value,
+        restricoes: $("#restricoes").value.trim(),
         savedAt: new Date().toISOString(),
       };
 
-      if (!data.name || !data.email || !data.presence) {
+      if (!data.nome || !data.email || !data.presenca) {
         toast("Preencha nome, e-mail e presença.");
         return;
       }
@@ -148,10 +132,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  if (btnClear) btnClear.addEventListener("click", clearForm);
+  if (btnLimpar) btnLimpar.addEventListener("click", clearForm);
   loadForm();
 
-  // ====== Galeria: arrastar (pointer) + teclado ======
+  // ===== Galeria: arrastar horizontalmente (pointer) =====
   (function () {
     const strip = document.querySelector(".gallery-strip");
     if (!strip) return;
@@ -161,7 +145,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let startScroll = 0;
 
     strip.addEventListener("pointerdown", (e) => {
-      if (typeof e.button === "number" && e.button !== 0) return;
       isDown = true;
       strip.classList.add("dragging");
       strip.setPointerCapture(e.pointerId);
@@ -182,25 +165,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     strip.addEventListener("pointerup", end);
     strip.addEventListener("pointercancel", end);
-
-    strip.addEventListener("keydown", (e) => {
-      const slide = strip.querySelector(".slide");
-      const gap = 12;
-      const step = slide ? (slide.getBoundingClientRect().width + gap) : 320;
-
-      if (e.key === "ArrowRight") {
-        e.preventDefault();
-        strip.scrollBy({ left: step, behavior: "smooth" });
-      } else if (e.key === "ArrowLeft") {
-        e.preventDefault();
-        strip.scrollBy({ left: -step, behavior: "smooth" });
-      } else if (e.key === "Home") {
-        e.preventDefault();
-        strip.scrollTo({ left: 0, behavior: "smooth" });
-      } else if (e.key === "End") {
-        e.preventDefault();
-        strip.scrollTo({ left: strip.scrollWidth, behavior: "smooth" });
-      }
-    });
+    strip.addEventListener("pointerleave", end);
   })();
-});
+})();
