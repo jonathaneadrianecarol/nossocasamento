@@ -67,5 +67,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (heroVideo) {
         heroVideo.playbackRate = 1.0;
+
+        // --- TIMELINE SIMPLES (SÓ PARA HORIZONTAL/PC) ---
+        // 0s: Foca no TETO/CÉU (Top)
+        // 10s: Volta para o MEIO (Center)
+        const timeline = [
+            { start: 0, position: '50% 0%' },   // Começa mostrando o topo
+            { start: 10, position: '50% 50%' }  // Aos 10s centraliza
+        ];
+
+        function updateVideoFocus() {
+            // Verifica se é Horizontal/PC (Largura > Altura)
+            const isLandscape = window.innerWidth > window.innerHeight;
+
+            if (isLandscape) {
+                const currentTime = heroVideo.currentTime;
+                const currentSetting = timeline.slice().reverse().find(item => item.start <= currentTime);
+
+                if (currentSetting) {
+                    heroVideo.style.objectPosition = currentSetting.position;
+                }
+            } else {
+                // Celular em pé: Usa o padrão do CSS
+                heroVideo.style.objectPosition = '';
+            }
+        }
+
+        heroVideo.addEventListener('timeupdate', updateVideoFocus);
+        window.addEventListener('resize', updateVideoFocus);
     }
 });
