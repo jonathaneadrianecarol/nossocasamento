@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { start: 0, position: '50% center', zoom: 1 },    // Início: Normal
             { start: 25, position: '20% center', zoom: 0.8},  // 5s: Zoom na ESQUERDA
             { start: 27, position: '80% center', zoom: 0.8 }, // 10s: Zoom na DIREITA
-            { start: 28, position: '50% center', zoom: 1 }    // 15s: Volta ao Normal
+            { start: 28, position: '50% center', zoom: 0.5 }    // 15s: Volta ao Normal
         ];
 
         function updateVideoFocus() {
