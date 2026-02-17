@@ -72,8 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Ajusta o FOCO e o ZOOM da câmera quando a tela é Larga
         // zoom: 1 (Normal), 1.2 (20% maior), 1.5 (50% maior), etc.
         const timeline = [
-            { start: 0, position: '50% 50%', zoom: 1 },    // Início: Normal
+            { start: 0, position: '50% 30%', zoom: 1 },    // Início: Normal
             { start: 22, position: '50% 5%', zoom: 2.4 }    // 15s: Volta ao Normal
+            { start: 27, position: '50% 50%', zoom: 1.7 }    // 15s: Volta ao Normal
         ];
 
         function updateVideoFocus() {
