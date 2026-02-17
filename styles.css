@@ -452,8 +452,8 @@ blockquote footer {
     }
 
     .btn {
-        padding: 0.8rem 1.5rem;
-        /* Botão menor */
+        padding: 0.6rem 1.3rem;
+        /* Botão menor */ /* Tamanho do botão (altura x largura) */
         font-size: 0.9rem;
         /* Fonte do botão menor */
     }
