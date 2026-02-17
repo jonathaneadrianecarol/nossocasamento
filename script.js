@@ -74,11 +74,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // zoom: 1 (Normal), 1.2 (Mais perto), etc.
         const timeline = [
             { start: 0, position: '50% center', zoom: 1 },    // Início: Normal
-            { start: 24, position: '80% center', zoom: 1},  // Zoom na DIREITA
-            { start: 27, position: '10% center', zoom: 1}, // Zoom na ESQUERDA
-            { start: 29, position: '80% center', zoom: 1},
+            { start: 26, position: '2% center', zoom: 1}, // Zoom na ESQUERDA
+            { start: 27, position: '80% center', zoom: 1},// Zoom na DIREITA
             { start: 31, position: '10% center', zoom: 1},
-            { start: 32, position: '50% center', zoom: 1}
+            { start: 32, position: '50% center', zoom: 1},
+            { start: 33, position: '20% center', zoom: 1},
+            { start: 34, position: '50% center', zoom: 1}
         ];
 
         function updateVideoFocus() {
