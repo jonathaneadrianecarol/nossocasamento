@@ -225,8 +225,8 @@ ul {
     z-index: 1;
     /* Video at bottom */
     opacity: 1;
-    transition: opacity 1s, object-position 1s, transform 1s;
-    /* Suaviza todas as mudanças */
+    transition: opacity 1s, object-position 5s ease-in-out, transform 5s ease-in-out;
+    /* 5s torna o movimento da câmera super suave */
 }
 
 @media (max-width: 768px) {
