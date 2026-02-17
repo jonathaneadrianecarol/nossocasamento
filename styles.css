@@ -449,11 +449,13 @@ blockquote footer {
         /* Sobe o texto e o botão no celular */
         font-size: 1.2rem !important;
         /* Fonte menor no celular */
+        margin-bottom: 1rem !important;
+        /* Aproxima o botão da data */
     }
 
     .btn {
-        padding: 0.6rem 1.3rem;
-        /* Botão menor */ /* Tamanho do botão (altura x largura) */
+        padding: 0.8rem 1.5rem;
+        /* Botão menor */
         font-size: 0.9rem;
         /* Fonte do botão menor */
     }
