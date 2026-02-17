@@ -1,3 +1,5 @@
+// script.js
+
 document.addEventListener('DOMContentLoaded', () => {
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -28,8 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (hamburger) {
         hamburger.addEventListener('click', () => {
-            // Simple toggle for demonstration. 
-            // In a real app, we'd toggle a class to show/hide with CSS transitions
             if (navLinks.style.display === 'flex') {
                 navLinks.style.display = 'none';
             } else {
@@ -46,8 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // RSVP Form Handling
-
+    // --- RSVP FORM HANDLING (ATUALIZADO) ---
     const form = document.getElementById('rsvp-form');
     
     if (form) {
@@ -57,74 +56,69 @@ document.addEventListener('DOMContentLoaded', () => {
             const btnSubmit = document.getElementById('btn-submit');
             const originalText = btnSubmit.innerText;
             
-            // 1. Muda o texto do botão para dar feedback
+            // 1. Feedback visual: Botão muda para "Enviando..."
             btnSubmit.innerText = 'Enviando...';
             btnSubmit.disabled = true;
 
             // 2. Coleta os dados
             const formData = new FormData(form);
-            const name = document.getElementById('name').value;
+            const fullName = document.getElementById('name').value;
+            
+            // Pega apenas o primeiro nome para a mensagem (Ex: "Jonathan Campo" -> "Jonathan")
+            const firstName = fullName.split(' ')[0];
 
-            // 3. Envia para o Formsubmit via Fetch
-fetch(form.action, {
-    method: 'POST',
-    body: formData,
-    headers: {
-        'Accept': 'application/json' // Garante que eles não mandem HTML
-    }
-})
-.then(response => {
-    // Se a resposta for OK (200), sucesso
-    if (response.ok) {
-        // ... dentro do if (response.ok) ...
-        const primeiroNome = name.split(' ')[0]; // Pega tudo antes do primeiro espaço
-        alert(`Obrigado, ${primeiroNome}! Sua presença foi confirmada. Mal podemos esperar para celebrar com você!`);
-        
-        form.reset();
-    } else {
-        // Se der erro, tenta ler a mensagem do servidor
-        return response.json().then(data => {
-            if (data.message) {
-                alert("Erro: " + data.message); // Ex: "Este email está bloqueado"
-            } else {
-                alert("Ops! Houve um erro ao enviar. Tente novamente.");
-            }
+            // 3. Envia para o Formsubmit via Fetch (AJAX)
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json' // Garante resposta limpa sem redirecionar
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // SUCESSO!
+                    alert(`Obrigado, ${firstName}! Sua presença foi confirmada. Mal podemos esperar para celebrar com você!`);
+                    form.reset(); // Limpa o formulário
+                } else {
+                    // ERRO DO SERVIDOR (Ex: Spam detection)
+                    return response.json().then(data => {
+                        if (data.message) {
+                            alert("Erro: " + data.message);
+                        } else {
+                            alert("Ops! Houve um erro ao enviar. Tente novamente.");
+                        }
+                    });
+                }
+            })
+            .catch(error => {
+                // ERRO DE CONEXÃO
+                console.error('Erro:', error);
+                alert("Erro de conexão. Verifique sua internet ou se o e-mail no código está ativado.");
+            })
+            .finally(() => {
+                // Restaura o botão ao estado original
+                btnSubmit.innerText = originalText;
+                btnSubmit.disabled = false;
+            });
         });
     }
-})
-.catch(error => {
-    // Só entra aqui se realmente falhar a internet
-    console.error('Erro:', error);
-    alert("Erro ao enviar. Verifique se o email no código está correto e ativado.");
-})
-.finally(() => {
-    btnSubmit.innerText = originalText;
-    btnSubmit.disabled = false;
-});
-        });
-    }
 
-    /* 
-       CONTROLE DO VÍDEO DE FUNDO 
+    /* CONTROLE DO VÍDEO DE FUNDO 
        --------------------------
-       Agora usamos apenas um vídeo unificado: 'video-casamento.mp4'
-       A reprodução e o loop são automáticos via HTML.
     */
     const heroVideo = document.getElementById('hero-video');
 
     if (heroVideo) {
         heroVideo.playbackRate = 1.0;
 
-        // --- TIMELINE SIMPLES (SÓ PARA HORIZONTAL/PC) ---
-        // 0s: Foca no TETO/CÉU (Top)
-        // 10s: Volta para o MEIO (Center)
+        // Timeline para PC/Horizontal
         const timeline = [
-            { start: 0, position: '50% 15%' },   // Começa mostrando o topo
-            { start: 10, position: '50% 50%' }  // Aos 10s centraliza
+            { start: 0, position: '50% 15%' },  // Topo
+            { start: 10, position: '50% 50%' }  // Centro
         ];
 
         function updateVideoFocus() {
-            // Verifica se é Horizontal/PC (Largura > Altura)
             const isLandscape = window.innerWidth > window.innerHeight;
 
             if (isLandscape) {
@@ -135,7 +129,6 @@ fetch(form.action, {
                     heroVideo.style.objectPosition = currentSetting.position;
                 }
             } else {
-                // Celular em pé: Usa o padrão do CSS
                 heroVideo.style.objectPosition = '';
             }
         }
@@ -145,7 +138,6 @@ fetch(form.action, {
     }
 
     // --- CONTAGEM REGRESSIVA ---
-    // Data do Casamento: 10 de Outubro de 2026 às 15:00
     const countdownDate = new Date("Oct 10, 2026 15:00:00").getTime();
 
     const updateCountdown = setInterval(function () {
@@ -177,6 +169,7 @@ fetch(form.action, {
             }
         }
     }, 1000);
+
     // --- MUSIC CONTROL ---
     const musicControl = document.getElementById('music-control');
     const bgMusic = document.getElementById('bg-music');
@@ -188,13 +181,13 @@ fetch(form.action, {
         musicControl.addEventListener('click', () => {
             if (isPlaying) {
                 bgMusic.pause();
-                musicIcon.setAttribute('data-lucide', 'volume-x'); // Mute icon
+                musicIcon.setAttribute('data-lucide', 'volume-x');
                 musicControl.classList.remove('playing');
                 isPlaying = false;
             } else {
                 bgMusic.play().then(() => {
                     isPlaying = true;
-                    musicIcon.setAttribute('data-lucide', 'volume-2'); // Sound ON icon
+                    musicIcon.setAttribute('data-lucide', 'volume-2');
                     musicControl.classList.add('playing');
                     lucide.createIcons();
                 }).catch(error => {
@@ -206,28 +199,22 @@ fetch(form.action, {
             }, 50);
         });
 
-        // Hide music hint on scroll (Starts visible, hides after scroll)
         window.addEventListener('scroll', () => {
             if (window.scrollY > 100 && musicHint) {
                 musicHint.classList.add('hidden');
             }
         });
 
-        // Optional: Try to auto-play on first interaction
         document.body.addEventListener('click', function firstClick() {
             if (!isPlaying) {
-                // Remove listener immediately to avoid multiple triggers
                 document.body.removeEventListener('click', firstClick);
-
-                // Attempt play
                 bgMusic.play().then(() => {
                     isPlaying = true;
                     musicIcon.setAttribute('data-lucide', 'volume-2');
                     musicControl.classList.add('playing');
                     lucide.createIcons();
                 }).catch(error => {
-                    // Auto-play might be blocked, user must click manually
-                    console.log("Auto-play blocked, waiting for user interaction on button.");
+                    console.log("Auto-play blocked, waiting for user interaction.");
                 });
             }
         }, { once: true });
@@ -248,7 +235,6 @@ fetch(form.action, {
     const backToTopBtn = document.getElementById('back-to-top');
     if (backToTopBtn) {
         window.addEventListener('scroll', () => {
-            // Show only when near the bottom/footer or significantly scrolled (e.g., > 1200px)
             if (window.scrollY > 1200) {
                 backToTopBtn.classList.add('visible');
             } else {
