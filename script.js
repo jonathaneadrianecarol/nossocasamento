@@ -69,22 +69,18 @@ document.addEventListener('DOMContentLoaded', () => {
         heroVideo.playbackRate = 1.0;
 
         // --- TIMELINE DE FOCO E ZOOM (ATIVO APENAS EM CELULAR VERTICAL) ---
-        // Ajusta o foco e zoom quando o celular está EM PÉ
-        // position: '50%' (Meio), '20%' (Esquerda), '80%' (Direita)
-        // zoom: 1 (Normal), 1.2 (Mais perto), etc.
+        // • Para ver partes escondidas nas laterais: MUDAR POSITION (0% = Esquerda, 100% = Direita)
+        // • Para aproximar: AUMENTAR ZOOM (1.0 = Normal, 1.5 = Perto). Não use zoom menor que 1.
         const timeline = [
-            { start: 0, position: '50% center', zoom: 1 },    // Início: Normal
-            { start: 26, position: '2% center', zoom: 1}, // Zoom na ESQUERDA
-            { start: 27, position: '80% center', zoom: 1},// Zoom na DIREITA
-            { start: 31, position: '10% center', zoom: 1},
-            { start: 32, position: '50% center', zoom: 1},
-            { start: 33, position: '20% center', zoom: 1},
-            { start: 34, position: '50% center', zoom: 1}
+            { start: 0, position: '50% center', zoom: 1.0 },   // Normal no meio
+            { start: 26, position: '10% center', zoom: 1.0 },   // 4s: Vai para Esquerda (Mostra o que estava escondido)
+            { start: 27, position: '90% center', zoom: 1.0 },   // 9s: Vai para Direita
+            { start: 14, position: '50% center', zoom: 1.5 },  // 14s: Foca no Meio bem de perto (Zoom)
+            { start: 19, position: '50% center', zoom: 1.0 }   // 19s: Volta ao normal
         ];
 
         function updateVideoFocus() {
             // Verifica se está em modo RETRATO (Vertical)
-            // Altura maior que Largura
             const isPortrait = window.innerHeight > window.innerWidth;
 
             if (isPortrait) {
@@ -92,12 +88,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 const currentSetting = timeline.slice().reverse().find(item => item.start <= currentTime);
 
                 if (currentSetting) {
+                    // Aplica POSIÇÃO (Para mover a câmera)
                     heroVideo.style.objectPosition = currentSetting.position;
-                    heroVideo.style.transform = `scale(${currentSetting.zoom || 1})`;
+
+                    // Aplica ZOOM (Apenas maior ou igual a 1, senão cria borda preta)
+                    const safeZoom = Math.max(1, currentSetting.zoom || 1);
+                    heroVideo.style.transform = `scale(${safeZoom})`;
                 }
             } else {
-                // Modo PAISAGEM (Horizontal) ou PC:
-                // Limpa tudo para usar o padrão
+                // Modo PAISAGEM/PC: Reset total
                 heroVideo.style.objectPosition = '';
                 heroVideo.style.transform = '';
             }
