@@ -449,7 +449,7 @@ blockquote footer {
         /* Sobe o texto e o botão no celular */
         font-size: 1.2rem !important;
         /* Fonte menor no celular */
-        margin-bottom: 1rem !important;
+        margin-bottom: 0.7rem !important;
         /* Aproxima o botão da data */
     }
 
