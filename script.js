@@ -67,45 +67,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (heroVideo) {
         heroVideo.playbackRate = 1.0;
-
-        // --- TIMELINE DE FOCO E ZOOM (ATIVO APENAS EM CELULAR VERTICAL) ---
-        // • Para ver partes escondidas nas laterais: MUDAR POSITION (0% = Esquerda, 100% = Direita)
-        // • Para aproximar: AUMENTAR ZOOM (1.0 = Normal, 1.5 = Perto). Não use zoom menor que 1.
-        const timeline = [
-            { start: 0, position: '50% center', zoom: 1.0 },   // Normal no meio
-            { start: 26, position: '10% center', zoom: 1.0 },   // 4s: Vai para Esquerda (Mostra o que estava escondido)
-            { start: 27, position: '90% center', zoom: 1.0 },   // 9s: Vai para Direita
-            { start: 29, position: '50% center', zoom: 1.5 },  // 14s: Foca no Meio bem de perto (Zoom)
-            { start: 31, position: '50% center', zoom: 1.0 }   // 19s: Volta ao normal
-        ];
-
-        function updateVideoFocus() {
-            // Verifica se está em modo RETRATO (Vertical)
-            const isPortrait = window.innerHeight > window.innerWidth;
-
-            if (isPortrait) {
-                const currentTime = heroVideo.currentTime;
-                const currentSetting = timeline.slice().reverse().find(item => item.start <= currentTime);
-
-                if (currentSetting) {
-                    // Aplica POSIÇÃO (Para mover a câmera)
-                    heroVideo.style.objectPosition = currentSetting.position;
-
-                    // Aplica ZOOM (Apenas maior ou igual a 1, senão cria borda preta)
-                    const safeZoom = Math.max(1, currentSetting.zoom || 1);
-                    heroVideo.style.transform = `scale(${safeZoom})`;
-                }
-            } else {
-                // Modo PAISAGEM/PC: Reset total
-                heroVideo.style.objectPosition = '';
-                heroVideo.style.transform = '';
-            }
-        }
-
-        heroVideo.addEventListener('timeupdate', updateVideoFocus);
-        window.addEventListener('resize', updateVideoFocus);
-
-        // Garante que atualiza ao girar a tela
-        window.addEventListener('resize', updateVideoFocus);
     }
 });
