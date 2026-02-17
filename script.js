@@ -96,4 +96,38 @@ document.addEventListener('DOMContentLoaded', () => {
         heroVideo.addEventListener('timeupdate', updateVideoFocus);
         window.addEventListener('resize', updateVideoFocus);
     }
+
+    // --- CONTAGEM REGRESSIVA ---
+    // Data do Casamento: 10 de Outubro de 2026 às 15:00
+    const countdownDate = new Date("Oct 10, 2026 15:00:00").getTime();
+
+    const updateCountdown = setInterval(function () {
+        const now = new Date().getTime();
+        const distance = countdownDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        const d = document.getElementById("days");
+        const h = document.getElementById("hours");
+        const m = document.getElementById("minutes");
+        const s = document.getElementById("seconds");
+
+        if (d && h && m && s) {
+            d.innerText = days < 10 ? "0" + days : days;
+            h.innerText = hours < 10 ? "0" + hours : hours;
+            m.innerText = minutes < 10 ? "0" + minutes : minutes;
+            s.innerText = seconds < 10 ? "0" + seconds : seconds;
+        }
+
+        if (distance < 0) {
+            clearInterval(updateCountdown);
+            const countdownContainer = document.getElementById("countdown");
+            if (countdownContainer) {
+                countdownContainer.innerHTML = "<h2>Chegou o grande dia!</h2>";
+            }
+        }
+    }, 1000);
 });
