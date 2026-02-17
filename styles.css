@@ -271,7 +271,7 @@ ul {
     }
 
     .casual-photo {
-        width: 250px;
+        width: 150px;
         /* <<< TAMANHO NO CELULAR: Mude este valor para ficar maior ou menor */
     }
 }
@@ -287,7 +287,7 @@ ul {
 
 .casual-photo {
     max-width: 100%;
-    width: 350px;
+    width: 250px;
     /* <<< TAMANHO NO PC: Mude este valor */
     border-radius: 4px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
