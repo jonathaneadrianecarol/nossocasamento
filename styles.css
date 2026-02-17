@@ -215,15 +215,26 @@ ul {
     height: 100%;
     object-fit: cover;
 
-    /* AJUSTE AQUI: Mude a posição do vídeo se ele estiver cortado errado */
+    /* AJUSTE AQUI (COMPUTADOR): Mude a posição do vídeo se ele estiver cortado errado */
     /* Valores possíveis: center (padrão), top, bottom, left, right */
     object-position: center center;
+
+    /* Dica: Use porcentagem para ajuste fino (ex: 50% 20%) */
+    /* Primeiro número = Esquerda/Direita, Segundo número = Cima/Baixo */
 
     z-index: 1;
     /* Video at bottom */
     opacity: 1;
     transition: opacity 1s ease-in-out;
     /* Transição mais lenta (1s) */
+}
+
+@media (max-width: 768px) {
+    #hero-video {
+        /* AJUSTE AQUI (CELULAR): Mude aqui para enquadrar melhor no celular */
+        /* Tente algo como '60% center' se quiser mostrar mais a direita */
+        object-position: 50% center;
+    }
 }
 
 #hero-video.fade-out {
