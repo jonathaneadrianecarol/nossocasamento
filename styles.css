@@ -271,7 +271,7 @@ ul {
     }
 
     .casual-photo {
-        width: 150px;
+        width: 250px;
         /* <<< TAMANHO NO CELULAR: Mude este valor para ficar maior ou menor */
     }
 }
@@ -287,7 +287,7 @@ ul {
 
 .casual-photo {
     max-width: 100%;
-    width: 250px;
+    width: 350px;
     /* <<< TAMANHO NO PC: Mude este valor */
     border-radius: 4px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
@@ -369,21 +369,84 @@ ul {
     background-color: var(--primary-color);
 }
 
-/* Story Section */
-.story {
-    background-color: var(--white);
+/* Gallery Style */
+.gallery-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.gallery-scroll {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
+    padding: 1rem 0;
+    -webkit-overflow-scrolling: touch;
+    /* Suavidade no iOS */
+    scrollbar-width: thin;
+    /* Firefox */
+}
+
+/* Esconde scrollbar no Chrome/Safari/Opera mas mantém funcionalidade */
+.gallery-scroll::-webkit-scrollbar {
+    height: 8px;
+}
+
+.gallery-scroll::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+.gallery-scroll::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.gallery-img {
+    height: 400px;
+    /* Altura fixa para padrão */
+    width: auto;
+    flex: 0 0 auto;
+    /* Não encolher */
+    scroll-snap-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    object-fit: cover;
+}
+
+.gallery-img:hover {
+    transform: scale(1.02);
+}
+
+.scroll-hint {
     text-align: center;
+    font-size: 0.9rem;
+    color: #888;
+    margin-top: 0.5rem;
+    font-style: italic;
+    animation: pulse 2s infinite;
 }
 
-.story-text {
-    max-width: 800px;
-    margin: 0 auto;
-    font-size: 1.1rem;
-    color: #666;
+@keyframes pulse {
+    0% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.6;
+    }
 }
 
-.story-text p {
-    margin-bottom: 1.5rem;
+@media (max-width: 768px) {
+    .gallery-img {
+        height: 300px;
+        /* Menor no celular */
+    }
 }
 
 /* Details Section */
