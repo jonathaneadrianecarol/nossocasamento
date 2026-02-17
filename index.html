@@ -1,167 +1,144 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Jonathan & Adriane | Nosso Casamento</title>
-  <meta name="description" content="Junte-se a nós para celebrar o casamento de Jonathan e Adriane. Detalhes, história e RSVP." />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
-    rel="stylesheet"
-  />
-
-  <link rel="stylesheet" href="styles.css" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jonathan & Adriane | Nosso Casamento</title>
+    <meta name="description"
+        content="Junte-se a nós para celebrar o casamento de Jonathan e Adriane. Detalhes, história e RSVP.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
-  <nav class="navbar" aria-label="Navegação principal">
-    <div class="container nav-container">
-      <a href="#home" class="logo" aria-label="Ir para o início">J &amp; A</a>
-
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#home">Início</a></li>
-        <li><a href="#story">Nossa História</a></li>
-        <li><a href="#details">Detalhes</a></li>
-        <li><a href="#rsvp">RSVP</a></li>
-      </ul>
-
-      <button class="hamburger" id="hamburger" type="button" aria-label="Abrir menu" aria-controls="navLinks" aria-expanded="false">
-        <i data-lucide="menu"></i>
-      </button>
-    </div>
-  </nav>
-
-  <header id="home" class="hero">
-    <!-- VÍDEO DE FUNDO (sem som) -->
-    <!-- Coloque seu arquivo em: /media/hero.mp4 (ou ajuste o src) -->
-    <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="images/hero-poster.jpg" aria-hidden="true">
-      <source src="media/hero.mp4" type="video/mp4" />
-    </video>
-
-    <div class="hero-overlay" aria-hidden="true"></div>
-
-    <div class="hero-content">
-      <p class="pre-title">Nós vamos nos casar!</p>
-      <h1 class="main-title">Jonathan &amp; Adriane</h1>
-      <p class="date">10 de Outubro de 2026</p>
-      <a href="#rsvp" class="btn btn-primary">Confirmar Presença</a>
-    </div>
-  </header>
-
-  <section id="story" class="section story">
-    <div class="container">
-      <h2 class="section-title">Nossa História</h2>
-
-      <div class="story-content">
-        <div class="story-text">
-          <p>
-            Tudo começou com uma conversa despretensiosa. O que parecia ser um encontro casual se transformou em amizade
-            e, com o tempo, em um amor tranquilo e forte.
-          </p>
-          <p>
-            Depois de tantos momentos bons, chegamos a esse dia especial. Vamos amar ter você com a gente para celebrar
-            esse novo capítulo.
-          </p>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">J & A</a>
+            <ul class="nav-links">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#story">Nossa História</a></li>
+                <li><a href="#details">Detalhes</a></li>
+                <li><a href="#rsvp">RSVP</a></li>
+            </ul>
+            <div class="hamburger">
+                <i data-lucide="menu"></i>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </nav>
 
-  <section id="details" class="section details">
-    <div class="container">
-      <h2 class="section-title">Quando &amp; Onde</h2>
-
-      <div class="details-grid">
-        <div class="detail-card">
-          <i data-lucide="calendar" class="detail-icon"></i>
-          <h3>A Data</h3>
-          <p>Sábado, 10 de Outubro de 2026</p>
-          <p>Cerimônia às 16:30</p>
+    <header id="home" class="hero">
+        <video autoplay muted loop playsinline id="hero-video" poster="hero.png">
+            <source src="video-casamento.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="pre-title">Nós vamos nos casar!</p>
+            <h1 class="main-title">Jonathan & Adriane</h1>
+            <p class="date">10 de Outubro de 2026</p>
+            <a href="#rsvp" class="btn btn-primary">Confirmar Presença</a>
         </div>
+    </header>
 
-        <div class="detail-card">
-          <i data-lucide="map-pin" class="detail-icon"></i>
-          <h3>O Local</h3>
-          <p>
-            <a href="https://www.instagram.com/espaco_ahmar/?hl=en" target="_blank" rel="noopener"
-              style="color: inherit; text-decoration: underline;">Espaço Ah, Mar!</a>
-          </p>
-          <p>Rua Praia de Arpoador, 157 - Vilas do Atlântico</p>
-          <p>Lauro de Freitas - BA, 42708-090</p>
-          <p>Tel: (71) 99297-6167</p>
+    <section id="story" class="section story">
+        <div class="container">
+            <h2 class="section-title">Nossa História</h2>
+            <div class="story-content">
+                <div class="story-text">
+                    <p>Tudo começou em uma tarde ensolarada no parque. O que parecia ser apenas um encontro casual se
+                        transformou em uma amizade incrível e, eventualmente, no amor de nossas vidas.</p>
+                    <p>Cinco anos de aventuras, risadas e aprendizados nos trouxeram até este momento especial. Estamos
+                        ansiosos para começar este novo capítulo juntos, cercados pelas pessoas que mais amamos.</p>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="detail-card">
-          <i data-lucide="party-popper" class="detail-icon"></i>
-          <h3>A Recepção</h3>
-          <p>Jantar e festa a seguir</p>
-          <p>No mesmo local</p>
+    <section id="details" class="section details">
+        <div class="container">
+            <h2 class="section-title">Quando & Onde</h2>
+            <div class="details-grid">
+                <div class="detail-card">
+                    <i data-lucide="calendar" class="detail-icon"></i>
+                    <h3>A Data</h3>
+                    <p>Sábado, 10 de Outubro de 2026</p>
+                    <p>Cerimônia às 16:00</p>
+                </div>
+                <div class="detail-card">
+                    <i data-lucide="map-pin" class="detail-icon"></i>
+                    <h3>O Local</h3>
+                    <p><a href="https://www.instagram.com/espaco_ahmar/?hl=en" target="_blank"
+                            style="color: inherit; text-decoration: underline;">Espaço Ah, Mar!</a></p>
+                    <p>R. Praia de Arpoador, N°157 - Vilas do Atlântico</p>
+                    <p>Lauro de Freitas - BA, 42708-090</p>
+                    <p>Tel: (71) 99297-6167</p>
+                </div>
+                <div class="detail-card">
+                    <i data-lucide="party-popper" class="detail-icon"></i>
+                    <h3>A Recepção</h3>
+                    <p>Jantar e festa a seguir</p>
+                    <p>No mesmo local</p>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section quote-section">
-    <div class="container">
-      <blockquote>
-        “O amor é composto por uma única alma habitando dois corpos.”
-        <footer>— Aristóteles</footer>
-      </blockquote>
-    </div>
-  </section>
-
-  <section id="rsvp" class="section rsvp">
-    <div class="container">
-      <h2 class="section-title">RSVP</h2>
-      <p class="rsvp-text">Por favor, confirme sua presença até 15 de Setembro de 2026.</p>
-
-      <form id="rsvp-form" class="rsvp-form">
-        <div class="form-group">
-          <label for="name">Nome Completo</label>
-          <input type="text" id="name" name="name" autocomplete="name" required />
+    <section class="section quote-section">
+        <div class="container">
+            <blockquote>
+                "O amor é composto por uma única alma habitando dois corpos."
+                <footer>- Aristóteles</footer>
+            </blockquote>
         </div>
+    </section>
 
-        <div class="form-group">
-          <label for="email">E-mail</label>
-          <input type="email" id="email" name="email" autocomplete="email" required />
+    <section id="rsvp" class="section rsvp">
+        <div class="container">
+            <h2 class="section-title">RSVP</h2>
+            <p class="rsvp-text">Por favor, confirme sua presença até 10 de Setembro de 2026.</p>
+            <form id="rsvp-form" class="rsvp-form">
+                <div class="form-group">
+                    <label for="name">Nome Completo</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="guests">Número de Convidados</label>
+                    <select id="guests" name="guests">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensagem (Opcional)</label>
+                    <textarea id="message" name="message" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Enviar Confirmação</button>
+            </form>
         </div>
+    </section>
 
-        <div class="form-group">
-          <label for="guests">Número de Convidados</label>
-          <select id="guests" name="guests">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-          </select>
+    <footer class="footer">
+        <div class="container">
+            <p>Feito com amor para Jonathan & Adriane</p>
+            <p>&copy; 2026 Todos os direitos reservados.</p>
         </div>
+    </footer>
 
-        <div class="form-group">
-          <label for="message">Mensagem (Opcional)</label>
-          <textarea id="message" name="message" rows="4"></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-block">Enviar Confirmação</button>
-      </form>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <div class="container">
-      <p>Feito com carinho para Jonathan &amp; Adriane</p>
-      <p>&copy; 2026 Todos os direitos reservados.</p>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
-  <script>
-    lucide.createIcons();
-  </script>
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
+
 </html>
