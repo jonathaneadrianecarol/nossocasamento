@@ -68,38 +68,40 @@ document.addEventListener('DOMContentLoaded', () => {
     if (heroVideo) {
         heroVideo.playbackRate = 1.0;
 
-        // --- TIMELINE DE FOCO E ZOOM (ATIVO EM PC E CELULAR HORIZONTAL) ---
-        // Ajusta o FOCO e o ZOOM da câmera quando a tela é Larga
-        // zoom: 1 (Normal), 1.2 (20% maior), 1.5 (50% maior), etc.
+        // --- TIMELINE DE FOCO E ZOOM (ATIVO APENAS EM CELULAR VERTICAL) ---
+        // Ajusta o foco e zoom quando o celular está EM PÉ
+        // position: '50%' (Meio), '20%' (Esquerda), '80%' (Direita)
+        // zoom: 1 (Normal), 1.2 (Mais perto), etc.
         const timeline = [
-            { start: 0, position: '50% 1%', zoom: 1 },    // Início: Normal
-            { start: 22, position: '50% 5%', zoom: 2.9}    // 15s: Volta ao Normal
+            { start: 0, position: '50% center', zoom: 1 },    // Início: Normal
+            { start: 5, position: '20% center', zoom: 1.2 },  // 5s: Zoom na ESQUERDA
+            { start: 10, position: '80% center', zoom: 1.2 }, // 10s: Zoom na DIREITA
+            { start: 15, position: '50% center', zoom: 1 }    // 15s: Volta ao Normal
         ];
 
         function updateVideoFocus() {
-            // Verifica se está em modo PAISAGEM (Horizontal) ou PC
-            const isLandscape = window.innerWidth > window.innerHeight;
+            // Verifica se está em modo RETRATO (Vertical)
+            // Altura maior que Largura
+            const isPortrait = window.innerHeight > window.innerWidth;
 
-            if (isLandscape) {
+            if (isPortrait) {
                 const currentTime = heroVideo.currentTime;
                 const currentSetting = timeline.slice().reverse().find(item => item.start <= currentTime);
 
                 if (currentSetting) {
-                    // Aplica POSIÇÃO e ZOOM
                     heroVideo.style.objectPosition = currentSetting.position;
-                    // Se não tiver zoom definido, usa 1 (padrão)
                     heroVideo.style.transform = `scale(${currentSetting.zoom || 1})`;
                 }
             } else {
-                // Modo RETRATO (Vertical):
-                // Usa o padrão do CSS
+                // Modo PAISAGEM (Horizontal) ou PC:
+                // Limpa tudo para usar o padrão
                 heroVideo.style.objectPosition = '';
-                heroVideo.style.transform = ''; // Reseta o zoom no celular em pé
+                heroVideo.style.transform = '';
             }
         }
 
-        // Executa a cada atualização de tempo do vídeo
         heroVideo.addEventListener('timeupdate', updateVideoFocus);
+        window.addEventListener('resize', updateVideoFocus);
 
         // Garante que atualiza ao girar a tela
         window.addEventListener('resize', updateVideoFocus);
