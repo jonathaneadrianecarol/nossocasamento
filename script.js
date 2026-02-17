@@ -74,8 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const timeline = [
             { start: 0, position: '50% 50%', zoom: 1 },    // Início: Normal
             { start: 5, position: '50% 50%', zoom: 1.2 },  // 5s: ZOOM IN (cobre bordas)
-            { start: 10, position: '50% 20%', zoom: 1.3 }, // 10s: Zoom + Foco CIMA
-            { start: 15, position: '50% 50%', zoom: 3 }    // 15s: Volta ao Normal
+            { start: 25, position: '50% 50%', zoom: 2 }    // 15s: Volta ao Normal
         ];
 
         function updateVideoFocus() {
