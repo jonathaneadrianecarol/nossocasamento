@@ -68,18 +68,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (heroVideo) {
         heroVideo.playbackRate = 1.0;
 
-        // --- TIMELINE DE FOCO (ATIVO EM PC E CELULAR DEITADO) ---
-        // Ajusta o foco da câmera quando a tela é Larga (Horizontal)
+        // --- TIMELINE DE FOCO E ZOOM (ATIVO EM PC E CELULAR HORIZONTAL) ---
+        // Ajusta o FOCO e o ZOOM da câmera quando a tela é Larga
+        // zoom: 1 (Normal), 1.2 (20% maior), 1.5 (50% maior), etc.
         const timeline = [
-            { start: 0, position: '50% 50%' },   // Início: Meio
-            { start: 5, position: '50% 20%' },   // 5s: Foco CIMA (exemplo)
-            { start: 10, position: '50% 80%' },  // 10s: Foco BAIXO (exemplo)
-            { start: 15, position: '50% 50%' }   // 15s: Centralizado
+            { start: 0, position: '50% 50%', zoom: 1 },    // Início: Normal
+            { start: 5, position: '50% 50%', zoom: 1.2 },  // 5s: ZOOM IN (cobre bordas)
+            { start: 10, position: '50% 20%', zoom: 1.3 }, // 10s: Zoom + Foco CIMA
+            { start: 15, position: '50% 50%', zoom: 1 }    // 15s: Volta ao Normal
         ];
 
         function updateVideoFocus() {
             // Verifica se está em modo PAISAGEM (Horizontal) ou PC
-            // Largura maior que Altura
             const isLandscape = window.innerWidth > window.innerHeight;
 
             if (isLandscape) {
@@ -87,12 +87,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 const currentSetting = timeline.slice().reverse().find(item => item.start <= currentTime);
 
                 if (currentSetting) {
+                    // Aplica POSIÇÃO e ZOOM
                     heroVideo.style.objectPosition = currentSetting.position;
+                    // Se não tiver zoom definido, usa 1 (padrão)
+                    heroVideo.style.transform = `scale(${currentSetting.zoom || 1})`;
                 }
             } else {
                 // Modo RETRATO (Vertical):
-                // Usa o padrão do CSS (geralmente centralizado)
+                // Usa o padrão do CSS
                 heroVideo.style.objectPosition = '';
+                heroVideo.style.transform = ''; // Reseta o zoom no celular em pé
             }
         }
 
