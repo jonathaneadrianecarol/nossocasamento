@@ -16,11 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
-            navbar.style.padding = '1rem 0';
-            navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            navbar.classList.add('scrolled');
         } else {
-            navbar.style.padding = '1.5rem 0';
-            navbar.style.boxShadow = 'none';
+            navbar.classList.remove('scrolled');
         }
     });
 
@@ -66,7 +64,42 @@ document.addEventListener('DOMContentLoaded', () => {
        A reprodução e o loop são automáticos via HTML.
     */
     const heroVideo = document.getElementById('hero-video');
+
     if (heroVideo) {
         heroVideo.playbackRate = 1.0;
+
+        // --- TIMELINE DE FOCO (ATIVO EM PC E CELULAR DEITADO) ---
+        // Ajusta o foco da câmera quando a tela é Larga (Horizontal)
+        const timeline = [
+            { start: 0, position: '50% 50%' },   // Início: Meio
+            { start: 5, position: '50% 20%' },   // 5s: Foco CIMA (exemplo)
+            { start: 10, position: '50% 80%' },  // 10s: Foco BAIXO (exemplo)
+            { start: 15, position: '50% 50%' }   // 15s: Centralizado
+        ];
+
+        function updateVideoFocus() {
+            // Verifica se está em modo PAISAGEM (Horizontal) ou PC
+            // Largura maior que Altura
+            const isLandscape = window.innerWidth > window.innerHeight;
+
+            if (isLandscape) {
+                const currentTime = heroVideo.currentTime;
+                const currentSetting = timeline.slice().reverse().find(item => item.start <= currentTime);
+
+                if (currentSetting) {
+                    heroVideo.style.objectPosition = currentSetting.position;
+                }
+            } else {
+                // Modo RETRATO (Vertical):
+                // Usa o padrão do CSS (geralmente centralizado)
+                heroVideo.style.objectPosition = '';
+            }
+        }
+
+        // Executa a cada atualização de tempo do vídeo
+        heroVideo.addEventListener('timeupdate', updateVideoFocus);
+
+        // Garante que atualiza ao girar a tela
+        window.addEventListener('resize', updateVideoFocus);
     }
 });
