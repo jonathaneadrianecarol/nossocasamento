@@ -46,6 +46,10 @@
             </p>
             <a href="#rsvp" class="btn btn-primary">Confirmar Presença</a>
         </div>
+        <!-- Scroll Down Indicator -->
+        <div class="scroll-down">
+            <i data-lucide="chevron-down"></i>
+        </div>
     </header>
 
     <!-- Pre-Wedding Gallery -->
@@ -279,14 +283,25 @@
         </div>
     </footer>
 
-    <!-- Music Control -->
+    <!-- Music Control Wrapper -->
+    <div class="music-wrapper">
+        <div id="music-control" class="music-control" title="Tocar Música">
+            <i data-lucide="volume-x" id="music-icon"></i>
+        </div>
+        <div class="music-hint" id="music-hint">
+            Com música é mais gostoso acompanhar esta história 🎶
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <div id="back-to-top" class="back-to-top" title="Voltar ao Topo">
+        <i data-lucide="arrow-up"></i>
+    </div>
+
+    <!-- Audio Element -->
     <audio id="bg-music" loop>
         <source src="media/musica.mp3" type="audio/mp3">
     </audio>
-
-    <div id="music-control" class="music-control" title="Tocar Música">
-        <i data-lucide="volume-x" id="music-icon"></i>
-    </div>
 
     <script src="script.js"></script>
     <script>
