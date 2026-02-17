@@ -427,7 +427,7 @@ blockquote footer {
     }
 
     .logo {
-        font-size: 0.8rem;
+        font-size: 1.2rem;
         /* Tamanho da fonte no celular */
     }
 
@@ -442,5 +442,10 @@ blockquote footer {
 
     .section {
         padding: 4rem 0;
+    }
+
+    .date {
+        margin-top: 10rem !important;
+        /* Sobe o texto e o botão no celular */
     }
 }
