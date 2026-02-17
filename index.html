@@ -1,197 +1,189 @@
-<!DOCTYPE html>
+<!-- index.html -->
+<!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jonathan & Adriane Caroline | Nosso Casamento</title>
-  <meta name="description" content="Site do casamento de Jonathan e Adriane Caroline — informações, programação, local, RSVP e detalhes do grande dia." />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#fdfbf7" />
+  <title>Jonathan & Adriane Caroline — Nosso Casamento</title>
+  <meta name="description" content="Site do casamento de Jonathan e Adriane Caroline — informações, programação, local, galeria, RSVP e dúvidas frequentes." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="styles.css" />
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="script.js" defer></script>
 </head>
 
 <body>
-  <!-- NAV -->
-  <nav class="navbar" aria-label="Navegação principal">
-    <div class="container nav-container">
-      <a href="#inicio" class="logo" aria-label="Ir para o início">J &amp; A</a>
+  <header class="topbar" role="banner">
+    <div class="container topbar-inner">
+      <a class="brand" href="#inicio" aria-label="Ir para o início">
+        <span class="monogram" aria-hidden="true">J&A</span>
+        <span class="brand-text">
+          <b>Jonathan & Adriane Caroline</b>
+          <small>10 de Outubro de 2026 · Espaço Ah, Mar! · Lauro de Freitas/BA</small>
+        </span>
+      </a>
 
-      <button class="hamburger" type="button" aria-label="Abrir menu" aria-controls="navLinks" aria-expanded="false">
-        <i data-lucide="menu"></i>
+      <button class="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
       </button>
 
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#historia">História</a></li>
-        <li><a href="#programacao">Programação</a></li>
-        <li><a href="#local">Local</a></li>
-        <li><a href="#galeria">Galeria</a></li>
-        <li><a href="#rsvp">RSVP</a></li>
-        <li><a href="#faq">FAQ</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- HERO -->
-  <header id="inicio" class="hero" role="banner">
-    <!-- Use uma imagem clara. Sugestão: images/fotoprincipal.jpg -->
-    <div class="hero-bg" aria-hidden="true"></div>
-    <div class="hero-overlay" aria-hidden="true"></div>
-
-    <div class="hero-content container">
-      <p class="pre-title">Nós vamos nos casar!</p>
-      <h1 class="main-title">Jonathan &amp; Adriane Caroline</h1>
-      <p class="hero-subline">
-        <span>10 de outubro de 2026</span>
-        <span class="dot">•</span>
-        <span>16h30</span>
-        <span class="dot">•</span>
-        <span>Espaço Ah, Mar! — Lauro de Freitas/BA</span>
-      </p>
-
-      <div class="countdown-wrap" aria-label="Contagem regressiva">
-        <span class="countdown-label">Contagem regressiva</span>
-        <span id="countdown" class="countdown-value">Carregando…</span>
-      </div>
-
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#rsvp">Confirmar presença</a>
-        <a class="btn btn-ghost" href="#programacao">Ver programação</a>
-      </div>
+      <nav id="nav" class="nav" aria-label="Navegação">
+        <a href="#historia">História</a>
+        <a href="#programacao">Programação</a>
+        <a href="#local">Local</a>
+        <a href="#galeria">Galeria</a>
+        <a href="#faq">FAQ</a>
+        <a class="cta" href="#rsvp">Confirmar presença</a>
+      </nav>
     </div>
   </header>
 
-  <!-- HISTÓRIA -->
-  <section id="historia" class="section story">
-    <div class="container">
-      <h2 class="section-title">Nossa História</h2>
-      <p class="section-hint">Um resumo breve e elegante (ajuste o texto para refletir vocês).</p>
+  <main id="inicio" class="hero" role="main">
+    <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="images/hero-poster.jpg">
+      <!-- coloque seu vídeo aqui: media/hero.mp4 -->
+      <source src="media/hero.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-overlay" aria-hidden="true"></div>
 
-      <div class="text-block">
-        <p>
-          Começou com uma conversa despretensiosa, um café e aquela sensação de que algo importante estava nascendo.
-          O resto é história: encontros, viagens e um jeito calmo de construir um “nós”.
-        </p>
-        <p>
-          Um fim de tarde à beira-mar. Sem grandes discursos, mas com toda a certeza do mundo.
-          A resposta foi simples, inteira e definitiva.
-        </p>
+    <div class="container hero-content">
+      <p class="pre-title">Nós vamos nos casar!</p>
+      <h1 class="main-title">Jonathan &amp; Adriane</h1>
+      <p class="date">10 de Outubro de 2026 · 16h30</p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#rsvp">Confirmar presença</a>
+        <a class="btn btn-ghost" href="#local">Como chegar</a>
+      </div>
+
+      <div class="countdown-card" role="status" aria-live="polite">
+        <span class="countdown-label">Contagem regressiva</span>
+        <span id="countdown" class="countdown-value">Carregando…</span>
       </div>
     </div>
-  </section>
+  </main>
 
-  <!-- DETALHES (cards com ícones, estilo do template) -->
-  <section class="section details">
+  <section id="historia" class="section section-white">
     <div class="container">
-      <h2 class="section-title">Quando &amp; Onde</h2>
-      <p class="section-hint">Informações rápidas do grande dia.</p>
+      <div class="section-head">
+        <h2 class="section-title">Nossa história</h2>
+        <p class="section-subtitle">Um resumo breve e elegante (ajuste o texto para refletir vocês).</p>
+      </div>
 
-      <div class="details-grid">
-        <article class="detail-card">
-          <i data-lucide="calendar" class="detail-icon"></i>
-          <h3>A Data</h3>
-          <p>Sábado, 10 de outubro de 2026</p>
-          <p>Cerimônia às 16h30</p>
-        </article>
-
-        <article class="detail-card">
-          <i data-lucide="map-pin" class="detail-icon"></i>
-          <h3>O Local</h3>
-          <p><b>Espaço Ah, Mar!</b></p>
-          <p>Rua Praia de Arpoador, 157 — Vilas do Atlântico</p>
-          <p>Lauro de Freitas — BA, 42708-090</p>
-          <p>Tel: (71) 99297-6167</p>
-          <p class="detail-links">
-            <a id="btnMaps" href="#" target="_blank" rel="noopener">Abrir no Google Maps</a>
-            <span class="sep">·</span>
-            <a id="btnInsta" href="#" target="_blank" rel="noopener">Instagram</a>
+      <div class="grid grid-2">
+        <article class="card">
+          <h3>Como tudo começou</h3>
+          <p>
+            Começou com uma conversa despretensiosa, um café e aquela sensação de que algo importante estava nascendo.
+            O resto é história: encontros, viagens e um jeito calmo de construir um “nós”.
           </p>
         </article>
 
-        <article class="detail-card">
-          <i data-lucide="shirt" class="detail-icon"></i>
-          <h3>Traje</h3>
-          <p><b>Praia chique</b></p>
-          <p>Tecidos leves, cores claras, estampas suaves e conforto.</p>
-          <p>Saltos finos não são recomendados (areia).</p>
+        <article class="card">
+          <h3>O pedido</h3>
+          <p>
+            Um fim de tarde à beira-mar. Sem grandes discursos, mas com toda a certeza do mundo.
+            A resposta foi simples, inteira e definitiva.
+          </p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- PROGRAMAÇÃO -->
   <section id="programacao" class="section">
     <div class="container">
-      <h2 class="section-title">Programação</h2>
-      <p class="section-hint">Horários aproximados. Chegue com antecedência para aproveitar com calma.</p>
+      <div class="section-head">
+        <h2 class="section-title">Programação</h2>
+        <p class="section-subtitle">Horários aproximados. Chegue com antecedência para aproveitar com calma.</p>
+      </div>
 
-      <div class="timeline">
-        <div class="t-item"><span class="t-time">16:00</span><span class="t-what"><b>Boas-vindas</b> — Recepção e drinks leves</span></div>
-        <div class="t-item"><span class="t-time">16:30</span><span class="t-what"><b>Cerimônia</b> — Pé na areia, coração tranquilo</span></div>
-        <div class="t-item"><span class="t-time">17:15</span><span class="t-what"><b>Brinde</b> — Fotos e pôr do sol</span></div>
-        <div class="t-item"><span class="t-time">18:00</span><span class="t-what"><b>Jantar</b> — Menu tropical e opções vegetarianas</span></div>
-        <div class="t-item"><span class="t-time">20:00</span><span class="t-what"><b>Festa</b> — DJ, pista e surpresas</span></div>
+      <div class="grid grid-2">
+        <article class="card">
+          <h3>Dia do casamento</h3>
+          <div class="timeline" aria-label="Programação">
+            <div class="item"><div class="time">16:00</div><div class="what"><b>Boas-vindas</b><span>Recepção e drinks leves</span></div></div>
+            <div class="item"><div class="time">16:30</div><div class="what"><b>Cerimônia</b><span>Pé na areia, coração tranquilo</span></div></div>
+            <div class="item"><div class="time">17:15</div><div class="what"><b>Brinde</b><span>Fotos e pôr do sol</span></div></div>
+            <div class="item"><div class="time">18:00</div><div class="what"><b>Jantar</b><span>Menu tropical e opções vegetarianas</span></div></div>
+            <div class="item"><div class="time">20:00</div><div class="what"><b>Festa</b><span>DJ, pista e surpresas</span></div></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Informações rápidas</h3>
+          <p class="muted" style="margin-bottom:12px">Dicas para o conforto e para o clima de praia.</p>
+          <div class="stack">
+            <div class="item"><div class="time">Clima</div><div class="what"><b>Brisa e calor</b><span>Traga um xale leve para o fim da tarde</span></div></div>
+            <div class="item"><div class="time">Piso</div><div class="what"><b>Areia</b><span>Saltos finos não são recomendados</span></div></div>
+            <div class="item"><div class="time">Cores</div><div class="what"><b>Claras</b><span>Neutros, dourado suave, florais discretos</span></div></div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- CITAÇÃO (faixa elegante do template) -->
-  <section class="section quote-section" aria-label="Citação">
+  <section id="local" class="section section-white">
     <div class="container">
-      <blockquote>
-        “O amor é composto por uma única alma habitando dois corpos.”
-        <footer>— Aristóteles</footer>
-      </blockquote>
-    </div>
-  </section>
+      <div class="section-head">
+        <h2 class="section-title">Local</h2>
+        <p class="section-subtitle">Endereço, mapa e recomendações de transporte/hospedagem.</p>
+      </div>
 
-  <!-- LOCAL (com mapa embed) -->
-  <section id="local" class="section">
-    <div class="container">
-      <h2 class="section-title">Local</h2>
-      <p class="section-hint">Mapa e recomendações de chegada.</p>
-
-      <div class="two-col">
-        <div class="card">
+      <div class="grid grid-2">
+        <article class="card">
           <h3>Cerimônia e festa</h3>
-          <p><b>Espaço Ah, Mar!</b><br/>Rua Praia de Arpoador, 157 · Vilas do Atlântico · Lauro de Freitas · BA · 42708-090</p>
+          <p><b>Espaço Ah, Mar!</b><br />Rua Praia de Arpoador, 157 · Vilas do Atlântico · Lauro de Freitas · BA · 42708-090</p>
           <p class="muted" style="margin-top:10px">
+            <b>Contato do local:</b> (71) 99297-6167 ·
+            <a class="link" href="https://www.instagram.com/espaco_ahmar/?hl=en" target="_blank" rel="noopener">@espaco_ahmar</a><br />
             Estacionamento limitado. Se puder, prefira carona, aplicativo ou transfer.
           </p>
-          <div class="mini-actions">
-            <a class="btn btn-primary" href="#rsvp">Confirmar presença</a>
-            <a class="btn btn-ghost" id="btnMaps2" href="#" target="_blank" rel="noopener">Google Maps</a>
-          </div>
-        </div>
 
-        <div class="card map-card">
-          <div class="map-head">
-            <h3>Mapa</h3>
-            <p class="muted">Toque/arraste para navegar.</p>
+          <div class="actions-row">
+            <a class="btn btn-ghost" id="btnMaps" href="#" target="_blank" rel="noopener">Abrir no Google Maps</a>
+            <a class="btn btn-ghost" href="#rsvp">RSVP</a>
           </div>
-          <div class="map-frame">
+
+          <div class="mini-grid">
+            <div class="mini-card">
+              <b>Hospedagem</b>
+              <span class="muted">Adicione 3–5 opções próximas com links.</span>
+            </div>
+            <div class="mini-card">
+              <b>Transporte</b>
+              <span class="muted">Aeroporto/rodoviária e tempo médio até o local.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card card-map">
+          <div class="map-head">
+            <h3 style="margin:0">Mapa</h3>
+            <p class="muted" style="margin:6px 0 0">Toque/arraste para navegar.</p>
+          </div>
+          <div class="map-embed">
             <iframe
               title="Mapa - Espaço Ah, Mar!"
               src="https://www.google.com/maps?q=Rua%20Praia%20de%20Arpoador%2C%20157%20-%20Vilas%20do%20Atl%C3%A2ntico%2C%20Lauro%20de%20Freitas%20-%20BA%2C%2042708-090&output=embed"
-              style="border:0; width:100%; height:100%"
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
               allowfullscreen
             ></iframe>
           </div>
-        </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- GALERIA horizontal arrastável -->
   <section id="galeria" class="section">
     <div class="container">
-      <h2 class="section-title">Galeria</h2>
-      <p class="section-hint">Arraste para o lado para ver mais fotos (ou use as setas do teclado).</p>
+      <div class="section-head">
+        <h2 class="section-title">Galeria</h2>
+        <p class="section-subtitle">Arraste para o lado para ver mais fotos.</p>
+      </div>
 
       <div class="gallery-strip" aria-label="Galeria de fotos" tabindex="0">
         <figure class="slide"><img src="images/galeria1.jpg" alt="Galeria 1" loading="lazy"></figure>
@@ -202,99 +194,124 @@
         <figure class="slide"><img src="images/galeria6.jpg" alt="Galeria 6" loading="lazy"></figure>
         <figure class="slide"><img src="images/galeria7.jpg" alt="Galeria 7" loading="lazy"></figure>
       </div>
-    </div>
-  </section>
 
-  <!-- RSVP -->
-  <section id="rsvp" class="section rsvp">
-    <div class="container">
-      <h2 class="section-title">RSVP</h2>
-      <p class="rsvp-text">Por favor, confirme sua presença até <b>15/09/2026</b>.</p>
-
-      <form id="rsvpForm" class="rsvp-form">
-        <div class="form-group">
-          <label for="rsvpName">Nome completo</label>
-          <input type="text" id="rsvpName" name="name" autocomplete="name" required />
-        </div>
-
-        <div class="form-group">
-          <label for="rsvpEmail">E-mail</label>
-          <input type="email" id="rsvpEmail" name="email" autocomplete="email" required />
-        </div>
-
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="rsvpPresence">Você irá?</label>
-            <select id="rsvpPresence" name="presence" required>
-              <option value="" selected disabled>Selecione</option>
-              <option value="sim">Sim, estarei presente</option>
-              <option value="nao">Não poderei ir</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="rsvpGuests">Quantidade de pessoas</label>
-            <select id="rsvpGuests" name="guests" required>
-              <option value="1" selected>1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="rsvpNotes">Restrições alimentares / observações</label>
-          <textarea id="rsvpNotes" name="notes" rows="4" placeholder="Ex.: vegetariano, sem glúten, alergias…"></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-block">Enviar RSVP</button>
-        <button type="button" class="btn btn-ghost btn-block" id="btnClearRsvp">Limpar</button>
-
-        <p class="muted small">
-          Este RSVP é demonstração (salva no seu navegador). Para coletar respostas de verdade, conecte a um Google Form/Typeform ou backend.
-        </p>
-      </form>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq" class="section">
-    <div class="container">
-      <h2 class="section-title">FAQ</h2>
-      <p class="section-hint">Respostas curtas e objetivas para dúvidas comuns.</p>
-
-      <div class="faq-grid">
+      <div class="grid grid-2" style="margin-top:14px">
         <article class="card">
-          <h3>Vai chover?</h3>
-          <p class="muted">Temos um plano B coberto no próprio espaço. Mantemos todos informados se houver mudança.</p>
+          <h3>Dress code</h3>
+          <p><b>Praia chique</b>: tecidos leves, cores claras, estampas suaves e conforto. Para quem preferir, traje social leve também funciona.</p>
         </article>
         <article class="card">
-          <h3>Posso levar acompanhante?</h3>
-          <p class="muted">Considere o convite/RSVP. Se tiver dúvida, fale conosco antes.</p>
-        </article>
-        <article class="card">
-          <h3>Qual o melhor horário para chegar?</h3>
-          <p class="muted">Chegue por volta de 16:00 para estacionar com calma e aproveitar as boas-vindas.</p>
-        </article>
-        <article class="card">
-          <h3>Tem dress code obrigatório?</h3>
-          <p class="muted">Não. A ideia é estar confortável. Recomendamos “praia chique” e cores claras.</p>
+          <h3>Lista de presentes</h3>
+          <p>Inclua aqui o link da lista (ou um Pix para cota de lua de mel). Se quiser, adicione uma mensagem curta e delicada.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <footer class="footer">
+  <section id="rsvp" class="section section-white">
     <div class="container">
-      <p><b>Jonathan &amp; Adriane Caroline</b></p>
-      <p class="muted small">Feito com carinho · Atualize nomes/datas/endereços conforme necessário</p>
+      <div class="section-head">
+        <h2 class="section-title">RSVP</h2>
+        <p class="section-subtitle">Confirme até <b>15/09/2026</b>. Este formulário salva no seu navegador (demo).</p>
+      </div>
+
+      <div class="grid grid-2">
+        <article class="card">
+          <h3>Confirmação de presença</h3>
+
+          <form id="rsvpForm" class="form">
+            <div class="row">
+              <div class="field">
+                <label for="nome">Nome completo</label>
+                <input id="nome" name="nome" autocomplete="name" required placeholder="Seu nome" />
+              </div>
+              <div class="field">
+                <label for="email">E-mail</label>
+                <input id="email" name="email" type="email" autocomplete="email" required placeholder="voce@exemplo.com" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label for="presenca">Você irá?</label>
+                <select id="presenca" name="presenca" required>
+                  <option value="" selected disabled>Selecione</option>
+                  <option value="sim">Sim, estarei presente</option>
+                  <option value="nao">Não poderei ir</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="qtd">Quantidade de pessoas</label>
+                <select id="qtd" name="qtd" required>
+                  <option value="1" selected>1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="restricoes">Restrições alimentares / observações</label>
+              <textarea id="restricoes" name="restricoes" placeholder="Ex.: vegetariano, sem glúten, alergias…"></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit">Enviar RSVP</button>
+              <button class="btn btn-ghost" type="button" id="btnLimpar">Limpar</button>
+              <span class="note">Para coletar respostas de verdade, conecte a um Google Form/Typeform ou backend.</span>
+            </div>
+          </form>
+        </article>
+
+        <article class="card">
+          <h3>Mensagenzinha</h3>
+          <p class="muted" style="margin-bottom:12px">Sua presença é o melhor presente. Obrigado por fazer parte da nossa história.</p>
+
+          <div class="stack">
+            <div class="item"><div class="time">Dúvidas</div><div class="what"><b>Fale com a gente</b><span>WhatsApp/Instagram (insira os contatos)</span></div></div>
+            <div class="item"><div class="time">Horário</div><div class="what"><b>Chegue cedo</b><span>Recomendamos chegar 30 minutos antes da cerimônia.</span></div></div>
+            <div class="item"><div class="time">Kids</div><div class="what"><b>Informação</b><span>Se haverá espaço kids, informe aqui com clareza.</span></div></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">FAQ</h2>
+        <p class="section-subtitle">Respostas curtas e objetivas para dúvidas comuns.</p>
+      </div>
+
+      <div class="grid grid-2">
+        <article class="card"><h3>Vai chover?</h3><p>Temos um plano B coberto no próprio espaço. Mantemos todos informados se houver mudança.</p></article>
+        <article class="card"><h3>Posso levar acompanhante?</h3><p>Considere o convite/RSVP. Se tiver dúvida, fale conosco antes.</p></article>
+        <article class="card"><h3>Qual o melhor horário para chegar?</h3><p>Chegue por volta de 16:00 para estacionar com calma e aproveitar as boas-vindas.</p></article>
+        <article class="card"><h3>Tem dress code obrigatório?</h3><p>Não. A ideia é estar confortável. Recomendamos “praia chique” e cores claras.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <span class="monogram" aria-hidden="true">J&A</span>
+        <div>
+          <div class="footer-title">Jonathan & Adriane Caroline</div>
+          <div class="footer-sub">Feito com carinho · Atualize nomes/datas/endereços conforme necessário</div>
+        </div>
+      </div>
+
+      <div class="footer-right">
+        <div><b>Dica rápida:</b></div>
+        <div>• Troque o vídeo em <code>media/hero.mp4</code> e o poster em <code>images/hero-poster.jpg</code>.</div>
+        <div>• Substitua as fotos em <code>images/galeria*.jpg</code>.</div>
+      </div>
     </div>
   </footer>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-  <script src="script.js"></script>
-  <script>lucide.createIcons();</script>
 </body>
 </html>
