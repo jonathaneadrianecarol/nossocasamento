@@ -65,34 +65,39 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData(form);
             const name = document.getElementById('name').value;
 
-            // 3. Envia para o Formsubmit via Fetch (fundo)
-            fetch(form.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Sucesso!
-                    alert(`Obrigado, ${name}! Sua presença foi confirmada. Mal podemos esperar para celebrar com você!`);
-                    form.reset();
-                } else {
-                    // Erro no serviço
-                    alert("Ops! Houve um erro ao enviar. Tente novamente ou nos chame no WhatsApp.");
-                }
-            })
-            .catch(error => {
-                // Erro de conexão
-                alert("Erro de conexão. Verifique sua internet.");
-                console.error('Erro:', error);
-            })
-            .finally(() => {
-                // Restaura o botão
-                btnSubmit.innerText = originalText;
-                btnSubmit.disabled = false;
-            });
+            // 3. Envia para o Formsubmit via Fetch
+fetch(form.action, {
+    method: 'POST',
+    body: formData,
+    headers: {
+        'Accept': 'application/json' // Garante que eles não mandem HTML
+    }
+})
+.then(response => {
+    // Se a resposta for OK (200), sucesso
+    if (response.ok) {
+        alert(`Obrigado, ${name}! Sua presença foi confirmada. Mal podemos esperar para celebrar com você!`);
+        form.reset();
+    } else {
+        // Se der erro, tenta ler a mensagem do servidor
+        return response.json().then(data => {
+            if (data.message) {
+                alert("Erro: " + data.message); // Ex: "Este email está bloqueado"
+            } else {
+                alert("Ops! Houve um erro ao enviar. Tente novamente.");
+            }
+        });
+    }
+})
+.catch(error => {
+    // Só entra aqui se realmente falhar a internet
+    console.error('Erro:', error);
+    alert("Erro ao enviar. Verifique se o email no código está correto e ativado.");
+})
+.finally(() => {
+    btnSubmit.innerText = originalText;
+    btnSubmit.disabled = false;
+});
         });
     }
 
