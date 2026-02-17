@@ -134,45 +134,79 @@ document.addEventListener('DOMContentLoaded', () => {
     const musicControl = document.getElementById('music-control');
     const bgMusic = document.getElementById('bg-music');
     const musicIcon = document.getElementById('music-icon');
+    const musicHint = document.getElementById('music-hint');
     let isPlaying = false;
 
     if (musicControl && bgMusic && musicIcon) {
         musicControl.addEventListener('click', () => {
             if (isPlaying) {
                 bgMusic.pause();
-                musicIcon.setAttribute('data-lucide', 'volume-x');
+                musicIcon.setAttribute('data-lucide', 'volume-x'); // Mute icon
                 musicControl.classList.remove('playing');
                 isPlaying = false;
             } else {
                 bgMusic.play().then(() => {
                     isPlaying = true;
-                    musicIcon.setAttribute('data-lucide', 'music');
+                    musicIcon.setAttribute('data-lucide', 'volume-2'); // Sound ON icon
                     musicControl.classList.add('playing');
-                    // Re-render icons to update the change
                     lucide.createIcons();
                 }).catch(error => {
                     console.log("Playback failed:", error);
                 });
             }
-            lucide.createIcons();
+            setTimeout(() => {
+                lucide.createIcons();
+            }, 50);
         });
 
-        // Optional: Try to auto-play on first interaction if user doesn't click button first
+        // Hide music hint on scroll
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100 && musicHint) {
+                musicHint.classList.add('hidden');
+            }
+        });
+
+        // Optional: Try to auto-play on first interaction
         document.body.addEventListener('click', function firstClick() {
             if (!isPlaying) {
-                // Remove this listener so it doesn't run every click
                 document.body.removeEventListener('click', firstClick);
-                // Try to play
                 bgMusic.play().then(() => {
                     isPlaying = true;
-                    musicIcon.setAttribute('data-lucide', 'music');
+                    musicIcon.setAttribute('data-lucide', 'volume-2');
                     musicControl.classList.add('playing');
                     lucide.createIcons();
-                }).catch(error => {
-                    // Autoplay likely blocked, wait for manual button click
-                    console.log("Autoplay blocked, waiting for user interaction on button");
-                });
+                }).catch(error => { });
             }
         }, { once: true });
+    }
+
+    // --- SCROLL DOWN INDICATOR ---
+    const scrollDownBtn = document.querySelector('.scroll-down');
+    if (scrollDownBtn) {
+        scrollDownBtn.addEventListener('click', () => {
+            const nextSection = document.getElementById('pre-wedding');
+            if (nextSection) {
+                nextSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    }
+
+    // --- BACK TO TOP BUTTON ---
+    const backToTopBtn = document.getElementById('back-to-top');
+    if (backToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
     }
 });
