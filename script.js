@@ -47,13 +47,52 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // RSVP Form Handling
+
     const form = document.getElementById('rsvp-form');
+    
     if (form) {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Impede o redirecionamento padrão
+            
+            const btnSubmit = document.getElementById('btn-submit');
+            const originalText = btnSubmit.innerText;
+            
+            // 1. Muda o texto do botão para dar feedback
+            btnSubmit.innerText = 'Enviando...';
+            btnSubmit.disabled = true;
+
+            // 2. Coleta os dados
+            const formData = new FormData(form);
             const name = document.getElementById('name').value;
-            alert(`Obrigado, ${name}! Sua presença foi confirmada. Mal podemos esperar para celebrar com você!`);
-            form.reset();
+
+            // 3. Envia para o Formsubmit via Fetch (fundo)
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Sucesso!
+                    alert(`Obrigado, ${name}! Sua presença foi confirmada. Mal podemos esperar para celebrar com você!`);
+                    form.reset();
+                } else {
+                    // Erro no serviço
+                    alert("Ops! Houve um erro ao enviar. Tente novamente ou nos chame no WhatsApp.");
+                }
+            })
+            .catch(error => {
+                // Erro de conexão
+                alert("Erro de conexão. Verifique sua internet.");
+                console.error('Erro:', error);
+            })
+            .finally(() => {
+                // Restaura o botão
+                btnSubmit.innerText = originalText;
+                btnSubmit.disabled = false;
+            });
         });
     }
 
