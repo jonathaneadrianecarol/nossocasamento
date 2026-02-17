@@ -444,18 +444,22 @@ blockquote footer {
         padding: 4rem 0;
     }
 
+    .hero-content {
+        position: absolute;
+        bottom: 15%;
+        /* Controla a altura: quanto menor %, mais pra baixo */
+        left: 0;
+        width: 100%;
+    }
+
     .date {
-        margin-top: 25rem !important;
-        /* Aumentei para descer mais na tela */
+        margin-top: 0 !important;
         font-size: 1.2rem !important;
         margin-bottom: 0.5rem !important;
-        /* Mais perto do botão */
     }
 
     .btn {
         padding: 0.8rem 1.5rem;
-        /* Botão menor */
         font-size: 0.9rem;
-        /* Fonte do botão menor */
     }
 }
