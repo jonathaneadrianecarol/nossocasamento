@@ -232,8 +232,14 @@ ul {
 @media (max-width: 768px) {
     #hero-video {
         /* AJUSTE AQUI (CELULAR): Mude aqui para enquadrar melhor no celular */
-        /* Tente algo como '60% center' se quiser mostrar mais a direita */
+
+        /* EXEMPLOS: */
+        /* object-position: 20% center;  <-- Mostra mais o lado ESQUERDO */
+        /* object-position: 80% center;  <-- Mostra mais o lado DIREITO */
+        /* object-position: center top;  <-- Mostra mais o TETO/CÉU */
+
         object-position: 50% center;
+        /* 50% é o MEIO exato */
     }
 }
 
