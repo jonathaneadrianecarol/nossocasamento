@@ -89,15 +89,17 @@ ul {
 
 /* Navbar */
 .navbar {
-    position: fixed;
+    position: absolute;
+    /* Começa absoluta */
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: transparent;
+    /* Transparente no início */
     padding: 1.5rem 0;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    transition: var(--transition);
+    transition: all 0.4s ease;
+    /* Transição suave */
 }
 
 .nav-container {
