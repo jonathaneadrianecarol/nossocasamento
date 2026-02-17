@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 50);
         });
 
-        // Hide music hint on scroll
+        // Hide music hint on scroll (Starts visible, hides after scroll)
         window.addEventListener('scroll', () => {
             if (window.scrollY > 100 && musicHint) {
                 musicHint.classList.add('hidden');
@@ -169,13 +169,19 @@ document.addEventListener('DOMContentLoaded', () => {
         // Optional: Try to auto-play on first interaction
         document.body.addEventListener('click', function firstClick() {
             if (!isPlaying) {
+                // Remove listener immediately to avoid multiple triggers
                 document.body.removeEventListener('click', firstClick);
+
+                // Attempt play
                 bgMusic.play().then(() => {
                     isPlaying = true;
                     musicIcon.setAttribute('data-lucide', 'volume-2');
                     musicControl.classList.add('playing');
                     lucide.createIcons();
-                }).catch(error => { });
+                }).catch(error => {
+                    // Auto-play might be blocked, user must click manually
+                    console.log("Auto-play blocked, waiting for user interaction on button.");
+                });
             }
         }, { once: true });
     }
@@ -184,9 +190,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollDownBtn = document.querySelector('.scroll-down');
     if (scrollDownBtn) {
         scrollDownBtn.addEventListener('click', () => {
-            const nextSection = document.getElementById('pre-wedding');
+            const nextSection = document.getElementById('pre-wedding'); // Or whatever is next
+            // If pre-wedding is hidden or layout changed, try finding the first section
+            const firstSection = document.querySelector('section');
             if (nextSection) {
                 nextSection.scrollIntoView({ behavior: 'smooth' });
+            } else if (firstSection) {
+                firstSection.scrollIntoView({ behavior: 'smooth' });
             }
         });
     }
@@ -195,7 +205,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const backToTopBtn = document.getElementById('back-to-top');
     if (backToTopBtn) {
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 500) {
+            // Show only when near the bottom/footer or significantly scrolled (e.g., > 1200px)
+            if (window.scrollY > 1200) {
                 backToTopBtn.classList.add('visible');
             } else {
                 backToTopBtn.classList.remove('visible');
