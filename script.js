@@ -190,13 +190,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollDownBtn = document.querySelector('.scroll-down');
     if (scrollDownBtn) {
         scrollDownBtn.addEventListener('click', () => {
-            const nextSection = document.getElementById('pre-wedding'); // Or whatever is next
-            // If pre-wedding is hidden or layout changed, try finding the first section
-            const firstSection = document.querySelector('section');
+            const nextSection = document.getElementById('welcome');
             if (nextSection) {
                 nextSection.scrollIntoView({ behavior: 'smooth' });
-            } else if (firstSection) {
-                firstSection.scrollIntoView({ behavior: 'smooth' });
             }
         });
     }
