@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // zoom: 1 (Normal), 1.2 (20% maior), 1.5 (50% maior), etc.
         const timeline = [
             { start: 0, position: '50% 1%', zoom: 1 },    // Início: Normal
-            { start: 22, position: '50% 5%', zoom: 2.9}    // 15s: Volta ao Normal
+            { start: 22, position: '50% 5%', zoom: 2.9},    // 15s: Volta ao Normal
             { start: 25, position: '50% 50%', zoom: 0.4}    // 15s: Volta ao Normal
         ];
 
