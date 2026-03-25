@@ -269,3 +269,24 @@ h3 {
   margin: 0;
   color: var(--text);
 }
+
+
+
+.back-button {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.back-button:hover {
+  background: #f5f3ef;
+  transform: translateY(-1px);
+}
+
