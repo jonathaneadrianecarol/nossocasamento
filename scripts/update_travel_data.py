@@ -270,11 +270,11 @@ def run_round_trip_search(search_cfg):
             except Exception as e:
                 print(f"[WARN] Error en {search_cfg['title']} | {dep} -> {ret}: {e}")
 
-    all_options.sort(key=score_option)
+    all_options = deduplicate_options(all_options)
     return {
         "title": search_cfg["title"],
         "description": "Mejores opciones encontradas con Google Flights.",
-        "options": all_options[:5],
+        "options": all_options[:4],
     }
 
 
@@ -387,11 +387,11 @@ def run_split_strategy_search(search_cfg):
                             "segments": outer_opt["segments"] + inner_opt["segments"],
                         })
 
-    combined_options.sort(key=score_option)
+    combined_options = deduplicate_options(combined_options)
     return {
         "title": search_cfg["title"],
         "description": "Combinación exterior + tramo interior, evaluada con Google Flights.",
-        "options": combined_options[:5],
+        "options": combined_options[:4],
     }
 
 
