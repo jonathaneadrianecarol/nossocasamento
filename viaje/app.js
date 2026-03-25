@@ -85,9 +85,38 @@ function renderSection(section) {
   `;
 }
 
+function classifySection(section) {
+  const title = (section.title || "").toLowerCase();
+
+  if (title.includes("cúcuta") || title.includes("cucuta")) {
+    return "cucuta";
+  }
+
+  if (title.includes("bogotá") || title.includes("bogota")) {
+    if (title.includes("río") || title.includes("rio")) {
+      return "strategies";
+    }
+    return "bogota";
+  }
+
+  if (
+    title.includes("são paulo") ||
+    title.includes("sao paulo") ||
+    title.includes("río") ||
+    title.includes("rio") ||
+    title.includes("bus")
+  ) {
+    return "strategies";
+  }
+
+  return "strategies";
+}
+
 async function loadTravelOptions() {
   const lastUpdateEl = document.getElementById("last-update");
-  const resultsEl = document.getElementById("travel-results");
+  const cucutaEl = document.getElementById("travel-results-cucuta");
+  const bogotaEl = document.getElementById("travel-results-bogota");
+  const strategiesEl = document.getElementById("travel-results-strategies");
 
   try {
     const response = await fetch("../data/travel-options.json", {
@@ -104,20 +133,42 @@ async function loadTravelOptions() {
 
     lastUpdateEl.innerHTML = `<strong>Última actualización:</strong> ${escapeHtml(updatedAt)}`;
 
-    if (!sections.length) {
-      resultsEl.innerHTML = `<p class="muted">Todavía no hay resultados publicados.</p>`;
-      return;
-    }
+    const cucutaSections = [];
+    const bogotaSections = [];
+    const strategySections = [];
 
-    resultsEl.innerHTML = sections.map(renderSection).join("");
+    sections.forEach(section => {
+      const kind = classifySection(section);
+      if (kind === "cucuta") cucutaSections.push(section);
+      else if (kind === "bogota") bogotaSections.push(section);
+      else strategySections.push(section);
+    });
+
+    cucutaEl.innerHTML = cucutaSections.length
+      ? cucutaSections.map(renderSection).join("")
+      : `<p class="muted">Todavía no hay resultados publicados para Cúcuta.</p>`;
+
+    bogotaEl.innerHTML = bogotaSections.length
+      ? bogotaSections.map(renderSection).join("")
+      : `<p class="muted">Todavía no hay resultados publicados para Bogotá.</p>`;
+
+    strategiesEl.innerHTML = strategySections.length
+      ? strategySections.map(renderSection).join("")
+      : `<p class="muted">Todavía no hay estrategias publicadas.</p>`;
+
   } catch (error) {
     console.error(error);
     lastUpdateEl.innerHTML = `<strong>Última actualización:</strong> no disponible`;
-    resultsEl.innerHTML = `
+
+    const errorHtml = `
       <div class="error-box">
         No fue posible cargar las opciones de viaje en este momento.
       </div>
     `;
+
+    cucutaEl.innerHTML = errorHtml;
+    bogotaEl.innerHTML = errorHtml;
+    strategiesEl.innerHTML = errorHtml;
   }
 }
 
