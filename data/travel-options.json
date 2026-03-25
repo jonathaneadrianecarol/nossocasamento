@@ -2,7 +2,7 @@
   "updated_at": "2026-03-25 17:14",
   "sections": [
     {
-      "title": "Desde Cúcuta: opción de viaje corto en octubre",
+      "title": "Cúcuta-Salvador: opción de viaje corto en octubre",
       "description": "Salida aproximada entre el 6 y el 8 de octubre, y regreso entre el 12 y el 13 de octubre.",
       "options": [
         {
@@ -52,7 +52,7 @@
       ]
     },
     {
-      "title": "Desde Cúcuta: opción de viaje más largo en octubre",
+      "title": "Cúcuta-Salvador: opción de viaje más largo en octubre",
       "description": "Salida aproximada entre el 6 y el 8 de octubre, y regreso entre el 22 y el 26 de octubre.",
       "options": [
         {
@@ -102,7 +102,7 @@
       ]
     },
     {
-      "title": "Desde Bogotá: opción de viaje corto en octubre",
+      "title": "Bogotá-Salvador: opción de viaje corto en octubre",
       "description": "Salida aproximada entre el 6 y el 8 de octubre, y regreso entre el 12 y el 13 de octubre.",
       "options": [
         {
@@ -142,7 +142,7 @@
       ]
     },
     {
-      "title": "Desde Bogotá: opción de viaje más largo en octubre",
+      "title": "Bogotá-Salvador: opción de viaje más largo en octubre",
       "description": "Salida aproximada entre el 6 y el 8 de octubre, y regreso entre el 22 y el 26 de octubre.",
       "options": [
         {
