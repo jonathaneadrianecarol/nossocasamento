@@ -805,16 +805,98 @@
         }
       ]
     },
-    {
-      "title": "Estrategia vía São Paulo | Cúcuta → São Paulo + vuelo a Salvador en la mitad",
-      "description": "Combinación exterior + tramo interior, evaluada con Google Flights.",
-      "options": []
-    },
-    {
-      "title": "Estrategia vía Río | Bogotá → Río + vuelo a Salvador en la mitad",
-      "description": "Combinación exterior + tramo interior, evaluada con Google Flights.",
-      "options": []
-    },
+    [
+  {
+    "title": "Estrategia vía São Paulo | Cúcuta → São Paulo + vuelo a Salvador en la mitad",
+    "description": "Sección completada manualmente a partir de una conexión observada en la búsqueda directa. No corresponde a una cotización separada Cúcuta→São Paulo + São Paulo→Salvador.",
+    "options": [
+      {
+        "label": "Referencia manual observada vía GRU",
+        "total_price_cop": "COP 2.264.390",
+        "price_value": 2264390,
+        "outbound_date": "2026-10-06",
+        "return_date": "2026-10-23",
+        "total_duration": "23h 30m",
+        "duration_minutes": 1410,
+        "stops": "2 paradas",
+        "stops_value": 2,
+        "airlines": "Avianca, Gol",
+        "segments": [
+          {
+            "carrier": "Avianca",
+            "flight_number": "AV 9429",
+            "origin": "CUC",
+            "origin_name": "Aeropuerto Internacional Camilo Daza",
+            "departure_local": "2026-10-06 09:55",
+            "destination": "BOG",
+            "destination_name": "Aeropuerto Internacional El Dorado",
+            "arrival_local": "2026-10-06 11:05"
+          },
+          {
+            "carrier": "Avianca",
+            "flight_number": "AV 161",
+            "origin": "BOG",
+            "origin_name": "Aeropuerto Internacional El Dorado",
+            "departure_local": "2026-10-06 17:00",
+            "destination": "GRU",
+            "destination_name": "Aeropuerto Internacional de São Paulo-Guarulhos",
+            "arrival_local": "2026-10-07 01:10"
+          },
+          {
+            "carrier": "Gol",
+            "flight_number": "G3 1690",
+            "origin": "GRU",
+            "origin_name": "Aeropuerto Internacional de São Paulo-Guarulhos",
+            "departure_local": "2026-10-07 09:05",
+            "destination": "SSA",
+            "destination_name": "Aeropuerto Internacional Diputado Luís Eduardo Magalhães",
+            "arrival_local": "2026-10-07 11:25"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Estrategia vía Río | Bogotá → Río + vuelo a Salvador en la mitad",
+    "description": "Sección completada manualmente a partir de una conexión observada en la búsqueda directa. No corresponde a una cotización separada Bogotá→Río + Río→Salvador.",
+    "options": [
+      {
+        "label": "Referencia manual observada vía GIG",
+        "total_price_cop": "COP 1.968.090",
+        "price_value": 1968090,
+        "outbound_date": "2026-10-06",
+        "return_date": "2026-10-12",
+        "total_duration": "10h 30m",
+        "duration_minutes": 630,
+        "stops": "1 parada",
+        "stops_value": 1,
+        "airlines": "Avianca, Gol",
+        "segments": [
+          {
+            "carrier": "Avianca",
+            "flight_number": "AV 261",
+            "origin": "BOG",
+            "origin_name": "Aeropuerto Internacional El Dorado",
+            "departure_local": "2026-10-06 21:55",
+            "destination": "GIG",
+            "destination_name": "Aeropuerto Internacional de Galeão",
+            "arrival_local": "2026-10-07 06:15"
+          },
+          {
+            "carrier": "Gol",
+            "flight_number": "G3 1888",
+            "origin": "GIG",
+            "origin_name": "Aeropuerto Internacional de Galeão",
+            "departure_local": "2026-10-07 08:25",
+            "destination": "SSA",
+            "destination_name": "Aeropuerto Internacional Diputado Luís Eduardo Magalhães",
+            "arrival_local": "2026-10-07 10:25"
+          }
+        ]
+      }
+    ]
+  }
+],
     {
       "title": "Comentario manual | São Paulo → Salvador en bus",
       "description": "Esta parte no se consulta automáticamente. Puede añadirse una estimativa manual de costo, tiempo total y logística.",
