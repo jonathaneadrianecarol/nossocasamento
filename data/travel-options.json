@@ -1,1 +1,26 @@
 
+{
+  "updated_at": "pendiente",
+  "sections": [
+    {
+      "title": "Cúcuta → Salvador",
+      "description": "Resultados orientativos con Google Flights.",
+      "options": []
+    },
+    {
+      "title": "Bogotá → Salvador",
+      "description": "Resultados orientativos con Google Flights.",
+      "options": []
+    },
+    {
+      "title": "Estrategia vía São Paulo",
+      "description": "Combinación evaluada con Google Flights.",
+      "options": []
+    },
+    {
+      "title": "Estrategia vía Río de Janeiro",
+      "description": "Combinación evaluada con Google Flights.",
+      "options": []
+    }
+  ]
+}
