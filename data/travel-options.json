@@ -3,10 +3,10 @@
   "sections": [
     {
       "title": "Desde Cúcuta: opción de viaje corto en octubre",
-      "description": "Escenario orientativo con salida entre el 6 y el 8 de octubre, y regreso entre el 12 y el 13 de octubre.",
+      "description": "Salida aproximada entre el 6 y el 8 de octubre, y regreso entre el 12 y el 13 de octubre.",
       "options": [
         {
-          "label": "Opción 1",
+          "label": "",
           "total_price_cop": "COP 2.462.270",
           "price_value": 2462270,
           "outbound_date": "2026-10-06",
@@ -48,59 +48,15 @@
               "arrival_local": "2026-10-07 19:10"
             }
           ]
-        },
-        {
-          "label": "Opción 2",
-          "total_price_cop": "COP 2.640.230",
-          "price_value": 2640230,
-          "outbound_date": "2026-10-06",
-          "return_date": "2026-10-12",
-          "total_duration": "20h 40m",
-          "duration_minutes": 1240,
-          "stops": "2 paradas",
-          "stops_value": 2,
-          "airlines": "Avianca, Gol",
-          "segments": [
-            {
-              "carrier": "Avianca",
-              "flight_number": "AV 9453",
-              "origin": "CUC",
-              "origin_name": "Aeropuerto Internacional Camilo Daza",
-              "departure_local": "2026-10-06 12:45",
-              "destination": "BOG",
-              "destination_name": "Aeropuerto Internacional El Dorado",
-              "arrival_local": "2026-10-06 14:00"
-            },
-            {
-              "carrier": "Avianca",
-              "flight_number": "AV 161",
-              "origin": "BOG",
-              "origin_name": "Aeropuerto Internacional El Dorado",
-              "departure_local": "2026-10-06 17:00",
-              "destination": "GRU",
-              "destination_name": "Aeropuerto Internacional de São Paulo-Guarulhos",
-              "arrival_local": "2026-10-07 01:10"
-            },
-            {
-              "carrier": "Gol",
-              "flight_number": "G3 1690",
-              "origin": "GRU",
-              "origin_name": "Aeropuerto Internacional de São Paulo-Guarulhos",
-              "departure_local": "2026-10-07 09:05",
-              "destination": "SSA",
-              "destination_name": "Aeropuerto Internacional Diputado Luís Eduardo Magalhães",
-              "arrival_local": "2026-10-07 11:25"
-            }
-          ]
         }
       ]
     },
     {
       "title": "Desde Cúcuta: opción de viaje más largo en octubre",
-      "description": "Escenario orientativo con salida entre el 6 y el 8 de octubre, y regreso entre el 22 y el 26 de octubre.",
+      "description": "Salida aproximada entre el 6 y el 8 de octubre, y regreso entre el 22 y el 26 de octubre.",
       "options": [
         {
-          "label": "Opción 1",
+          "label": "",
           "total_price_cop": "COP 2.264.690",
           "price_value": 2264690,
           "outbound_date": "2026-10-06",
@@ -147,10 +103,10 @@
     },
     {
       "title": "Desde Bogotá: opción de viaje corto en octubre",
-      "description": "Escenario orientativo con salida entre el 6 y el 8 de octubre, y regreso entre el 12 y el 13 de octubre.",
+      "description": "Salida aproximada entre el 6 y el 8 de octubre, y regreso entre el 12 y el 13 de octubre.",
       "options": [
         {
-          "label": "Opción 1",
+          "label": "",
           "total_price_cop": "COP 1.929.090",
           "price_value": 1929090,
           "outbound_date": "2026-10-07",
@@ -187,10 +143,10 @@
     },
     {
       "title": "Desde Bogotá: opción de viaje más largo en octubre",
-      "description": "Escenario orientativo con salida entre el 6 y el 8 de octubre, y regreso entre el 22 y el 26 de octubre.",
+      "description": "Salida aproximada entre el 6 y el 8 de octubre, y regreso entre el 22 y el 26 de octubre.",
       "options": [
         {
-          "label": "Opción 1",
+          "label": "",
           "total_price_cop": "COP 1.929.090",
           "price_value": 1929090,
           "outbound_date": "2026-10-07",
@@ -222,46 +178,12 @@
               "arrival_local": "2026-10-08 00:40"
             }
           ]
-        },
-        {
-          "label": "Opción 2",
-          "total_price_cop": "COP 1.964.290",
-          "price_value": 1964290,
-          "outbound_date": "2026-10-07",
-          "return_date": "2026-10-22",
-          "total_duration": "14h 57m",
-          "duration_minutes": 897,
-          "stops": "1 parada",
-          "stops_value": 1,
-          "airlines": "Gol",
-          "segments": [
-            {
-              "carrier": "Gol",
-              "flight_number": "G3 8243",
-              "origin": "BOG",
-              "origin_name": "Aeropuerto Internacional El Dorado",
-              "departure_local": "2026-10-07 23:33",
-              "destination": "BSB",
-              "destination_name": "Aeropuerto Internacional Presidente Juscelino Kubitschek",
-              "arrival_local": "2026-10-08 06:45"
-            },
-            {
-              "carrier": "Gol",
-              "flight_number": "G3 1718",
-              "origin": "BSB",
-              "origin_name": "Aeropuerto Internacional Presidente Juscelino Kubitschek",
-              "departure_local": "2026-10-08 14:35",
-              "destination": "SSA",
-              "destination_name": "Aeropuerto Internacional Diputado Luís Eduardo Magalhães",
-              "arrival_local": "2026-10-08 16:30"
-            }
-          ]
         }
       ]
     },
     {
-      "title": "Estrategia con posibilidad de pasar por São Paulo",
-      "description": "Referencia manual basada en una conexión observada dentro de las búsquedas directas. No corresponde a una cotización separada Cúcuta → São Paulo + São Paulo → Salvador.",
+      "title": "Posibilidad de pasar por São Paulo",
+      "description": "No corresponde a una cotización separada Cúcuta → São Paulo + São Paulo → Salvador.",
       "options": [
         {
           "label": "Referencia manual",
@@ -310,8 +232,8 @@
       ]
     },
     {
-      "title": "Estrategia con posibilidad de pasar por Río de Janeiro",
-      "description": "Referencia manual basada en una conexión observada dentro de las búsquedas directas. No corresponde a una cotización separada Bogotá → Río de Janeiro + Río de Janeiro → Salvador.",
+      "title": "Posibilidad de pasar por Río de Janeiro",
+      "description": "No corresponde a una cotización separada Bogotá → Río de Janeiro + Río de Janeiro → Salvador.",
       "options": [
         {
           "label": "Referencia manual",
@@ -350,8 +272,8 @@
       ]
     },
     {
-      "title": "Comentario manual | São Paulo → Salvador en bus",
-      "description": "Referencia manual para quienes quieran considerar un trayecto terrestre dentro de Brasil. Los valores y tiempos son aproximados y pueden cambiar según la empresa, la terminal y la fecha.",
+      "title": "POsibilidad de ir a São Paulo → Salvador en bus",
+      "description": "Los valores y tiempos son aproximados y pueden cambiar según la empresa, la terminal y la fecha.",
       "options": [
         {
           "label": "Referencia aproximada",
@@ -373,6 +295,36 @@
               "departure_local": "Horario variable",
               "destination": "Salvador",
               "destination_name": "Terminal de buses",
+              "arrival_local": "Horario variable"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Posobilidad de ir a São Paulo → Rio de Janeiro en bus",
+      "description": "Los valores y tiempos son aproximados y pueden cambiar según la empresa, la terminal y la fecha.",
+      "options": [
+        {
+          "label": "Referencia aproximada",
+          "total_price_cop": "COP 43.000 a COP 229.000 aprox.",
+          "price_value": null,
+          "outbound_date": "—",
+          "return_date": "—",
+          "total_duration": "Aproximadamente 6 a 7 horas",
+          "duration_minutes": null,
+          "stops": "Generalmente viaje directo",
+          "stops_value": null,
+          "airlines": "1001, Águia Branca, FlixBus, Itapemirim",
+          "segments": [
+            {
+              "carrier": "Trayecto terrestre",
+              "flight_number": null,
+              "origin": "São Paulo",
+              "origin_name": "Rodoviária do Tietê / Barra Funda",
+              "departure_local": "Horario variable",
+              "destination": "Rio de Janeiro",
+              "destination_name": "Terminal Rodoviário Novo Rio",
               "arrival_local": "Horario variable"
             }
           ]
