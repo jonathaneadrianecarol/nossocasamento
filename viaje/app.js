@@ -7,6 +7,32 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
+function formatDateEs(dateStr) {
+  if (!dateStr || dateStr === "—") return "—";
+
+  const parts = dateStr.split("-");
+  if (parts.length !== 3) return dateStr;
+
+  const [year, month, day] = parts;
+
+  const months = {
+    "01": "enero",
+    "02": "febrero",
+    "03": "marzo",
+    "04": "abril",
+    "05": "mayo",
+    "06": "junio",
+    "07": "julio",
+    "08": "agosto",
+    "09": "septiembre",
+    "10": "octubre",
+    "11": "noviembre",
+    "12": "diciembre"
+  };
+
+  return `${Number(day)} de ${months[month] || month}`;
+}
+
 function renderSegments(segments) {
   if (!segments || !segments.length) {
     return `<p class="muted">Sin detalle de tramos.</p>`;
@@ -37,7 +63,7 @@ function renderOption(option) {
     <article class="option-card">
       <div class="option-header">
         <div>
-          <h3>${escapeHtml(option.label || "Opción")}</h3>
+          ${option.label ? `<h3>${escapeHtml(option.label)}</h3>` : ""}
           <p class="airlines">${escapeHtml(option.airlines || "—")}</p>
         </div>
         <div class="price">${escapeHtml(option.total_price_cop || "—")}</div>
@@ -46,7 +72,7 @@ function renderOption(option) {
       <div class="summary-grid">
         <div>
           <span class="label">Fechas</span>
-          <div>${escapeHtml(option.outbound_date || "—")} → ${escapeHtml(option.return_date || "—")}</div>
+          <div>${escapeHtml(formatDateEs(option.outbound_date))} → ${escapeHtml(formatDateEs(option.return_date))}</div>
         </div>
         <div>
           <span class="label">Duración total</span>
@@ -89,6 +115,9 @@ function classifySection(section) {
   const title = (section.title || "").toLowerCase();
 
   if (title.includes("cúcuta") || title.includes("cucuta")) {
+    if (title.includes("río") || title.includes("rio")) {
+      return "strategies";
+    }
     return "cucuta";
   }
 
@@ -139,9 +168,13 @@ async function loadTravelOptions() {
 
     sections.forEach(section => {
       const kind = classifySection(section);
-      if (kind === "cucuta") cucutaSections.push(section);
-      else if (kind === "bogota") bogotaSections.push(section);
-      else strategySections.push(section);
+      if (kind === "cucuta") {
+        cucutaSections.push(section);
+      } else if (kind === "bogota") {
+        bogotaSections.push(section);
+      } else {
+        strategySections.push(section);
+      }
     });
 
     cucutaEl.innerHTML = cucutaSections.length
