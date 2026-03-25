@@ -2,7 +2,6 @@
 
 import os
 import json
-import math
 import requests
 from pathlib import Path
 from datetime import date, datetime, timedelta
@@ -19,7 +18,8 @@ SERPAPI_URL = "https://serpapi.com/search.json"
 SEARCHES = [
     {
         "key": "cuc_ssa_short",
-        "title": "Cúcuta → Salvador | 6–8 oct ida | 12–13 oct vuelta",
+        "title": "Desde Cúcuta: opción de viaje corto en octubre",
+        "description_public": "Escenario orientativo con salida entre el 6 y el 8 de octubre, y regreso entre el 12 y el 13 de octubre.",
         "type": "round_trip",
         "origin": "CUC",
         "destination": "SSA",
@@ -30,7 +30,8 @@ SEARCHES = [
     },
     {
         "key": "cuc_ssa_long",
-        "title": "Cúcuta → Salvador | 6–8 oct ida | 22–26 oct vuelta",
+        "title": "Desde Cúcuta: opción de viaje más largo en octubre",
+        "description_public": "Escenario orientativo con salida entre el 6 y el 8 de octubre, y regreso entre el 22 y el 26 de octubre.",
         "type": "round_trip",
         "origin": "CUC",
         "destination": "SSA",
@@ -41,7 +42,8 @@ SEARCHES = [
     },
     {
         "key": "bog_ssa_short",
-        "title": "Bogotá → Salvador | 6–8 oct ida | 12–13 oct vuelta",
+        "title": "Desde Bogotá: opción de viaje corto en octubre",
+        "description_public": "Escenario orientativo con salida entre el 6 y el 8 de octubre, y regreso entre el 12 y el 13 de octubre.",
         "type": "round_trip",
         "origin": "BOG",
         "destination": "SSA",
@@ -52,7 +54,8 @@ SEARCHES = [
     },
     {
         "key": "bog_ssa_long",
-        "title": "Bogotá → Salvador | 6–8 oct ida | 22–26 oct vuelta",
+        "title": "Desde Bogotá: opción de viaje más largo en octubre",
+        "description_public": "Escenario orientativo con salida entre el 6 y el 8 de octubre, y regreso entre el 22 y el 26 de octubre.",
         "type": "round_trip",
         "origin": "BOG",
         "destination": "SSA",
@@ -62,36 +65,16 @@ SEARCHES = [
         "return_end": "2026-10-26",
     },
     {
-        "key": "cuc_sao_ssa_strategy",
-        "title": "Estrategia vía São Paulo | Cúcuta → São Paulo + vuelo a Salvador en la mitad",
-        "type": "split_strategy",
-        "outer_origin": "CUC",
-        "outer_destination": "SAO",
-        "outer_depart_start": "2026-10-06",
-        "outer_depart_end": "2026-10-08",
-        "outer_return_start": "2026-10-22",
-        "outer_return_end": "2026-10-26",
-        "inner_origin": "SAO",
-        "inner_destination": "SSA",
-        "inner_trip_min_days": 2,
-        "inner_trip_max_days": 4,
-        "midpoint_slack_days": 1,
-    },
-    {
-        "key": "bog_rio_ssa_strategy",
-        "title": "Estrategia vía Río | Bogotá → Río + vuelo a Salvador en la mitad",
-        "type": "split_strategy",
-        "outer_origin": "BOG",
-        "outer_destination": "RIO",
-        "outer_depart_start": "2026-10-06",
-        "outer_depart_end": "2026-10-08",
-        "outer_return_start": "2026-10-22",
-        "outer_return_end": "2026-10-26",
-        "inner_origin": "RIO",
-        "inner_destination": "SSA",
-        "inner_trip_min_days": 2,
-        "inner_trip_max_days": 4,
-        "midpoint_slack_days": 1,
+        "key": "cuc_rio_long",
+        "title": "Desde Cúcuta: referencia de viaje hacia Río de Janeiro en octubre",
+        "description_public": "Escenario orientativo con salida entre el 6 y el 8 de octubre, y regreso entre el 22 y el 26 de octubre. Puede servir como referencia para quienes quieran evaluar una parada en Río antes de seguir hacia Salvador.",
+        "type": "round_trip",
+        "origin": "CUC",
+        "destination": "RIO",
+        "depart_start": "2026-10-06",
+        "depart_end": "2026-10-08",
+        "return_start": "2026-10-22",
+        "return_end": "2026-10-26",
     },
 ]
 
@@ -109,10 +92,6 @@ def daterange(start_str, end_str):
         days.append(current)
         current += timedelta(days=1)
     return days
-
-
-def midpoint_date(start_date, end_date):
-    return start_date + timedelta(days=(end_date - start_date).days // 2)
 
 
 def format_cop(value):
@@ -147,6 +126,59 @@ def score_option(opt):
 def ensure_env():
     if not SERPAPI_API_KEY:
         raise RuntimeError("Falta la variable de entorno SERPAPI_API_KEY")
+
+
+def normalize_airlines(value):
+    if not value:
+        return ""
+    parts = [x.strip() for x in value.split(",") if x.strip()]
+    return ", ".join(sorted(set(parts)))
+
+
+def make_soft_signature(opt):
+    return (
+        opt.get("outbound_date"),
+        opt.get("return_date"),
+        opt.get("price_value"),
+        opt.get("stops_value"),
+        normalize_airlines(opt.get("airlines"))
+    )
+
+
+def deduplicate_options(options, max_duration_diff=45):
+    grouped = {}
+
+    for opt in options:
+        sig = make_soft_signature(opt)
+
+        if sig not in grouped:
+            grouped[sig] = opt
+            continue
+
+        current = grouped[sig]
+        current_duration = current.get("duration_minutes")
+        new_duration = opt.get("duration_minutes")
+
+        if current_duration is None or new_duration is None:
+            continue
+
+        if abs(new_duration - current_duration) <= max_duration_diff:
+            if new_duration < current_duration:
+                grouped[sig] = opt
+        else:
+            extended_sig = sig + (new_duration,)
+            if extended_sig not in grouped:
+                grouped[extended_sig] = opt
+
+    deduped = list(grouped.values())
+    deduped.sort(key=score_option)
+    return deduped
+
+
+def relabel_options(options):
+    for idx, opt in enumerate(options, start=1):
+        opt["label"] = f"Opción {idx}"
+    return options
 
 
 # =========================
@@ -237,58 +269,6 @@ def extract_options(data, label_prefix, depart_date, return_date):
     return options
 
 
-def normalize_airlines(value):
-    if not value:
-        return ""
-    parts = [x.strip() for x in value.split(",") if x.strip()]
-    return ", ".join(sorted(set(parts)))
-
-
-def make_soft_signature(opt):
-    return (
-        opt.get("outbound_date"),
-        opt.get("return_date"),
-        opt.get("price_value"),
-        opt.get("stops_value"),
-        normalize_airlines(opt.get("airlines"))
-    )
-
-
-def deduplicate_options(options, max_duration_diff=45):
-    grouped = {}
-
-    for opt in options:
-        sig = make_soft_signature(opt)
-
-        if sig not in grouped:
-            grouped[sig] = opt
-            continue
-
-        current = grouped[sig]
-
-        current_duration = current.get("duration_minutes")
-        new_duration = opt.get("duration_minutes")
-
-        # Si no se puede comparar duración, conservar el que ya estaba
-        if current_duration is None or new_duration is None:
-            continue
-
-        # Si son muy parecidos en duración, conservar el más corto
-        if abs(new_duration - current_duration) <= max_duration_diff:
-            if new_duration < current_duration:
-                grouped[sig] = opt
-        else:
-            # Si la diferencia es grande, conservar ambos con firma extendida
-            extended_sig = sig + (new_duration,)
-            if extended_sig not in grouped:
-                grouped[extended_sig] = opt
-
-    deduped = list(grouped.values())
-    deduped.sort(key=score_option)
-    return deduped
-
-
-
 # =========================
 # BÚSQUEDAS SIMPLES
 # =========================
@@ -330,122 +310,6 @@ def run_round_trip_search(search_cfg):
         "options": all_options[:4],
     }
 
-# =========================
-# ESTRATEGIAS PARTIDAS
-# =========================
-
-def run_split_strategy_search(search_cfg):
-    combined_options = []
-
-    outer_depart_dates = daterange(search_cfg["outer_depart_start"], search_cfg["outer_depart_end"])
-    outer_return_dates = daterange(search_cfg["outer_return_start"], search_cfg["outer_return_end"])
-
-    for outer_dep in outer_depart_dates:
-        for outer_ret in outer_return_dates:
-            if outer_ret <= outer_dep:
-                continue
-
-            midpoint = midpoint_date(outer_dep, outer_ret)
-
-            inner_depart_candidates = [
-                midpoint + timedelta(days=delta)
-                for delta in range(-search_cfg["midpoint_slack_days"], search_cfg["midpoint_slack_days"] + 1)
-            ]
-
-            inner_ranges = []
-            for inner_dep in inner_depart_candidates:
-                for days_inside in range(search_cfg["inner_trip_min_days"], search_cfg["inner_trip_max_days"] + 1):
-                    inner_ret = inner_dep + timedelta(days=days_inside)
-                    if outer_dep < inner_dep < inner_ret < outer_ret:
-                        inner_ranges.append((inner_dep, inner_ret))
-
-            # outer
-            outer_results = []
-            try:
-                outer_raw = google_flights_search(
-                    search_cfg["outer_origin"],
-                    search_cfg["outer_destination"],
-                    outer_dep.isoformat(),
-                    outer_ret.isoformat(),
-                )
-                outer_results = extract_options(
-                    outer_raw,
-                    label_prefix="Tramo exterior",
-                    depart_date=outer_dep.isoformat(),
-                    return_date=outer_ret.isoformat(),
-                )[:3]
-            except Exception as e:
-                print(f"[WARN] Error outer {search_cfg['title']} | {outer_dep} -> {outer_ret}: {e}")
-                continue
-
-            # inner
-            for inner_dep, inner_ret in inner_ranges:
-                try:
-                    inner_raw = google_flights_search(
-                        search_cfg["inner_origin"],
-                        search_cfg["inner_destination"],
-                        inner_dep.isoformat(),
-                        inner_ret.isoformat(),
-                    )
-                    inner_results = extract_options(
-                        inner_raw,
-                        label_prefix="Tramo interior",
-                        depart_date=inner_dep.isoformat(),
-                        return_date=inner_ret.isoformat(),
-                    )[:3]
-                except Exception as e:
-                    print(f"[WARN] Error inner {search_cfg['title']} | {inner_dep} -> {inner_ret}: {e}")
-                    continue
-
-                for outer_opt in outer_results:
-                    for inner_opt in inner_results:
-                        price_total = None
-                        if outer_opt["price_value"] is not None and inner_opt["price_value"] is not None:
-                            price_total = outer_opt["price_value"] + inner_opt["price_value"]
-
-                        duration_total = None
-                        if outer_opt["duration_minutes"] is not None and inner_opt["duration_minutes"] is not None:
-                            duration_total = outer_opt["duration_minutes"] + inner_opt["duration_minutes"]
-
-                        stops_total = None
-                        if outer_opt["stops_value"] is not None and inner_opt["stops_value"] is not None:
-                            stops_total = outer_opt["stops_value"] + inner_opt["stops_value"]
-
-                        if stops_total == 0:
-                            stops_text = "Directo"
-                        elif stops_total == 1:
-                            stops_text = "1 parada"
-                        elif stops_total is None:
-                            stops_text = "—"
-                        else:
-                            stops_text = f"{stops_total} paradas"
-
-                        airlines = sorted(set(
-                            [x.strip() for x in outer_opt["airlines"].split(",") if x.strip()] +
-                            [x.strip() for x in inner_opt["airlines"].split(",") if x.strip()]
-                        ))
-
-                        combined_options.append({
-                            "label": f"Exterior {outer_dep.isoformat()}→{outer_ret.isoformat()} + interior {inner_dep.isoformat()}→{inner_ret.isoformat()}",
-                            "total_price_cop": format_cop(price_total),
-                            "price_value": price_total,
-                            "outbound_date": outer_dep.isoformat(),
-                            "return_date": outer_ret.isoformat(),
-                            "total_duration": minutes_to_text(duration_total),
-                            "duration_minutes": duration_total,
-                            "stops": stops_text,
-                            "stops_value": stops_total,
-                            "airlines": ", ".join(airlines) if airlines else "—",
-                            "segments": outer_opt["segments"] + inner_opt["segments"],
-                        })
-
-    combined_options = deduplicate_options(combined_options)
-    return {
-        "title": search_cfg["title"],
-        "description": "Combinación exterior + tramo interior, evaluada con Google Flights.",
-        "options": combined_options[:4],
-    }
-
 
 # =========================
 # SALIDA JSON
@@ -455,17 +319,26 @@ def build_json_output():
     sections = []
 
     for cfg in SEARCHES:
-        print(f"[INFO] Procesando: {cfg['title']}")
+        print(f"[INFO] Procesando: {cfg['title']}", flush=True)
         if cfg["type"] == "round_trip":
             section = run_round_trip_search(cfg)
-        elif cfg["type"] == "split_strategy":
-            section = run_split_strategy_search(cfg)
         else:
             continue
 
         sections.append(section)
 
-    # comentario manual sobre bus
+    sections.append({
+        "title": "Estrategia con posibilidad de pasar por São Paulo",
+        "description": "Esta parte se mantiene como referencia manual. La idea es evaluar si conviene combinar el viaje con una parada en São Paulo y luego continuar hacia Salvador con un tramo interno dentro de Brasil.",
+        "options": []
+    })
+
+    sections.append({
+        "title": "Estrategia con posibilidad de pasar por Río de Janeiro",
+        "description": "Esta parte se mantiene como referencia manual. La idea es evaluar si conviene combinar el viaje con una parada en Río y luego continuar hacia Salvador con un tramo interno dentro de Brasil.",
+        "options": []
+    })
+
     sections.append({
         "title": "Comentario manual | São Paulo → Salvador en bus",
         "description": (
@@ -507,12 +380,8 @@ def main():
         encoding="utf-8"
     )
 
-    print(f"[OK] Archivo actualizado: {output_path}")
+    print(f"[OK] Archivo actualizado: {output_path}", flush=True)
 
 
 if __name__ == "__main__":
     main()
-
-
-
-
