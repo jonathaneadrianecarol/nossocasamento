@@ -1,8 +1,17 @@
 name: Update travel options
 
-# Temporalmente manual.
-# Cuando se corrija el exceso de búsquedas en update_travel_data.py
-# y se reduzca el consumo de créditos de SerpApi, volver a activar schedule.
+# IMPORTANTE:
+# Este workflow quedó solo manual porque la versión actual del script
+# hace demasiadas consultas y agotó los créditos de SerpApi.
+# Cuando se optimice update_travel_data.py para hacer muchas menos búsquedas,
+# volver a habilitar:
+#
+# on:
+#   workflow_dispatch:
+#   schedule:
+#     - cron: "17 8,20 * * *"
+#       timezone: "America/Sao_Paulo"
+#
 on:
   workflow_dispatch:
 
