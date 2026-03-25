@@ -1,10 +1,10 @@
-name: Update travel options   # nombre visible en la pestaña Actions
+name: Update travel options
 
+# Temporalmente manual.
+# Cuando se corrija el exceso de búsquedas en update_travel_data.py
+# y se reduzca el consumo de créditos de SerpApi, volver a activar schedule.
 on:
-  workflow_dispatch:          # permite correrlo manualmente
-  schedule:
-    - cron: "17 8,20 * * *"   # todos los días a las 08:17 y 20:17
-      timezone: "America/Sao_Paulo"  # usando esa zona horaria
+  workflow_dispatch:
 
 jobs:
   update-travel-data:
@@ -31,7 +31,7 @@ jobs:
         env:
           SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
         run: |
-          python scripts/update_travel_data.py
+          python -u scripts/update_travel_data.py
 
       - name: Commit updated JSON
         run: |
