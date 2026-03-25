@@ -2,11 +2,11 @@
   "updated_at": "2026-03-25 17:14",
   "sections": [
     {
-      "title": "Cúcuta → Salvador | 6–8 oct ida | 12–13 oct vuelta",
-      "description": "Mejores opciones encontradas con Google Flights.",
+      "title": "Desde Cúcuta: opción de viaje corto en octubre",
+      "description": "Escenario orientativo con salida entre el 6 y el 8 de octubre, y regreso entre el 12 y el 13 de octubre.",
       "options": [
         {
-          "label": "2026-10-06 → 2026-10-13 #1",
+          "label": "Opción 1",
           "total_price_cop": "COP 2.462.270",
           "price_value": 2462270,
           "outbound_date": "2026-10-06",
@@ -50,51 +50,7 @@
           ]
         },
         {
-          "label": "2026-10-06 → 2026-10-13 #2",
-          "total_price_cop": "COP 2.462.270",
-          "price_value": 2462270,
-          "outbound_date": "2026-10-06",
-          "return_date": "2026-10-13",
-          "total_duration": "19h 50m",
-          "duration_minutes": 1190,
-          "stops": "2 paradas",
-          "stops_value": 2,
-          "airlines": "Avianca, Gol",
-          "segments": [
-            {
-              "carrier": "Avianca",
-              "flight_number": "AV 5233",
-              "origin": "CUC",
-              "origin_name": "Aeropuerto Internacional Camilo Daza",
-              "departure_local": "2026-10-06 22:30",
-              "destination": "BOG",
-              "destination_name": "Aeropuerto Internacional El Dorado",
-              "arrival_local": "2026-10-06 23:40"
-            },
-            {
-              "carrier": "Avianca",
-              "flight_number": "AV 147",
-              "origin": "BOG",
-              "origin_name": "Aeropuerto Internacional El Dorado",
-              "departure_local": "2026-10-07 07:15",
-              "destination": "GIG",
-              "destination_name": "Aeropuerto Internacional de Galeão",
-              "arrival_local": "2026-10-07 15:35"
-            },
-            {
-              "carrier": "Gol",
-              "flight_number": "G3 1232",
-              "origin": "GIG",
-              "origin_name": "Aeropuerto Internacional de Galeão",
-              "departure_local": "2026-10-07 18:20",
-              "destination": "SSA",
-              "destination_name": "Aeropuerto Internacional Diputado Luís Eduardo Magalhães",
-              "arrival_local": "2026-10-07 20:20"
-            }
-          ]
-        },
-        {
-          "label": "2026-10-06 → 2026-10-12 #1",
+          "label": "Opción 2",
           "total_price_cop": "COP 2.580.810",
           "price_value": 2580810,
           "outbound_date": "2026-10-06",
@@ -138,51 +94,7 @@
           ]
         },
         {
-          "label": "2026-10-06 → 2026-10-12 #2",
-          "total_price_cop": "COP 2.580.810",
-          "price_value": 2580810,
-          "outbound_date": "2026-10-06",
-          "return_date": "2026-10-12",
-          "total_duration": "19h 50m",
-          "duration_minutes": 1190,
-          "stops": "2 paradas",
-          "stops_value": 2,
-          "airlines": "Avianca, Gol",
-          "segments": [
-            {
-              "carrier": "Avianca",
-              "flight_number": "AV 5233",
-              "origin": "CUC",
-              "origin_name": "Aeropuerto Internacional Camilo Daza",
-              "departure_local": "2026-10-06 22:30",
-              "destination": "BOG",
-              "destination_name": "Aeropuerto Internacional El Dorado",
-              "arrival_local": "2026-10-06 23:40"
-            },
-            {
-              "carrier": "Avianca",
-              "flight_number": "AV 147",
-              "origin": "BOG",
-              "origin_name": "Aeropuerto Internacional El Dorado",
-              "departure_local": "2026-10-07 07:15",
-              "destination": "GIG",
-              "destination_name": "Aeropuerto Internacional de Galeão",
-              "arrival_local": "2026-10-07 15:35"
-            },
-            {
-              "carrier": "Gol",
-              "flight_number": "G3 1232",
-              "origin": "GIG",
-              "origin_name": "Aeropuerto Internacional de Galeão",
-              "departure_local": "2026-10-07 18:20",
-              "destination": "SSA",
-              "destination_name": "Aeropuerto Internacional Diputado Luís Eduardo Magalhães",
-              "arrival_local": "2026-10-07 20:20"
-            }
-          ]
-        },
-        {
-          "label": "2026-10-06 → 2026-10-12 #3",
+          "label": "Opción 3",
           "total_price_cop": "COP 2.640.230",
           "price_value": 2640230,
           "outbound_date": "2026-10-06",
@@ -228,11 +140,11 @@
       ]
     },
     {
-      "title": "Cúcuta → Salvador | 6–8 oct ida | 22–26 oct vuelta",
-      "description": "Mejores opciones encontradas con Google Flights.",
+      "title": "Desde Cúcuta: opción de viaje más largo en octubre",
+      "description": "Escenario orientativo con salida entre el 6 y el 8 de octubre, y regreso entre el 22 y el 26 de octubre.",
       "options": [
         {
-          "label": "2026-10-06 → 2026-10-23 #1",
+          "label": "Opción 1",
           "total_price_cop": "COP 2.264.390",
           "price_value": 2264390,
           "outbound_date": "2026-10-06",
@@ -276,51 +188,7 @@
           ]
         },
         {
-          "label": "2026-10-06 → 2026-10-24 #1",
-          "total_price_cop": "COP 2.264.390",
-          "price_value": 2264390,
-          "outbound_date": "2026-10-06",
-          "return_date": "2026-10-24",
-          "total_duration": "23h 30m",
-          "duration_minutes": 1410,
-          "stops": "2 paradas",
-          "stops_value": 2,
-          "airlines": "Avianca, Gol",
-          "segments": [
-            {
-              "carrier": "Avianca",
-              "flight_number": "AV 9429",
-              "origin": "CUC",
-              "origin_name": "Aeropuerto Internacional Camilo Daza",
-              "departure_local": "2026-10-06 09:55",
-              "destination": "BOG",
-              "destination_name": "Aeropuerto Internacional El Dorado",
-              "arrival_local": "2026-10-06 11:05"
-            },
-            {
-              "carrier": "Avianca",
-              "flight_number": "AV 161",
-              "origin": "BOG",
-              "origin_name": "Aeropuerto Internacional El Dorado",
-              "departure_local": "2026-10-06 17:00",
-              "destination": "GRU",
-              "destination_name": "Aeropuerto Internacional de São Paulo-Guarulhos",
-              "arrival_local": "2026-10-07 01:10"
-            },
-            {
-              "carrier": "Gol",
-              "flight_number": "G3 1690",
-              "origin": "GRU",
-              "origin_name": "Aeropuerto Internacional de São Paulo-Guarulhos",
-              "departure_local": "2026-10-07 09:05",
-              "destination": "SSA",
-              "destination_name": "Aeropuerto Internacional Diputado Luís Eduardo Magalhães",
-              "arrival_local": "2026-10-07 11:25"
-            }
-          ]
-        },
-        {
-          "label": "2026-10-06 → 2026-10-22 #1",
+          "label": "Opción 2",
           "total_price_cop": "COP 2.264.690",
           "price_value": 2264690,
           "outbound_date": "2026-10-06",
@@ -364,51 +232,7 @@
           ]
         },
         {
-          "label": "2026-10-06 → 2026-10-24 #2",
-          "total_price_cop": "COP 2.264.690",
-          "price_value": 2264690,
-          "outbound_date": "2026-10-06",
-          "return_date": "2026-10-24",
-          "total_duration": "22h 35m",
-          "duration_minutes": 1355,
-          "stops": "2 paradas",
-          "stops_value": 2,
-          "airlines": "Avianca, Gol",
-          "segments": [
-            {
-              "carrier": "Avianca",
-              "flight_number": "AV 5233",
-              "origin": "CUC",
-              "origin_name": "Aeropuerto Internacional Camilo Daza",
-              "departure_local": "2026-10-06 22:30",
-              "destination": "BOG",
-              "destination_name": "Aeropuerto Internacional El Dorado",
-              "arrival_local": "2026-10-06 23:40"
-            },
-            {
-              "carrier": "Avianca",
-              "flight_number": "AV 147",
-              "origin": "BOG",
-              "origin_name": "Aeropuerto Internacional El Dorado",
-              "departure_local": "2026-10-07 07:15",
-              "destination": "GIG",
-              "destination_name": "Aeropuerto Internacional de Galeão",
-              "arrival_local": "2026-10-07 15:35"
-            },
-            {
-              "carrier": "Gol",
-              "flight_number": "G3 1497",
-              "origin": "GIG",
-              "origin_name": "Aeropuerto Internacional de Galeão",
-              "departure_local": "2026-10-07 21:00",
-              "destination": "SSA",
-              "destination_name": "Aeropuerto Internacional Diputado Luís Eduardo Magalhães",
-              "arrival_local": "2026-10-07 23:05"
-            }
-          ]
-        },
-        {
-          "label": "2026-10-06 → 2026-10-22 #2",
+          "label": "Opción 3",
           "total_price_cop": "COP 2.267.390",
           "price_value": 2267390,
           "outbound_date": "2026-10-06",
@@ -454,11 +278,11 @@
       ]
     },
     {
-      "title": "Bogotá → Salvador | 6–8 oct ida | 12–13 oct vuelta",
-      "description": "Mejores opciones encontradas con Google Flights.",
+      "title": "Desde Bogotá: opción de viaje corto en octubre",
+      "description": "Escenario orientativo con salida entre el 6 y el 8 de octubre, y regreso entre el 12 y el 13 de octubre.",
       "options": [
         {
-          "label": "2026-10-07 → 2026-10-13 #1",
+          "label": "Opción 1",
           "total_price_cop": "COP 1.929.090",
           "price_value": 1929090,
           "outbound_date": "2026-10-07",
@@ -492,41 +316,7 @@
           ]
         },
         {
-          "label": "2026-10-07 → 2026-10-13 #3",
-          "total_price_cop": "COP 1.967.290",
-          "price_value": 1967290,
-          "outbound_date": "2026-10-07",
-          "return_date": "2026-10-13",
-          "total_duration": "14h 57m",
-          "duration_minutes": 897,
-          "stops": "1 parada",
-          "stops_value": 1,
-          "airlines": "Gol",
-          "segments": [
-            {
-              "carrier": "Gol",
-              "flight_number": "G3 8243",
-              "origin": "BOG",
-              "origin_name": "Aeropuerto Internacional El Dorado",
-              "departure_local": "2026-10-07 23:33",
-              "destination": "BSB",
-              "destination_name": "Aeropuerto Internacional Presidente Juscelino Kubitschek",
-              "arrival_local": "2026-10-08 06:45"
-            },
-            {
-              "carrier": "Gol",
-              "flight_number": "G3 1718",
-              "origin": "BSB",
-              "origin_name": "Aeropuerto Internacional Presidente Juscelino Kubitschek",
-              "departure_local": "2026-10-08 14:35",
-              "destination": "SSA",
-              "destination_name": "Aeropuerto Internacional Diputado Luís Eduardo Magalhães",
-              "arrival_local": "2026-10-08 16:30"
-            }
-          ]
-        },
-        {
-          "label": "2026-10-06 → 2026-10-12 #1",
+          "label": "Opción 2",
           "total_price_cop": "COP 1.967.790",
           "price_value": 1967790,
           "outbound_date": "2026-10-06",
@@ -560,41 +350,7 @@
           ]
         },
         {
-          "label": "2026-10-06 → 2026-10-13 #2",
-          "total_price_cop": "COP 1.967.790",
-          "price_value": 1967790,
-          "outbound_date": "2026-10-06",
-          "return_date": "2026-10-13",
-          "total_duration": "11h 40m",
-          "duration_minutes": 700,
-          "stops": "1 parada",
-          "stops_value": 1,
-          "airlines": "Avianca, Gol",
-          "segments": [
-            {
-              "carrier": "Avianca",
-              "flight_number": "AV 85",
-              "origin": "BOG",
-              "origin_name": "Aeropuerto Internacional El Dorado",
-              "departure_local": "2026-10-06 21:45",
-              "destination": "GRU",
-              "destination_name": "Aeropuerto Internacional de São Paulo-Guarulhos",
-              "arrival_local": "2026-10-07 05:25"
-            },
-            {
-              "carrier": "Gol",
-              "flight_number": "G3 1690",
-              "origin": "GRU",
-              "origin_name": "Aeropuerto Internacional de São Paulo-Guarulhos",
-              "departure_local": "2026-10-07 09:05",
-              "destination": "SSA",
-              "destination_name": "Aeropuerto Internacional Diputado Luís Eduardo Magalhães",
-              "arrival_local": "2026-10-07 11:25"
-            }
-          ]
-        },
-        {
-          "label": "2026-10-06 → 2026-10-12 #5",
+          "label": "Opción 3",
           "total_price_cop": "COP 1.968.090",
           "price_value": 1968090,
           "outbound_date": "2026-10-06",
@@ -630,11 +386,11 @@
       ]
     },
     {
-      "title": "Bogotá → Salvador | 6–8 oct ida | 22–26 oct vuelta",
-      "description": "Mejores opciones encontradas con Google Flights.",
+      "title": "Desde Bogotá: opción de viaje más largo en octubre",
+      "description": "Escenario orientativo con salida entre el 6 y el 8 de octubre, y regreso entre el 22 y el 26 de octubre.",
       "options": [
         {
-          "label": "2026-10-07 → 2026-10-22 #1",
+          "label": "Opción 1",
           "total_price_cop": "COP 1.929.090",
           "price_value": 1929090,
           "outbound_date": "2026-10-07",
@@ -668,113 +424,11 @@
           ]
         },
         {
-          "label": "2026-10-07 → 2026-10-24 #1",
-          "total_price_cop": "COP 1.929.090",
-          "price_value": 1929090,
-          "outbound_date": "2026-10-07",
-          "return_date": "2026-10-24",
-          "total_duration": "10h 32m",
-          "duration_minutes": 632,
-          "stops": "1 parada",
-          "stops_value": 1,
-          "airlines": "COPA",
-          "segments": [
-            {
-              "carrier": "COPA",
-              "flight_number": "CM 335",
-              "origin": "BOG",
-              "origin_name": "Aeropuerto Internacional El Dorado",
-              "departure_local": "2026-10-07 12:08",
-              "destination": "PTY",
-              "destination_name": "Aeropuerto Internacional de Tocumen",
-              "arrival_local": "2026-10-07 13:52"
-            },
-            {
-              "carrier": "COPA",
-              "flight_number": "CM 752",
-              "origin": "PTY",
-              "origin_name": "Aeropuerto Internacional de Tocumen",
-              "departure_local": "2026-10-07 15:42",
-              "destination": "SSA",
-              "destination_name": "Aeropuerto Internacional Diputado Luís Eduardo Magalhães",
-              "arrival_local": "2026-10-08 00:40"
-            }
-          ]
-        },
-        {
-          "label": "2026-10-07 → 2026-10-26 #1",
-          "total_price_cop": "COP 1.929.090",
-          "price_value": 1929090,
-          "outbound_date": "2026-10-07",
-          "return_date": "2026-10-26",
-          "total_duration": "10h 32m",
-          "duration_minutes": 632,
-          "stops": "1 parada",
-          "stops_value": 1,
-          "airlines": "COPA",
-          "segments": [
-            {
-              "carrier": "COPA",
-              "flight_number": "CM 335",
-              "origin": "BOG",
-              "origin_name": "Aeropuerto Internacional El Dorado",
-              "departure_local": "2026-10-07 12:08",
-              "destination": "PTY",
-              "destination_name": "Aeropuerto Internacional de Tocumen",
-              "arrival_local": "2026-10-07 13:52"
-            },
-            {
-              "carrier": "COPA",
-              "flight_number": "CM 752",
-              "origin": "PTY",
-              "origin_name": "Aeropuerto Internacional de Tocumen",
-              "departure_local": "2026-10-07 15:42",
-              "destination": "SSA",
-              "destination_name": "Aeropuerto Internacional Diputado Luís Eduardo Magalhães",
-              "arrival_local": "2026-10-08 00:40"
-            }
-          ]
-        },
-        {
-          "label": "2026-10-07 → 2026-10-22 #3",
+          "label": "Opción 2",
           "total_price_cop": "COP 1.964.290",
           "price_value": 1964290,
           "outbound_date": "2026-10-07",
           "return_date": "2026-10-22",
-          "total_duration": "14h 57m",
-          "duration_minutes": 897,
-          "stops": "1 parada",
-          "stops_value": 1,
-          "airlines": "Gol",
-          "segments": [
-            {
-              "carrier": "Gol",
-              "flight_number": "G3 8243",
-              "origin": "BOG",
-              "origin_name": "Aeropuerto Internacional El Dorado",
-              "departure_local": "2026-10-07 23:33",
-              "destination": "BSB",
-              "destination_name": "Aeropuerto Internacional Presidente Juscelino Kubitschek",
-              "arrival_local": "2026-10-08 06:45"
-            },
-            {
-              "carrier": "Gol",
-              "flight_number": "G3 1718",
-              "origin": "BSB",
-              "origin_name": "Aeropuerto Internacional Presidente Juscelino Kubitschek",
-              "departure_local": "2026-10-08 14:35",
-              "destination": "SSA",
-              "destination_name": "Aeropuerto Internacional Diputado Luís Eduardo Magalhães",
-              "arrival_local": "2026-10-08 16:30"
-            }
-          ]
-        },
-        {
-          "label": "2026-10-07 → 2026-10-23 #2",
-          "total_price_cop": "COP 1.964.290",
-          "price_value": 1964290,
-          "outbound_date": "2026-10-07",
-          "return_date": "2026-10-23",
           "total_duration": "14h 57m",
           "duration_minutes": 897,
           "stops": "1 parada",
@@ -806,11 +460,11 @@
       ]
     },
     {
-      "title": "Estrategia vía São Paulo | Cúcuta → São Paulo + vuelo a Salvador en la mitad",
-      "description": "Sección completada manualmente a partir de una conexión observada en la búsqueda directa. No corresponde a una cotización separada Cúcuta→São Paulo + São Paulo→Salvador.",
+      "title": "Estrategia con posibilidad de pasar por São Paulo",
+      "description": "Referencia manual basada en una conexión observada dentro de las búsquedas directas. No corresponde a una cotización separada Cúcuta → São Paulo + São Paulo → Salvador.",
       "options": [
         {
-          "label": "Referencia manual observada vía GRU",
+          "label": "Referencia manual",
           "total_price_cop": "COP 2.264.390",
           "price_value": 2264390,
           "outbound_date": "2026-10-06",
@@ -856,11 +510,11 @@
       ]
     },
     {
-      "title": "Estrategia vía Río | Bogotá → Río + vuelo a Salvador en la mitad",
-      "description": "Sección completada manualmente a partir de una conexión observada en la búsqueda directa. No corresponde a una cotización separada Bogotá→Río + Río→Salvador.",
+      "title": "Estrategia con posibilidad de pasar por Río de Janeiro",
+      "description": "Referencia manual basada en una conexión observada dentro de las búsquedas directas. No corresponde a una cotización separada Bogotá → Río de Janeiro + Río de Janeiro → Salvador.",
       "options": [
         {
-          "label": "Referencia manual observada vía GIG",
+          "label": "Referencia manual",
           "total_price_cop": "COP 1.968.090",
           "price_value": 1968090,
           "outbound_date": "2026-10-06",
@@ -897,20 +551,31 @@
     },
     {
       "title": "Comentario manual | São Paulo → Salvador en bus",
-      "description": "Esta parte no se consulta automáticamente. Puede añadirse una estimativa manual de costo, tiempo total y logística.",
+      "description": "Referencia manual para quienes quieran considerar un trayecto terrestre dentro de Brasil. Los valores y tiempos son aproximados y pueden cambiar según la empresa, la terminal y la fecha.",
       "options": [
         {
-          "label": "Estimativa manual",
-          "total_price_cop": "Revisar manualmente",
+          "label": "Referencia aproximada",
+          "total_price_cop": "COP 272.000 a COP 672.000 aprox.",
           "price_value": null,
           "outbound_date": "—",
           "return_date": "—",
-          "total_duration": "Trayecto largo, revisar operador y terminal",
+          "total_duration": "Aproximadamente 34 a 42 horas",
           "duration_minutes": null,
-          "stops": "No aplica",
+          "stops": "Puede variar según la ruta",
           "stops_value": null,
-          "airlines": "Bus interurbano",
-          "segments": []
+          "airlines": "Gontijo, Viação Catedral, Arte Transportes",
+          "segments": [
+            {
+              "carrier": "Trayecto terrestre",
+              "flight_number": null,
+              "origin": "São Paulo",
+              "origin_name": "Terminal de buses",
+              "departure_local": "Horario variable",
+              "destination": "Salvador",
+              "destination_name": "Terminal de buses",
+              "arrival_local": "Horario variable"
+            }
+          ]
         }
       ]
     }
