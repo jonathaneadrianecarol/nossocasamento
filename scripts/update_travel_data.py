@@ -353,8 +353,13 @@ def build_json_output():
         "options": []
     })
 
+    
+    
+    
+    
+    
     sections.append({
-        "title": "Comentario manual | São Paulo → Salvador en bus",
+        "title": "Comentario manual | São Paulo a Salvador en bus",
         "description": (
             "Esta parte no se consulta automáticamente. "
             "Puede añadirse una estimativa manual de costo, tiempo total y logística."
@@ -362,20 +367,52 @@ def build_json_output():
         "options": [
             {
                 "label": "Estimativa manual",
-                "total_price_cop": "Revisar manualmente",
-                "price_value": None,
-                "outbound_date": "—",
-                "return_date": "—",
-                "total_duration": "Trayecto largo, revisar operador y terminal",
-                "duration_minutes": None,
-                "stops": "No aplica",
-                "stops_value": None,
-                "airlines": "Bus interurbano",
+                "total_price_cop": "R$ 380 a R$ 940 aprox.",
+              "price_value": null,
+              "outbound_date": "—",
+              "return_date": "—",
+              "total_duration": "Aproximadamente 34 a 42 horas",
+              "duration_minutes": null,
+              "stops": "Puede variar según la ruta",
+              "stops_value": null,
+              "airlines": "Gontijo, Viação Catedral, Arte Transportes",
                 "segments": []
             }
         ]
     })
 
+    {
+  "title": "Comentario manual | São Paulo → Rio de Janeiro en bus",
+  "description": "Referencia manual para quienes quieran considerar un trayecto terrestre dentro de Brasil. Los valores y tiempos son aproximados y pueden cambiar según la empresa, la terminal y la fecha.",
+  "options": [
+    {
+      "label": "Referencia aproximada",
+      "total_price_cop": "R$ 60 a R$ 320 aprox.",
+      "price_value": null,
+      "outbound_date": "—",
+      "return_date": "—",
+      "total_duration": "Aproximadamente 6 a 7 horas",
+      "duration_minutes": null,
+      "stops": "Generalmente viaje directo",
+      "stops_value": null,
+      "airlines": "1001, Águia Branca, FlixBus, Itapemirim",
+      "segments": [
+        {
+          "carrier": "Trayecto terrestre",
+          "flight_number": null,
+          "origin": "São Paulo",
+          "origin_name": "Rodoviária do Tietê / Barra Funda",
+          "departure_local": "Horario variable",
+          "destination": "Rio de Janeiro",
+          "destination_name": "Terminal Rodoviário Novo Rio",
+          "arrival_local": "Horario variable"
+        }
+      ]
+    }
+  ]
+}
+
+    
     return {
         "updated_at": datetime.now().strftime("%Y-%m-%d %H:%M"),
         "sections": sections
