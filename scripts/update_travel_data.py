@@ -167,7 +167,6 @@ def google_flights_search(origin, destination, outbound_date, return_date):
         "gl": "co",
         "deep_search": "true",
         "sort_by": 2,       # precio
-        "no_cache": "true",
     }
 
     resp = requests.get(SERPAPI_URL, params=params, timeout=90)
@@ -238,6 +237,58 @@ def extract_options(data, label_prefix, depart_date, return_date):
     return options
 
 
+def normalize_airlines(value):
+    if not value:
+        return ""
+    parts = [x.strip() for x in value.split(",") if x.strip()]
+    return ", ".join(sorted(set(parts)))
+
+
+def make_soft_signature(opt):
+    return (
+        opt.get("outbound_date"),
+        opt.get("return_date"),
+        opt.get("price_value"),
+        opt.get("stops_value"),
+        normalize_airlines(opt.get("airlines"))
+    )
+
+
+def deduplicate_options(options, max_duration_diff=45):
+    grouped = {}
+
+    for opt in options:
+        sig = make_soft_signature(opt)
+
+        if sig not in grouped:
+            grouped[sig] = opt
+            continue
+
+        current = grouped[sig]
+
+        current_duration = current.get("duration_minutes")
+        new_duration = opt.get("duration_minutes")
+
+        # Si no se puede comparar duración, conservar el que ya estaba
+        if current_duration is None or new_duration is None:
+            continue
+
+        # Si son muy parecidos en duración, conservar el más corto
+        if abs(new_duration - current_duration) <= max_duration_diff:
+            if new_duration < current_duration:
+                grouped[sig] = opt
+        else:
+            # Si la diferencia es grande, conservar ambos con firma extendida
+            extended_sig = sig + (new_duration,)
+            if extended_sig not in grouped:
+                grouped[extended_sig] = opt
+
+    deduped = list(grouped.values())
+    deduped.sort(key=score_option)
+    return deduped
+
+
+
 # =========================
 # BÚSQUEDAS SIMPLES
 # =========================
@@ -268,15 +319,16 @@ def run_round_trip_search(search_cfg):
                 )
                 all_options.extend(extracted)
             except Exception as e:
-                print(f"[WARN] Error en {search_cfg['title']} | {dep} -> {ret}: {e}")
+                print(f"[WARN] Error en {search_cfg['title']} | {dep} -> {ret}: {e}", flush=True)
 
     all_options = deduplicate_options(all_options)
+    all_options = relabel_options(all_options)
+
     return {
         "title": search_cfg["title"],
-        "description": "Mejores opciones encontradas con Google Flights.",
+        "description": search_cfg.get("description_public", "Mejores opciones encontradas con Google Flights."),
         "options": all_options[:4],
     }
-
 
 # =========================
 # ESTRATEGIAS PARTIDAS
@@ -464,52 +516,3 @@ if __name__ == "__main__":
 
 
 
-def normalize_airlines(value):
-    if not value:
-        return ""
-    parts = [x.strip() for x in value.split(",") if x.strip()]
-    return ", ".join(sorted(set(parts)))
-
-
-def make_soft_signature(opt):
-    return (
-        opt.get("outbound_date"),
-        opt.get("return_date"),
-        opt.get("price_value"),
-        opt.get("stops_value"),
-        normalize_airlines(opt.get("airlines"))
-    )
-
-
-def deduplicate_options(options, max_duration_diff=45):
-    grouped = {}
-
-    for opt in options:
-        sig = make_soft_signature(opt)
-
-        if sig not in grouped:
-            grouped[sig] = opt
-            continue
-
-        current = grouped[sig]
-
-        current_duration = current.get("duration_minutes")
-        new_duration = opt.get("duration_minutes")
-
-        # Si no se puede comparar duración, conservar el que ya estaba
-        if current_duration is None or new_duration is None:
-            continue
-
-        # Si son muy parecidos en duración, conservar el más corto
-        if abs(new_duration - current_duration) <= max_duration_diff:
-            if new_duration < current_duration:
-                grouped[sig] = opt
-        else:
-            # Si la diferencia es grande, conservar ambos con firma extendida
-            extended_sig = sig + (new_duration,)
-            if extended_sig not in grouped:
-                grouped[extended_sig] = opt
-
-    deduped = list(grouped.values())
-    deduped.sort(key=score_option)
-    return deduped
