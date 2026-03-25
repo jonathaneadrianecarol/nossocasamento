@@ -10,6 +10,11 @@ from datetime import date, datetime, timedelta
 SERPAPI_API_KEY = os.getenv("SERPAPI_API_KEY")
 SERPAPI_URL = "https://serpapi.com/search.json"
 
+# Límite de seguridad para no agotar créditos por accidente.
+# Ajusta este valor cuando quieras volver a probar.
+MAX_REQUESTS = 25
+REQUEST_COUNT = 0
+
 
 # =========================
 # CONFIGURACIÓN DE BÚSQUEDAS
@@ -186,6 +191,15 @@ def relabel_options(options):
 # =========================
 
 def google_flights_search(origin, destination, outbound_date, return_date):
+    global REQUEST_COUNT
+
+    REQUEST_COUNT += 1
+    if REQUEST_COUNT > MAX_REQUESTS:
+        raise RuntimeError(
+            f"Se alcanzó el límite de seguridad de búsquedas ({MAX_REQUESTS}). "
+            "Ajusta MAX_REQUESTS si quieres ampliar la corrida."
+        )
+
     params = {
         "engine": "google_flights",
         "api_key": SERPAPI_API_KEY,
@@ -193,12 +207,12 @@ def google_flights_search(origin, destination, outbound_date, return_date):
         "arrival_id": destination,
         "outbound_date": outbound_date,
         "return_date": return_date,
-        "type": 1,          # ida y vuelta
+        "type": 1,
         "currency": "COP",
         "hl": "es",
         "gl": "co",
         "deep_search": "true",
-        "sort_by": 2,       # precio
+        "sort_by": 2,
     }
 
     resp = requests.get(SERPAPI_URL, params=params, timeout=90)
@@ -357,14 +371,14 @@ def build_json_output():
                 "stops": "No aplica",
                 "stops_value": None,
                 "airlines": "Bus interurbano",
-                "segments": [],
+                "segments": []
             }
-        ],
+        ]
     })
 
     return {
         "updated_at": datetime.now().strftime("%Y-%m-%d %H:%M"),
-        "sections": sections,
+        "sections": sections
     }
 
 
