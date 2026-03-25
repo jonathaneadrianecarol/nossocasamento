@@ -2,8 +2,8 @@
   "updated_at": "2026-03-25 17:14",
   "sections": [
     {
-      "title": "Opción de viaje corto en octubre",
-      "description": "Salida aproximada entre el 6 y el 8 de octubre, y regreso entre el 12 y el 13 de octubre.",
+      "title": "Desde Cúcuta: opción de viaje corto en octubre",
+      "description": "Escenario orientativo con salida entre el 6 y el 8 de octubre, y regreso entre el 12 y el 13 de octubre.",
       "options": [
         {
           "label": "",
@@ -52,8 +52,8 @@
       ]
     },
     {
-      "title": "Opción de viaje más largo en octubre",
-      "description": "Salida aproximada entre el 6 y el 8 de octubre, y regreso entre el 22 y el 26 de octubre.",
+      "title": "Desde Cúcuta: opción de viaje más largo en octubre",
+      "description": "Escenario orientativo con salida entre el 6 y el 8 de octubre, y regreso entre el 22 y el 26 de octubre.",
       "options": [
         {
           "label": "",
@@ -102,8 +102,8 @@
       ]
     },
     {
-      "title": "Opción de viaje corto en octubre",
-      "description": "Salida aproximada entre el 6 y el 8 de octubre, y regreso entre el 12 y el 13 de octubre.",
+      "title": "Desde Bogotá: opción de viaje corto en octubre",
+      "description": "Escenario orientativo con salida entre el 6 y el 8 de octubre, y regreso entre el 12 y el 13 de octubre.",
       "options": [
         {
           "label": "",
@@ -142,8 +142,8 @@
       ]
     },
     {
-      "title": "Opción de viaje más largo en octubre",
-      "description": "Salida aproximada entre el 6 y el 8 de octubre, y regreso entre el 22 y el 26 de octubre.",
+      "title": "Desde Bogotá: opción de viaje más largo en octubre",
+      "description": "Escenario orientativo con salida entre el 6 y el 8 de octubre, y regreso entre el 22 y el 26 de octubre.",
       "options": [
         {
           "label": "",
@@ -182,8 +182,8 @@
       ]
     },
     {
-      "title": "Posibilidad de pasar por São Paulo",
-      "description": "No corresponde a una cotización separada Cúcuta → São Paulo + São Paulo → Salvador.",
+      "title": "Estrategia con posibilidad de pasar por São Paulo",
+      "description": "Referencia manual basada en una conexión observada dentro de las búsquedas directas. No corresponde a una cotización separada Cúcuta → São Paulo + São Paulo → Salvador.",
       "options": [
         {
           "label": "Referencia manual",
@@ -232,8 +232,8 @@
       ]
     },
     {
-      "title": "Posibilidad de pasar por Río de Janeiro",
-      "description": "No corresponde a una cotización separada Bogotá → Río de Janeiro + Río de Janeiro → Salvador.",
+      "title": "Estrategia con posibilidad de pasar por Río de Janeiro",
+      "description": "Referencia manual basada en una conexión observada dentro de las búsquedas directas. No corresponde a una cotización separada Bogotá → Río de Janeiro + Río de Janeiro → Salvador.",
       "options": [
         {
           "label": "Referencia manual",
@@ -272,8 +272,8 @@
       ]
     },
     {
-      "title": "POsibilidad de ir a São Paulo → Salvador en bus",
-      "description": "Los valores y tiempos son aproximados y pueden cambiar según la empresa, la terminal y la fecha.",
+      "title": "Comentario manual | São Paulo → Salvador en bus",
+      "description": "Referencia manual para quienes quieran considerar un trayecto terrestre dentro de Brasil. Los valores y tiempos son aproximados y pueden cambiar según la empresa, la terminal y la fecha.",
       "options": [
         {
           "label": "Referencia aproximada",
@@ -302,8 +302,8 @@
       ]
     },
     {
-      "title": "Posobilidad de ir a São Paulo → Rio de Janeiro en bus",
-      "description": "Los valores y tiempos son aproximados y pueden cambiar según la empresa, la terminal y la fecha.",
+      "title": "Comentario manual | São Paulo → Rio de Janeiro en bus",
+      "description": "Referencia manual para quienes quieran considerar un trayecto terrestre dentro de Brasil. Los valores y tiempos son aproximados y pueden cambiar según la empresa, la terminal y la fecha.",
       "options": [
         {
           "label": "Referencia aproximada",
