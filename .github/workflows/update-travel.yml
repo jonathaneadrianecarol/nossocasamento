@@ -1,0 +1,42 @@
+name: Update travel options   # nombre visible en la pestaña Actions
+
+on:
+  workflow_dispatch:          # permite correrlo manualmente
+  schedule:
+    - cron: "17 8,20 * * *"   # todos los días a las 08:17 y 20:17
+      timezone: "America/Sao_Paulo"  # usando esa zona horaria
+
+jobs:
+  update-travel-data:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Run updater script
+        env:
+          SERPAPI_API_KEY: ${{ secrets.SERPAPI_API_KEY }}
+        run: |
+          python scripts/update_travel_data.py
+
+      - name: Commit updated JSON
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/travel-options.json
+          git diff --cached --quiet || git commit -m "Update travel options"
+          git push
