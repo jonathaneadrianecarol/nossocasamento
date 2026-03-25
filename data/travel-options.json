@@ -51,50 +51,6 @@
         },
         {
           "label": "Opción 2",
-          "total_price_cop": "COP 2.580.810",
-          "price_value": 2580810,
-          "outbound_date": "2026-10-06",
-          "return_date": "2026-10-12",
-          "total_duration": "19h 45m",
-          "duration_minutes": 1185,
-          "stops": "2 paradas",
-          "stops_value": 2,
-          "airlines": "Avianca, Gol",
-          "segments": [
-            {
-              "carrier": "Avianca",
-              "flight_number": "AV 9421",
-              "origin": "CUC",
-              "origin_name": "Aeropuerto Internacional Camilo Daza",
-              "departure_local": "2026-10-06 21:25",
-              "destination": "BOG",
-              "destination_name": "Aeropuerto Internacional El Dorado",
-              "arrival_local": "2026-10-06 22:40"
-            },
-            {
-              "carrier": "Avianca",
-              "flight_number": "AV 147",
-              "origin": "BOG",
-              "origin_name": "Aeropuerto Internacional El Dorado",
-              "departure_local": "2026-10-07 07:15",
-              "destination": "GIG",
-              "destination_name": "Aeropuerto Internacional de Galeão",
-              "arrival_local": "2026-10-07 15:35"
-            },
-            {
-              "carrier": "Gol",
-              "flight_number": "G3 1896",
-              "origin": "GIG",
-              "origin_name": "Aeropuerto Internacional de Galeão",
-              "departure_local": "2026-10-07 17:10",
-              "destination": "SSA",
-              "destination_name": "Aeropuerto Internacional Diputado Luís Eduardo Magalhães",
-              "arrival_local": "2026-10-07 19:10"
-            }
-          ]
-        },
-        {
-          "label": "Opción 3",
           "total_price_cop": "COP 2.640.230",
           "price_value": 2640230,
           "outbound_date": "2026-10-06",
@@ -145,50 +101,6 @@
       "options": [
         {
           "label": "Opción 1",
-          "total_price_cop": "COP 2.264.390",
-          "price_value": 2264390,
-          "outbound_date": "2026-10-06",
-          "return_date": "2026-10-23",
-          "total_duration": "23h 30m",
-          "duration_minutes": 1410,
-          "stops": "2 paradas",
-          "stops_value": 2,
-          "airlines": "Avianca, Gol",
-          "segments": [
-            {
-              "carrier": "Avianca",
-              "flight_number": "AV 9429",
-              "origin": "CUC",
-              "origin_name": "Aeropuerto Internacional Camilo Daza",
-              "departure_local": "2026-10-06 09:55",
-              "destination": "BOG",
-              "destination_name": "Aeropuerto Internacional El Dorado",
-              "arrival_local": "2026-10-06 11:05"
-            },
-            {
-              "carrier": "Avianca",
-              "flight_number": "AV 161",
-              "origin": "BOG",
-              "origin_name": "Aeropuerto Internacional El Dorado",
-              "departure_local": "2026-10-06 17:00",
-              "destination": "GRU",
-              "destination_name": "Aeropuerto Internacional de São Paulo-Guarulhos",
-              "arrival_local": "2026-10-07 01:10"
-            },
-            {
-              "carrier": "Gol",
-              "flight_number": "G3 1690",
-              "origin": "GRU",
-              "origin_name": "Aeropuerto Internacional de São Paulo-Guarulhos",
-              "departure_local": "2026-10-07 09:05",
-              "destination": "SSA",
-              "destination_name": "Aeropuerto Internacional Diputado Luís Eduardo Magalhães",
-              "arrival_local": "2026-10-07 11:25"
-            }
-          ]
-        },
-        {
-          "label": "Opción 2",
           "total_price_cop": "COP 2.264.690",
           "price_value": 2264690,
           "outbound_date": "2026-10-06",
@@ -230,50 +142,6 @@
               "arrival_local": "2026-10-07 23:05"
             }
           ]
-        },
-        {
-          "label": "Opción 3",
-          "total_price_cop": "COP 2.267.390",
-          "price_value": 2267390,
-          "outbound_date": "2026-10-06",
-          "return_date": "2026-10-22",
-          "total_duration": "20h 40m",
-          "duration_minutes": 1240,
-          "stops": "2 paradas",
-          "stops_value": 2,
-          "airlines": "Avianca, Gol",
-          "segments": [
-            {
-              "carrier": "Avianca",
-              "flight_number": "AV 9453",
-              "origin": "CUC",
-              "origin_name": "Aeropuerto Internacional Camilo Daza",
-              "departure_local": "2026-10-06 12:45",
-              "destination": "BOG",
-              "destination_name": "Aeropuerto Internacional El Dorado",
-              "arrival_local": "2026-10-06 14:00"
-            },
-            {
-              "carrier": "Avianca",
-              "flight_number": "AV 161",
-              "origin": "BOG",
-              "origin_name": "Aeropuerto Internacional El Dorado",
-              "departure_local": "2026-10-06 17:00",
-              "destination": "GRU",
-              "destination_name": "Aeropuerto Internacional de São Paulo-Guarulhos",
-              "arrival_local": "2026-10-07 01:10"
-            },
-            {
-              "carrier": "Gol",
-              "flight_number": "G3 1690",
-              "origin": "GRU",
-              "origin_name": "Aeropuerto Internacional de São Paulo-Guarulhos",
-              "departure_local": "2026-10-07 09:05",
-              "destination": "SSA",
-              "destination_name": "Aeropuerto Internacional Diputado Luís Eduardo Magalhães",
-              "arrival_local": "2026-10-07 11:25"
-            }
-          ]
         }
       ]
     },
@@ -312,74 +180,6 @@
               "destination": "SSA",
               "destination_name": "Aeropuerto Internacional Diputado Luís Eduardo Magalhães",
               "arrival_local": "2026-10-08 00:40"
-            }
-          ]
-        },
-        {
-          "label": "Opción 2",
-          "total_price_cop": "COP 1.967.790",
-          "price_value": 1967790,
-          "outbound_date": "2026-10-06",
-          "return_date": "2026-10-12",
-          "total_duration": "11h 40m",
-          "duration_minutes": 700,
-          "stops": "1 parada",
-          "stops_value": 1,
-          "airlines": "Avianca, Gol",
-          "segments": [
-            {
-              "carrier": "Avianca",
-              "flight_number": "AV 85",
-              "origin": "BOG",
-              "origin_name": "Aeropuerto Internacional El Dorado",
-              "departure_local": "2026-10-06 21:45",
-              "destination": "GRU",
-              "destination_name": "Aeropuerto Internacional de São Paulo-Guarulhos",
-              "arrival_local": "2026-10-07 05:25"
-            },
-            {
-              "carrier": "Gol",
-              "flight_number": "G3 1690",
-              "origin": "GRU",
-              "origin_name": "Aeropuerto Internacional de São Paulo-Guarulhos",
-              "departure_local": "2026-10-07 09:05",
-              "destination": "SSA",
-              "destination_name": "Aeropuerto Internacional Diputado Luís Eduardo Magalhães",
-              "arrival_local": "2026-10-07 11:25"
-            }
-          ]
-        },
-        {
-          "label": "Opción 3",
-          "total_price_cop": "COP 1.968.090",
-          "price_value": 1968090,
-          "outbound_date": "2026-10-06",
-          "return_date": "2026-10-12",
-          "total_duration": "10h 30m",
-          "duration_minutes": 630,
-          "stops": "1 parada",
-          "stops_value": 1,
-          "airlines": "Avianca, Gol",
-          "segments": [
-            {
-              "carrier": "Avianca",
-              "flight_number": "AV 261",
-              "origin": "BOG",
-              "origin_name": "Aeropuerto Internacional El Dorado",
-              "departure_local": "2026-10-06 21:55",
-              "destination": "GIG",
-              "destination_name": "Aeropuerto Internacional de Galeão",
-              "arrival_local": "2026-10-07 06:15"
-            },
-            {
-              "carrier": "Gol",
-              "flight_number": "G3 1888",
-              "origin": "GIG",
-              "origin_name": "Aeropuerto Internacional de Galeão",
-              "departure_local": "2026-10-07 08:25",
-              "destination": "SSA",
-              "destination_name": "Aeropuerto Internacional Diputado Luís Eduardo Magalhães",
-              "arrival_local": "2026-10-07 10:25"
             }
           ]
         }
