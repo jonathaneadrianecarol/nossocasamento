@@ -226,28 +226,52 @@
     <section id="rsvp" class="section rsvp">
         <div class="container">
             <h2 class="section-title">RSVP</h2>
-            Por favor, confirme sua presença na nossa cerimônia de casamento até 1 de Abril de 2026.<br><br>
-            <strong>Importante:</strong> Pedimos a gentileza de preencher uma confirmação individual para cada pessoa, mesmo sendo da mesma família ou casal.
+    
+            <p class="rsvp-text">
+                Por favor, confirme sua presença na nossa cerimônia de casamento até 1 de Abril de 2026.<br><br>
+                <strong>Importante:</strong> Pedimos a gentileza de preencher uma confirmação individual para cada pessoa, mesmo sendo da mesma família ou casal.
             </p>
-            <form id="rsvp-form" action="https://formsubmit.co/ajax/jonathaneadrianecarol@gmail.com" method="POST">
-    		<input type="hidden" name="_captcha" value="false"> <input type="hidden" name="_template" value="table"> <input type="hidden" name="_subject" value="Nova Confirmação de Presença!"> <input type="hidden" name="_next" value="http://seusite.github.io/thanks"> <div class="form-group">
-        <label for="name">Nome Completo (Apenas uma pessoa por envio)</label>
-        <input type="text" id="name" name="name" required>
-    </div>
-    <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
-    </div>
-    <div class="form-group">
-        <label for="phone">Telefone (com código do país)</label>
-        <input type="tel" id="phone" name="phone" placeholder="+55 11 99999-9999" required>
-    </div>
-    <div class="form-group">
-        <label for="message">Mensagem (Opcional)</label>
-        <textarea id="message" name="message" rows="4"></textarea>
-    </div>
-    <button type="submit" id="btn-submit" class="btn btn-primary btn-block">Enviar Confirmação</button>
-</form>
+    
+            <form id="rsvp-form"
+                  class="rsvp-form"
+                  action="https://formsubmit.co/ajax/jonathaneadrianecarol@gmail.com"
+                  method="POST">
+                
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_subject" value="Nova Confirmação de Presença!">
+                <input type="hidden" name="language" value="pt-BR">
+                <input type="hidden" name="source_page" value="site-pt">
+                <input type="hidden" id="submitted_at" name="submitted_at" value="">
+                <input type="hidden" id="page_url" name="page_url" value="">
+                <input type="hidden" id="user_agent" name="user_agent" value="">
+    
+                <div class="form-group">
+                    <label for="name">Nome Completo (Apenas uma pessoa por envio)</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="phone">Telefone (com código do país)</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+55 11 99999-9999" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="message">Mensagem (Opcional)</label>
+                    <textarea id="message" name="message" rows="4"></textarea>
+                </div>
+    
+                <button type="submit" id="btn-submit" class="btn btn-primary btn-block">
+                    Enviar Confirmação
+                </button>
+    
+                <div id="form-status" style="margin-top: 1rem; font-size: 0.95rem;"></div>
+            </form>
         </div>
     </section>
 
