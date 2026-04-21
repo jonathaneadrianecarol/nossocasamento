@@ -46,76 +46,127 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- RSVP FORM HANDLING (ATUALIZADO) ---
+    // --- RSVP FORM HANDLING (ROBUSTO) ---
     const form = document.getElementById('rsvp-form');
-    
+
     if (form) {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Impede o redirecionamento padrão
-            
-            const btnSubmit = document.getElementById('btn-submit');
-            const originalText = btnSubmit.innerText;
-            
-            // 1. Feedback visual: Botão muda para "Enviando..."
-            btnSubmit.innerText = 'Enviando...';
+        const btnSubmit = document.getElementById('btn-submit');
+        const formStatus = document.getElementById('form-status');
+        const lang = (document.documentElement.lang || 'pt-BR').toLowerCase();
+
+        const isSpanish = lang.startsWith('es');
+
+        const messages = isSpanish ? {
+            sending: 'Enviando...',
+            success: firstName => `Gracias, ${firstName}. Tu confirmación fue enviada correctamente.`,
+            successDetail: 'Si no recibimos el correo, ya tendremos al menos más datos de rastreo del envío.',
+            genericError: 'No fue posible enviar la confirmación. Inténtalo nuevamente en unos minutos.',
+            networkError: 'Error de conexión. Verifica tu internet y vuelve a intentarlo.',
+            invalidResponse: 'El servicio respondió de forma inesperada. Inténtalo nuevamente.',
+            button: 'Enviar Confirmación'
+        } : {
+            sending: 'Enviando...',
+            success: firstName => `Obrigado, ${firstName}. Sua confirmação foi enviada com sucesso.`,
+            successDetail: 'Se o e-mail não chegar, pelo menos o envio terá mais dados de rastreio.',
+            genericError: 'Não foi possível enviar a confirmação. Tente novamente em alguns minutos.',
+            networkError: 'Erro de conexão. Verifique sua internet e tente novamente.',
+            invalidResponse: 'O serviço respondeu de forma inesperada. Tente novamente.',
+            button: 'Enviar Confirmação'
+        };
+
+        const setStatus = (text, type = 'info') => {
+            if (!formStatus) return;
+            formStatus.textContent = text;
+            formStatus.style.color =
+                type === 'success' ? '#2e7d32' :
+                type === 'error' ? '#c62828' :
+                '#555';
+        };
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            if (!btnSubmit || btnSubmit.disabled) return;
+
+            const fullName = (document.getElementById('name')?.value || '').trim();
+            const firstName = fullName ? fullName.split(' ')[0] : (isSpanish ? 'invitado' : 'convidado');
+
+            const submittedAtInput = document.getElementById('submitted_at');
+            const pageUrlInput = document.getElementById('page_url');
+            const userAgentInput = document.getElementById('user_agent');
+
+            if (submittedAtInput) submittedAtInput.value = new Date().toISOString();
+            if (pageUrlInput) pageUrlInput.value = window.location.href;
+            if (userAgentInput) userAgentInput.value = navigator.userAgent;
+
+            btnSubmit.innerText = messages.sending;
             btnSubmit.disabled = true;
+            setStatus('');
 
-            // 2. Coleta os dados
             const formData = new FormData(form);
-            const fullName = document.getElementById('name').value;
-            
-            // Pega apenas o primeiro nome para a mensagem (Ex: "Jonathan Campo" -> "Jonathan")
-            const firstName = fullName.split(' ')[0];
 
-            // 3. Envia para o Formsubmit via Fetch (AJAX)
-            fetch(form.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json' // Garante resposta limpa sem redirecionar
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 15000);
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    },
+                    signal: controller.signal
+                });
+
+                clearTimeout(timeoutId);
+
+                const contentType = response.headers.get('content-type') || '';
+                let data = null;
+
+                if (contentType.includes('application/json')) {
+                    try {
+                        data = await response.json();
+                    } catch (jsonError) {
+                        throw new Error(messages.invalidResponse);
+                    }
                 }
-            })
-            .then(response => {
-                if (response.ok) {
-                    // SUCESSO!
-                    alert(`Obrigado, ${firstName}! Sua presença foi confirmada. Mal podemos esperar para celebrar com você!`);
-                    form.reset(); // Limpa o formulário
+
+                if (!response.ok) {
+                    const serverMessage =
+                        data && typeof data === 'object' && data.message
+                            ? data.message
+                            : messages.genericError;
+                    throw new Error(serverMessage);
+                }
+
+                setStatus(`${messages.success(firstName)} ${messages.successDetail}`, 'success');
+                form.reset();
+            } catch (error) {
+                clearTimeout(timeoutId);
+
+                if (error.name === 'AbortError') {
+                    setStatus(messages.networkError, 'error');
                 } else {
-                    // ERRO DO SERVIDOR (Ex: Spam detection)
-                    return response.json().then(data => {
-                        if (data.message) {
-                            alert("Erro: " + data.message);
-                        } else {
-                            alert("Ops! Houve um erro ao enviar. Tente novamente.");
-                        }
-                    });
+                    setStatus(error.message || messages.genericError, 'error');
                 }
-            })
-            .catch(error => {
-                // ERRO DE CONEXÃO
-                console.error('Erro:', error);
-                alert("Erro de conexão. Verifique sua internet ou se o e-mail no código está ativado.");
-            })
-            .finally(() => {
-                // Restaura o botão ao estado original
-                btnSubmit.innerText = originalText;
+
+                console.error('RSVP error:', error);
+            } finally {
+                btnSubmit.innerText = messages.button;
                 btnSubmit.disabled = false;
-            });
+            }
         });
     }
 
-    /* CONTROLE DO VÍDEO DE FUNDO 
-       --------------------------
-    */
+    /* CONTROLE DO VÍDEO DE FUNDO */
     const heroVideo = document.getElementById('hero-video');
 
     if (heroVideo) {
         heroVideo.playbackRate = 1.0;
 
-        // Timeline para PC/Horizontal
         const timeline = [
-            { start: 0, position: '50% 15%' },  // Topo
-            { start: 10, position: '50% 50%' }  // Centro
+            { start: 0, position: '50% 15%' },
+            { start: 10, position: '50% 50%' }
         ];
 
         function updateVideoFocus() {
@@ -137,8 +188,12 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('resize', updateVideoFocus);
     }
 
-    // --- CONTAGEM REGRESSIVA ---
+    // --- CONTAGEM REGRESSIVA / CUENTA REGRESIVA ---
     const countdownDate = new Date("Oct 10, 2026 15:00:00").getTime();
+    const pageLang = (document.documentElement.lang || 'pt-BR').toLowerCase();
+    const countdownFinishedText = pageLang.startsWith('es')
+        ? '<h2>¡Llegó el gran día!</h2>'
+        : '<h2>Chegou o grande dia!</h2>';
 
     const updateCountdown = setInterval(function () {
         const now = new Date().getTime();
@@ -165,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
             clearInterval(updateCountdown);
             const countdownContainer = document.getElementById("countdown");
             if (countdownContainer) {
-                countdownContainer.innerHTML = "<h2>Chegou o grande dia!</h2>";
+                countdownContainer.innerHTML = countdownFinishedText;
             }
         }
     }, 1000);
@@ -194,6 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.log("Playback failed:", error);
                 });
             }
+
             setTimeout(() => {
                 lucide.createIcons();
             }, 50);
