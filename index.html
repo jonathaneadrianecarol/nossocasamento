@@ -24,8 +24,8 @@
                 <li><a href="#home">Início</a></li>
                 <li><a href="#story">Nossa História</a></li>
                 <li><a href="#details">Detalhes</a></li>
-                <li><a href="presentes/index.html">Presentes</a></li>
-                <li><a href="viagem/index.html">Viagem</a></li>
+                <li><a href="presentes/index.html" class="nav-new-section">Presentes</a></li>
+                <li><a href="viagem/index.html" class="nav-new-section">Viagem</a></li>
                 <li><a href="#rsvp">RSVP</a></li>
                 <li><a href="es/index.html" style="font-weight: 700;">🇪🇸 ES</a></li>
             </ul>
@@ -326,12 +326,19 @@
     </footer>
 
     <!-- Music Control Wrapper -->
-    <div class="music-wrapper">
-        <div id="music-control" class="music-control" title="Tocar Música">
-            <i data-lucide="volume-x" id="music-icon"></i>
+    <div class="music-wrapper" data-playlist-base="media/playlist/">
+        <div class="music-controls">
+            <button type="button" id="music-next" class="music-control music-next" title="Próxima música" aria-label="Tocar a próxima música">
+                <i data-lucide="skip-forward"></i>
+            </button>
+            <button type="button" id="music-control" class="music-control" title="Tocar ou pausar música" aria-label="Tocar ou pausar música">
+                <i data-lucide="volume-x" id="music-icon"></i>
+            </button>
         </div>
-        <div class="music-hint" id="music-hint">
-            Com música é mais gostoso acompanhar esta história 🎶
+        <div class="music-hint" id="music-hint" aria-live="polite">
+            <span class="music-hint-message">Com música é mais gostoso acompanhar esta história 🎶</span>
+            <strong class="music-track-title" id="music-track-title">Playlist do casamento</strong>
+            <span class="music-track-artist" id="music-track-artist"></span>
         </div>
     </div>
 
@@ -341,9 +348,7 @@
     </div>
 
     <!-- Audio Element -->
-    <audio id="bg-music" loop>
-        <source src="media/musica.mp3" type="audio/mp3">
-    </audio>
+    <audio id="bg-music" preload="metadata"></audio>
 
     <script src="script.js"></script>
     <script>
