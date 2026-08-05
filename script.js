@@ -225,57 +225,123 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 1000);
 
-    // --- MUSIC CONTROL ---
+    // --- RANDOM PLAYLIST CONTROL ---
+    const musicWrapper = document.querySelector('.music-wrapper');
     const musicControl = document.getElementById('music-control');
+    const musicNext = document.getElementById('music-next');
     const bgMusic = document.getElementById('bg-music');
-    const musicIcon = document.getElementById('music-icon');
-    const musicHint = document.getElementById('music-hint');
+    const trackTitle = document.getElementById('music-track-title');
+    const trackArtist = document.getElementById('music-track-artist');
+
+    const playlist = [
+        { file: '1.mp3', title: 'Várias Queixas', artist: 'Gilsons' },
+        { file: '2.mp3', title: 'Cafecito', artist: 'La Ciencia de Juancho Valencia' },
+        { file: '3.mp3', title: 'Dime Que Sí', artist: 'Los Rumberos' },
+        { file: '4.mp3', title: 'Me Abraça', artist: 'Banda Eva' },
+        { file: '5.mp3', title: 'Ella Es Mi Todo', artist: 'Kaleth Morales' },
+        { file: '6.mp3', title: 'Partilhar', artist: 'Rubel' },
+        { file: '7.mp3', title: 'Canoita', artist: 'La Pacifican Power' },
+        { file: '8.mp3', title: 'Chocolate', artist: 'Profetas' },
+        { file: '9.mp3', title: 'Piloto', artist: 'Flora Matos' },
+        { file: '10.mp3', title: 'Veludo Marrom', artist: 'Liniker' },
+        { file: '11.mp3', title: 'Busca Por Dentro', artist: 'Grupo Niche' }
+    ];
+
+    let shuffledQueue = [];
+    let currentTrackIndex = null;
     let isPlaying = false;
 
-    if (musicControl && bgMusic && musicIcon) {
+    function shuffle(items) {
+        const shuffled = [...items];
+        for (let i = shuffled.length - 1; i > 0; i -= 1) {
+            const randomIndex = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[i]];
+        }
+        return shuffled;
+    }
+
+    function refillQueue() {
+        const indexes = playlist.map((_, index) => index);
+        const withoutCurrent = currentTrackIndex === null
+            ? indexes
+            : indexes.filter(index => index !== currentTrackIndex);
+
+        shuffledQueue = shuffle(withoutCurrent);
+        if (currentTrackIndex !== null) {
+            shuffledQueue.push(currentTrackIndex);
+        }
+    }
+
+    function updateMusicIcon(playing) {
+        if (!musicControl) return;
+        const iconName = playing ? 'volume-2' : 'volume-x';
+        musicControl.innerHTML = `<i data-lucide="${iconName}" id="music-icon"></i>`;
+        musicControl.classList.toggle('playing', playing);
+        lucide.createIcons();
+    }
+
+    function updateTrackInformation(track) {
+        if (trackTitle) trackTitle.textContent = track.title;
+        if (trackArtist) trackArtist.textContent = track.artist;
+    }
+
+    function playCurrentTrack() {
+        if (!bgMusic) return;
+        bgMusic.play().catch(error => {
+            console.log('Playback failed:', error);
+        });
+    }
+
+    function loadNextTrack(shouldPlay = false) {
+        if (!bgMusic || !musicWrapper || playlist.length === 0) return;
+        if (shuffledQueue.length === 0) refillQueue();
+
+        currentTrackIndex = shuffledQueue.shift();
+        const track = playlist[currentTrackIndex];
+        const playlistBase = musicWrapper.dataset.playlistBase || 'media/playlist/';
+
+        bgMusic.src = `${playlistBase}${track.file}`;
+        bgMusic.load();
+        updateTrackInformation(track);
+
+        if (shouldPlay) playCurrentTrack();
+    }
+
+    if (musicWrapper && musicControl && musicNext && bgMusic) {
+        loadNextTrack(false);
+
         musicControl.addEventListener('click', () => {
             if (isPlaying) {
                 bgMusic.pause();
-                musicIcon.setAttribute('data-lucide', 'volume-x');
-                musicControl.classList.remove('playing');
-                isPlaying = false;
             } else {
-                bgMusic.play().then(() => {
-                    isPlaying = true;
-                    musicIcon.setAttribute('data-lucide', 'volume-2');
-                    musicControl.classList.add('playing');
-                    lucide.createIcons();
-                }).catch(error => {
-                    console.log("Playback failed:", error);
-                });
-            }
-
-            setTimeout(() => {
-                lucide.createIcons();
-            }, 50);
-        });
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100 && musicHint) {
-                musicHint.classList.add('hidden');
+                playCurrentTrack();
             }
         });
 
-        document.body.addEventListener('click', function firstClick() {
-            if (!isPlaying) {
-                document.body.removeEventListener('click', firstClick);
-                bgMusic.play().then(() => {
-                    isPlaying = true;
-                    musicIcon.setAttribute('data-lucide', 'volume-2');
-                    musicControl.classList.add('playing');
-                    lucide.createIcons();
-                }).catch(error => {
-                    console.log("Auto-play blocked, waiting for user interaction.");
-                });
+        musicNext.addEventListener('click', () => {
+            loadNextTrack(true);
+        });
+
+        bgMusic.addEventListener('play', () => {
+            isPlaying = true;
+            updateMusicIcon(true);
+        });
+
+        bgMusic.addEventListener('pause', () => {
+            isPlaying = false;
+            updateMusicIcon(false);
+        });
+
+        bgMusic.addEventListener('ended', () => {
+            loadNextTrack(true);
+        });
+
+        document.body.addEventListener('click', function firstInteraction(event) {
+            if (!event.target.closest('.music-controls') && bgMusic.paused) {
+                playCurrentTrack();
             }
         }, { once: true });
     }
-
     // --- SCROLL DOWN INDICATOR ---
     const scrollDownBtn = document.querySelector('.scroll-down');
     if (scrollDownBtn) {
