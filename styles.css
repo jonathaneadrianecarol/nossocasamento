@@ -188,6 +188,20 @@ ul {
     color: var(--primary-color);
 }
 
+.nav-links a.nav-new-section {
+    padding: 0.4rem 0.7rem;
+    border: 1px solid var(--primary-color);
+    border-radius: 999px;
+    background-color: rgba(253, 251, 247, 0.88);
+    color: var(--heading-color);
+    font-weight: 700;
+}
+
+.nav-links a.nav-new-section:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
 .hamburger {
     display: none;
     cursor: pointer;
@@ -709,6 +723,9 @@ blockquote footer {
     z-index: 10000;
     transition: all 0.3s ease;
     border: 2px solid var(--primary-color);
+    padding: 0;
+    font: inherit;
+    appearance: none;
 }
 
 .music-control:hover {
@@ -824,12 +841,23 @@ blockquote footer {
     /* Button right, text left */
 }
 
+.music-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+}
+
 .music-control {
     position: relative;
     /* Reset fixed positioning as it's now in wrapper */
     bottom: auto;
     right: auto;
     flex-shrink: 0;
+}
+
+.music-next {
+    width: 44px;
+    height: 44px;
 }
 
 .music-hint {
@@ -840,7 +868,7 @@ blockquote footer {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     margin-right: 15px;
     font-size: 0.9rem;
-    max-width: 250px;
+    max-width: 300px;
     line-height: 1.4;
     position: relative;
     opacity: 1;
@@ -848,6 +876,23 @@ blockquote footer {
     transition: all 0.5s ease;
     pointer-events: none;
     /* Let clicks pass through */
+}
+
+.music-hint-message,
+.music-track-title,
+.music-track-artist {
+    display: block;
+}
+
+.music-track-title {
+    margin-top: 0.3rem;
+    color: var(--primary-color);
+    font-size: 0.95rem;
+}
+
+.music-track-artist {
+    color: #777;
+    font-size: 0.8rem;
 }
 
 /* Arrow for the tooltip */
@@ -865,6 +910,36 @@ blockquote footer {
 .music-hint.hidden {
     opacity: 0;
     transform: translateX(20px);
+}
+@media (max-width: 600px) {
+    .music-wrapper {
+        right: 12px;
+        bottom: 12px;
+    }
+
+    .music-controls {
+        gap: 0.4rem;
+    }
+
+    .music-control {
+        width: 46px;
+        height: 46px;
+    }
+
+    .music-next {
+        width: 40px;
+        height: 40px;
+    }
+
+    .music-hint {
+        max-width: 200px;
+        margin-right: 8px;
+        padding: 0.65rem 0.8rem;
+    }
+
+    .music-hint-message {
+        display: none;
+    }
 }
 
 /* --- Scroll Down Indicator (Hero) --- */
