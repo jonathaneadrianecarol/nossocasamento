@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Lista de Presentes | Jonathan & Adriane</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../gifts.css">
+        <script src="https://unpkg.com/lucide@latest">
+        </script>
+        <style>
+            .gift-actions {
+                width: 100%;
+                margin-top: 1rem;
+            }
+
+            .pix-btn {
+                display: block;
+                padding: .72rem;
+                border-radius: 6px;
+                background: #a88632;
+                color: #fff;
+                font-weight: 700;
+                text-decoration: none;
+            }
+
+            .payment-title {
+                margin: 4rem 0 1rem;
+                text-align: center;
+                font: 400 2.3rem 'Playfair Display', serif;
+            }
+
+            .payment-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.2rem;
+            }
+
+            .payment-card {
+                padding: 2rem;
+                border: 1px solid #e7ded2;
+                border-radius: 18px;
+                background: #fff;
+                text-align: center;
+            }
+
+            .payment-card.primary {
+                border: 2px solid #b99a45;
+            }
+
+            .payment-card i {
+                color: #a88632;
+            }
+
+            .payment-card p {
+                color: #706861;
+                line-height: 1.65;
+            }
+
+            .colombia-qr {
+                width: min(240px, 100%);
+                margin: 1rem auto;
+                border-radius: 12px;
+                display: block;
+            }
+
+            @media (max-width: 760px) {
+                .payment-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+    </head>
+    <body class="gift-page">
+        <nav class="gift-nav">
+            <a href="../">Jonathan & Adriane</a>
+            <a href="../es/regalos/">ES</a>
+        </nav>
+        <header class="gift-hero">
+            <div>
+                <small>NOSSO CASAMENTO</small>
+                <h1>Lista de Presentes</h1>
+                <p>Ter voc&#234; conosco j&#225; &#233; o maior presente. Se desejar contribuir com os nossos sonhos, escolha uma lembran&#231;a simb&#243;lica e a forma de pagamento mais conveniente.</p>
+            </div>
+        </header>
+        <main class="gift-main">
+            <div class="gift-intro">
+                <h2>Um presente para o nosso futuro</h2>
+                <p>Os itens s&#227;o simb&#243;licos e os valores ser&#227;o usados no nosso novo lar e na lua de mel. Presentes diferentes podem ter o mesmo valor: escolha aquele que fizer voc&#234; sorrir.</p>
+            </div>
+            <div class="gift-grid">
+                <article class="gift-card">
+                    <i data-lucide="glass-water">
+                    </i>
+                    <h3>Um brinde aos noivos</h3>
+                    <p>Duas caipirinhas para celebrarmos o amor.</p>
+                    <b class="gift-price">R$ 50</b>
+                    <div class="gift-actions">
+                        <a class="pix-btn" target="_blank" rel="noopener" href="https://nubank.com.br/cobrar/55ggfo/6a5d168d-64f6-4301-90c3-4c088ed34c10">Presentear via Pix</a>
+                    </div>
+                </article>
+                <article class="gift-card">
+                    <i data-lucide="ice-cream-bowl">
+                    </i>
+                    <h3>Sorvete para dois</h3>
+                    <p>Um momento doce durante a nossa viagem.</p>
+                    <b class="gift-price">R$ 75</b>
+                    <div class="gift-actions">
+                        <a class="pix-btn" target="_blank" rel="noopener" href="https://nubank.com.br/cobrar/55ggfo/6a5d172f-20bf-4a32-87f9-f8e6019a5e53">Presentear via Pix</a>
+                    </div>
+                </article>
+                <article class="gift-card">
+                    <i data-lucide="coffee">
+                    </i>
+                    <h3>Caf&#233; da manh&#227; especial</h3>
+                    <p>Para come&#231;armos um dia da lua de mel com carinho.</p>
+                    <b class="gift-price">R$ 100</b>
+                    <div class="gift-actions">
+                        <a class="pix-btn" target="_blank" rel="noopener" href="https://nubank.com.br/cobrar/55ggfo/6a5d1759-9cb2-4372-9b49-c5345d281f3b">Presentear via Pix</a>
+                    </div>
+                </article>
+                <article class="gift-card">
+                    <i data-lucide="landmark">
+                    </i>
+                    <h3>Passeio cultural</h3>
+                    <p>Uma tarde descobrindo hist&#243;rias e lugares novos.</p>
+                    <b class="gift-price">R$ 100</b>
+                    <div class="gift-actions">
+                        <a class="pix-btn" target="_blank" rel="noopener" href="https://nubank.com.br/cobrar/55ggfo/6a5d1759-9cb2-4372-9b49-c5345d281f3b">Presentear via Pix</a>
+                    </div>
+                </article>
+                <article class="gift-card">
+                    <i data-lucide="utensils">
+                    </i>
+                    <h3>Jantar rom&#226;ntico</h3>
+                    <p>Uma noite especial para celebrarmos a vida de casados.</p>
+                    <b class="gift-price">R$ 150</b>
+                    <div class="gift-actions">
+                        <a class="pix-btn" target="_blank" rel="noopener" href="https://nubank.com.br/cobrar/55ggfo/6a5d17a8-8698-43b4-9f45-4d7599eb8d46">Presentear via Pix</a>
+                    </div>
+                </article>
+                <article class="gift-card">
+                    <i data-lucide="heart">
+                    </i>
+                    <h3>Experi&#234;ncia para o casal</h3>
+                    <p>Um momento tranquilo para curtirmos juntos.</p>
+                    <b class="gift-price">R$ 150</b>
+                    <div class="gift-actions">
+                        <a class="pix-btn" target="_blank" rel="noopener" href="https://nubank.com.br/cobrar/55ggfo/6a5d17a8-8698-43b4-9f45-4d7599eb8d46">Presentear via Pix</a>
+                    </div>
+                </article>
+                <article class="gift-card">
+                    <i data-lucide="camera">
+                    </i>
+                    <h3>Passeio na lua de mel</h3>
+                    <p>Uma experi&#234;ncia para guardarmos boas mem&#243;rias.</p>
+                    <b class="gift-price">R$ 200</b>
+                    <div class="gift-actions">
+                        <a class="pix-btn" target="_blank" rel="noopener" href="https://nubank.com.br/cobrar/55ggfo/6a5d17ba-e821-41fa-a8e1-5446e33d4593">Presentear via Pix</a>
+                    </div>
+                </article>
+                <article class="gift-card">
+                    <i data-lucide="bed-double">
+                    </i>
+                    <h3>Noite de hotel</h3>
+                    <p>Uma noite encantadora durante a lua de mel.</p>
+                    <b class="gift-price">R$ 400</b>
+                    <div class="gift-actions">
+                        <a class="pix-btn" target="_blank" rel="noopener" href="https://nubank.com.br/cobrar/55ggfo/6a5d17d2-12cb-48b1-b022-35bddd27ab25">Presentear via Pix</a>
+                    </div>
+                </article>
+                <article class="gift-card">
+                    <i data-lucide="cooking-pot">
+                    </i>
+                    <h3>Nossa nova cozinha</h3>
+                    <p>Uma ajuda para equiparmos o nosso lar.</p>
+                    <b class="gift-price">R$ 600</b>
+                    <div class="gift-actions">
+                        <a class="pix-btn" target="_blank" rel="noopener" href="https://nubank.com.br/cobrar/55ggfo/6a5d17ea-016e-4b19-8f5d-c0960531f0ea">Presentear via Pix</a>
+                    </div>
+                </article>
+                <article class="gift-card">
+                    <i data-lucide="plane">
+                    </i>
+                    <h3>Passagens da lua de mel</h3>
+                    <p>Uma contribui&#231;&#227;o para nossa primeira grande viagem.</p>
+                    <b class="gift-price">R$ 1.000</b>
+                    <div class="gift-actions">
+                        <a class="pix-btn" target="_blank" rel="noopener" href="https://nubank.com.br/cobrar/55ggfo/6a5d1819-2160-48b4-9266-8e82e2ccc35d">Presentear via Pix</a>
+                    </div>
+                </article>
+                <article class="gift-card">
+                    <i data-lucide="house-heart">
+                    </i>
+                    <h3>Um sonho para o novo lar</h3>
+                    <p>Uma contribui&#231;&#227;o especial para construirmos nosso cantinho.</p>
+                    <b class="gift-price">R$ 1.500</b>
+                    <div class="gift-actions">
+                        <a class="pix-btn" target="_blank" rel="noopener" href="https://nubank.com.br/cobrar/55ggfo/6a5d182c-7dab-4d3a-857f-403b9f137721">Presentear via Pix</a>
+                    </div>
+                </article>
+            </div>
+            <h2 class="payment-title">Outras formas de presentear</h2>
+            <div class="payment-grid">
+                <article class="payment-card primary">
+                    <i data-lucide="qr-code">
+                    </i>
+                    <h3>Pix no Brasil</h3>
+                    <p>Os bot&#245;es acima abrem uma cobran&#231;a Nubank com o valor exato do presente.</p>
+                </article>
+                <article class="payment-card">
+                    <i data-lucide="credit-card">
+                    </i>
+                    <h3>Cart&#227;o de cr&#233;dito</h3>
+                    <p>Prefere cart&#227;o? A lista segura do Casar.com permite concluir o presente com cart&#227;o de cr&#233;dito.</p>
+                    <a class="gift-button" target="_blank" rel="noopener" href="https://noivos.casar.com/jonathan-e-adriane">Pagar com cart&#227;o</a>
+                </article>
+                <article class="payment-card">
+                    <i data-lucide="landmark">
+                    </i>
+                    <h3>Transfer&#234;ncia na Col&#244;mbia</h3>
+                    <p>Escaneie o QR abaixo pelo aplicativo do seu banco colombiano para usar a chave Davivienda.</p>
+                    <a href="../images/pagos/davivienda-qr.png" target="_blank" rel="noopener">
+                        <img class="colombia-qr" src="../images/pagos/davivienda-qr.png" alt="C&#243;digo QR da chave Davivienda de Jonathan Campo Jaimes">
+                    </a>
+                    <small>Toque no QR para ampliar</small>
+                </article>
+            </div>
+        </main>
+        <footer class="gift-footer">Com carinho, Jonathan & Adriane</footer>
+        <script>lucide.createIcons()</script>
+    </body>
+</html>
