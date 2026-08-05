@@ -1,0 +1,165 @@
+.gift-page {
+    margin: 0;
+    background: #fbfaf7;
+    color: #37332f;
+    font-family: Lato,sans-serif
+}
+
+.gift-nav {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 1.4rem 5%;
+    color: #fff
+}
+
+.gift-nav a {
+    color: inherit;
+    text-decoration: none
+}
+
+.gift-hero {
+    min-height: 65vh;
+    display: grid;
+    place-items: center;
+    padding: 5rem 1.5rem 3rem;
+    background: linear-gradient(#201b1799,#201b17cc),url("images/fotoprincipal.jpg") center 34%/cover;
+    color: #fff;
+    text-align: center
+}
+
+.gift-hero div {
+    max-width: 760px
+}
+
+.gift-hero h1 {
+    font: 400 clamp(3rem,8vw,5.5rem) 'Playfair Display',serif;
+    margin: .5rem
+}
+
+.gift-hero p {
+    font-size: 1.2rem;
+    line-height: 1.7
+}
+
+.gift-main {
+    max-width: 1120px;
+    margin: auto;
+    padding: 5rem 1.5rem
+}
+
+.gift-intro {
+    max-width: 760px;
+    margin: 0 auto 3rem;
+    text-align: center
+}
+
+.gift-intro h2 {
+    font: 400 2.4rem 'Playfair Display',serif
+}
+
+.gift-intro p,.gift-card p,.gift-note p {
+    color: #706861;
+    line-height: 1.7
+}
+
+.gift-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 1.2rem
+}
+
+.gift-card {
+    display: flex;
+    min-height: 220px;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1.4rem;
+    border: 1px solid #ebe3d8;
+    border-radius: 18px;
+    background: #fff;
+    text-align: center;
+    box-shadow: 0 12px 35px #45362812
+}
+
+.gift-card i {
+    color: #b99a45
+}
+
+.gift-card h3 {
+    font: 400 1.4rem 'Playfair Display',serif
+}
+
+.gift-card p {
+    flex: 1
+}
+
+.gift-price {
+    color: #a88632;
+    font-size: 1.3rem;
+    font-weight: 700
+}
+
+.gift-checkout {
+    margin-top: 3rem;
+    padding: 2.5rem;
+    border-radius: 20px;
+    background: #312b27;
+    color: #fff;
+    text-align: center
+}
+
+.gift-checkout h2 {
+    font: 400 2rem 'Playfair Display',serif
+}
+
+.gift-button {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: .9rem 1.5rem;
+    border-radius: 4px;
+    background: #c3a44d;
+    color: #fff;
+    text-decoration: none;
+    opacity: .75
+}
+
+.gift-notes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-top: 1.5rem
+}
+
+.gift-note {
+    padding: 1.5rem;
+    border: 1px solid #e7ded2;
+    border-radius: 16px;
+    background: #fff
+}
+
+.gift-footer {
+    padding: 2rem;
+    background: #28231f;
+    color: #ddd2c7;
+    text-align: center
+}
+
+@media (max-width:800px) {
+    .gift-grid {
+        grid-template-columns: repeat(2,1fr)
+    }
+}
+
+@media (max-width:560px) {
+    .gift-grid,.gift-notes {
+        grid-template-columns: 1fr
+    }
+    .gift-main {
+        padding: 3rem 1rem
+    }
+}
