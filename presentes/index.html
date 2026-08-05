@@ -33,7 +33,7 @@
 
             .payment-grid {
                 display: grid;
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(2, minmax(0, 1fr));
                 gap: 1.2rem;
             }
 
@@ -43,10 +43,6 @@
                 border-radius: 18px;
                 background: #fff;
                 text-align: center;
-            }
-
-            .payment-card.primary {
-                border: 2px solid #b99a45;
             }
 
             .payment-card i {
@@ -87,7 +83,7 @@
         <main class="gift-main">
             <div class="gift-intro">
                 <h2>Um presente para n&oacute;s</h2>
-                <p>Os itens s&#227;o simb&#243;licos e os valores ser&#227;o usados no nosso novo lar e na lua de mel. Presentes diferentes podem ter o mesmo valor; escolha aquele que desejar.</p>
+                <p>Os itens s&#227;o simb&#243;licos e os valores ser&#227;o usados no nosso novo lar e na lua de mel. Presentes diferentes podem ter o mesmo valor; escolha aquele que desejar. Voc&#234; pode presentear via Pix; mais abaixo tamb&#233;m encontrar&#225; as op&#231;&#245;es de cart&#227;o de cr&#233;dito e transfer&#234;ncia via Bre-B na Col&#244;mbia.</p>
             </div>
             <div class="gift-grid">
                 <article class="gift-card">
@@ -213,25 +209,19 @@
             </div>
             <h2 class="payment-title">Outras formas de presentear</h2>
             <div class="payment-grid">
-                <article class="payment-card primary">
-                    <i data-lucide="qr-code">
-                    </i>
-                    <h3>Pix no Brasil</h3>
-                    <p>Os bot&#245;es acima abrem o nosso link de cobran&#231;a do Nubank, onde voc&#234; pode informar o valor do presente escolhido.</p>
-                </article>
                 <article class="payment-card">
                     <i data-lucide="credit-card">
                     </i>
                     <h3>Cart&#227;o de cr&#233;dito</h3>
                     <p>Prefere cart&#227;o? A lista segura do Casar.com permite concluir o presente com cart&#227;o de cr&#233;dito.</p>
-                    <p class="payment-alert"><strong>Aten&#231;&#227;o:</strong> desmarque o cart&#227;o-presente adicionado automaticamente pelo Casar.com para evitar essa cobran&#231;a extra.</p>
+                    <p class="payment-alert"><strong>Aten&#231;&#227;o:</strong> no momento do pagamento, desmarque o cart&#227;o-presente adicionado automaticamente pelo Casar.com para evitar essa cobran&#231;a extra.</p>
                     <a class="gift-button" target="_blank" rel="noopener" href="https://noivos.casar.com/jonathan-e-adriane">Pagar com cart&#227;o</a>
                 </article>
                 <article class="payment-card">
                     <i data-lucide="landmark">
                     </i>
-                    <h3>Transfer&#234;ncia na Col&#244;mbia</h3>
-                    <p>Escaneie o QR abaixo pelo aplicativo do seu banco colombiano para usar a chave Davivienda.</p>
+                    <h3>Transfer&#234;ncia via Bre-B na Col&#244;mbia</h3>
+                    <p>Escaneie o QR abaixo pelo aplicativo do seu banco colombiano para pagar usando a chave Bre-B do Davivienda.</p>
                     <a href="../images/pagos/davivienda-qr.png" target="_blank" rel="noopener">
                         <img class="colombia-qr" src="../images/pagos/davivienda-qr.png" alt="C&#243;digo QR da chave Davivienda de Jonathan Campo Jaimes">
                     </a>
