@@ -33,7 +33,7 @@
 
             .payment-grid {
                 display: grid;
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(2, minmax(0, 1fr));
                 gap: 1.2rem;
             }
 
@@ -43,10 +43,6 @@
                 border-radius: 18px;
                 background: #fff;
                 text-align: center;
-            }
-
-            .payment-card.primary {
-                border: 2px solid #b99a45;
             }
 
             .payment-card i {
@@ -87,7 +83,7 @@
         <main class="gift-main">
             <div class="gift-intro">
                 <h2>Un regalo para nosotros</h2>
-                <p>Los art&#237;culos son simb&#243;licos y los valores se utilizar&#225;n en nuestro nuevo hogar y en la luna de miel. Distintos regalos pueden tener el mismo valor; elige el que desees.</p>
+                <p>Los art&#237;culos son simb&#243;licos y los valores se utilizar&#225;n en nuestro nuevo hogar y en la luna de miel. Distintos regalos pueden tener el mismo valor; elige el que desees. Puedes regalar mediante Pix; m&#225;s abajo tambi&#233;n encontrar&#225;s las opciones de tarjeta de cr&#233;dito y transferencia mediante Bre-B en Colombia.</p>
             </div>
             <div class="gift-grid">
                 <article class="gift-card">
@@ -213,25 +209,19 @@
             </div>
             <h2 class="payment-title">Otras formas de regalarnos</h2>
             <div class="payment-grid">
-                <article class="payment-card primary">
-                    <i data-lucide="qr-code">
-                    </i>
-                    <h3>Pix en Brasil</h3>
-                    <p>Los botones superiores abren nuestro enlace de cobro de Nubank, donde puedes indicar el valor del regalo elegido.</p>
-                </article>
                 <article class="payment-card">
                     <i data-lucide="credit-card">
                     </i>
                     <h3>Tarjeta de cr&#233;dito</h3>
                     <p>&#191;Prefieres tarjeta? La lista segura de Casar.com permite completar el regalo con tarjeta de cr&#233;dito.</p>
-                    <p class="payment-alert"><strong>Atenci&#243;n:</strong> desmarca la tarjeta de regalo que Casar.com a&#241;ade autom&#225;ticamente para evitar ese cobro extra.</p>
+                    <p class="payment-alert"><strong>Atenci&#243;n:</strong> al momento de pagar, desmarca la tarjeta de regalo que Casar.com a&#241;ade autom&#225;ticamente para evitar ese cobro extra.</p>
                     <a class="gift-button" target="_blank" rel="noopener" href="https://noivos.casar.com/jonathan-e-adriane">Pagar con tarjeta</a>
                 </article>
                 <article class="payment-card">
                     <i data-lucide="landmark">
                     </i>
-                    <h3>Transferencia en Colombia</h3>
-                    <p>Escanea el siguiente QR desde la aplicaci&#243;n de tu banco colombiano para utilizar la llave Davivienda.</p>
+                    <h3>Transferencia mediante Bre-B en Colombia</h3>
+                    <p>Escanea el siguiente QR desde la aplicaci&#243;n de tu banco colombiano para pagar mediante la llave Bre-B de Davivienda.</p>
                     <a href="../../images/pagos/davivienda-qr.png" target="_blank" rel="noopener">
                         <img class="colombia-qr" src="../../images/pagos/davivienda-qr.png" alt="C&#243;digo QR de la llave Davivienda de Jonathan Campo Jaimes">
                     </a>
