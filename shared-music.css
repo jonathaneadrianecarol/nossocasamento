@@ -1,0 +1,137 @@
+.music-wrapper {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    font-family: 'Lato', sans-serif;
+}
+
+.music-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+}
+
+.music-wrapper .music-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    flex: 0 0 auto;
+    padding: 0;
+    border: 2px solid #d4af37;
+    border-radius: 50%;
+    appearance: none;
+    background: #ffffff;
+    color: #b28e20;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
+    cursor: pointer;
+    transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+}
+
+.music-wrapper .music-control:hover,
+.music-wrapper .music-control:focus-visible,
+.music-wrapper .music-control.playing {
+    background: #d4af37;
+    color: #ffffff;
+    outline: none;
+    transform: scale(1.06);
+}
+
+.music-wrapper .music-control svg {
+    width: 22px;
+    height: 22px;
+}
+
+.music-wrapper .music-next {
+    width: 44px;
+    height: 44px;
+}
+
+.music-hint {
+    position: relative;
+    max-width: 285px;
+    margin-right: 14px;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.96);
+    color: #4a4a4a;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
+    font-size: 0.85rem;
+    line-height: 1.35;
+    pointer-events: none;
+}
+
+.music-hint::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -6px;
+    transform: translateY(-50%);
+    border-width: 6px 0 6px 6px;
+    border-style: solid;
+    border-color: transparent transparent transparent rgba(255, 255, 255, 0.96);
+}
+
+.music-hint-message,
+.music-track-title,
+.music-track-artist {
+    display: block;
+}
+
+.music-track-title {
+    margin-top: 0.2rem;
+    color: #a88632;
+    font-size: 0.9rem;
+}
+
+.music-track-artist {
+    color: #777777;
+    font-size: 0.78rem;
+}
+
+#bg-music {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .music-wrapper {
+        right: 12px;
+        bottom: 12px;
+    }
+
+    .music-controls {
+        gap: 0.4rem;
+    }
+
+    .music-wrapper .music-control {
+        width: 46px;
+        height: 46px;
+    }
+
+    .music-wrapper .music-next {
+        width: 40px;
+        height: 40px;
+    }
+
+    .music-hint {
+        max-width: 175px;
+        margin-right: 8px;
+        padding: 0.6rem 0.75rem;
+    }
+
+    .music-hint-message {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .music-wrapper .music-control {
+        transition: none;
+    }
+}
