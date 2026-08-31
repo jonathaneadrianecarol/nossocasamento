@@ -46,33 +46,58 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- RSVP FORM HANDLING (ROBUSTO) ---
-    const form = document.getElementById('rsvp-form');
+    // --- CONFIRMAÇÃO DE PRESENÇA E MENSAGENS ---
+    const language = (document.documentElement.lang || 'pt-BR').toLowerCase();
+    const isSpanish = language.startsWith('es');
+    const choiceButtons = document.querySelectorAll('[data-rsvp-choice]');
+    const choicePanels = {
+        yes: document.getElementById('rsvp-yes-panel'),
+        no: document.getElementById('rsvp-no-panel')
+    };
 
-    if (form) {
-        const btnSubmit = document.getElementById('btn-submit');
-        const formStatus = document.getElementById('form-status');
-        const lang = (document.documentElement.lang || 'pt-BR').toLowerCase();
+    choiceButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const selectedChoice = button.dataset.rsvpChoice;
 
-        const isSpanish = lang.startsWith('es');
+            choiceButtons.forEach(option => {
+                const isSelected = option === button;
+                option.classList.toggle('is-selected', isSelected);
+                option.setAttribute('aria-expanded', String(isSelected));
+            });
 
-        const messages = isSpanish ? {
-            sending: 'Enviando...',
-            success: firstName => `Gracias, ${firstName}. Tu confirmación fue enviada correctamente.`,
-            successDetail: 'Si no recibimos el correo, ya tendremos al menos más datos de rastreo del envío.',
-            genericError: 'No fue posible enviar la confirmación. Inténtalo nuevamente en unos minutos.',
-            networkError: 'Error de conexión. Verifica tu internet y vuelve a intentarlo.',
-            invalidResponse: 'El servicio respondió de forma inesperada. Inténtalo nuevamente.',
-            button: 'Enviar Confirmación'
-        } : {
-            sending: 'Enviando...',
-            success: firstName => `Obrigado, ${firstName}. Sua confirmação foi enviada com sucesso.`,
-            successDetail: 'Se o e-mail não chegar, pelo menos o envio terá mais dados de rastreio.',
-            genericError: 'Não foi possível enviar a confirmação. Tente novamente em alguns minutos.',
-            networkError: 'Erro de conexão. Verifique sua internet e tente novamente.',
-            invalidResponse: 'O serviço respondeu de forma inesperada. Tente novamente.',
-            button: 'Enviar Confirmação'
-        };
+            Object.entries(choicePanels).forEach(([choice, panel]) => {
+                if (panel) panel.hidden = choice !== selectedChoice;
+            });
+
+            const selectedPanel = choicePanels[selectedChoice];
+            if (selectedPanel) {
+                window.setTimeout(() => {
+                    selectedPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 80);
+            }
+        });
+    });
+
+    const formMessages = isSpanish ? {
+        sending: 'Enviando...',
+        rsvpSuccess: firstName => `Gracias, ${firstName}. Tu confirmación fue enviada correctamente.`,
+        messageSuccess: firstName => `Gracias, ${firstName}. Tu mensaje fue enviado con cariño.`,
+        genericError: 'No fue posible enviar el formulario. Inténtalo nuevamente en unos minutos.',
+        networkError: 'Error de conexión. Verifica tu internet y vuelve a intentarlo.',
+        invalidResponse: 'El servicio respondió de forma inesperada. Inténtalo nuevamente.'
+    } : {
+        sending: 'Enviando...',
+        rsvpSuccess: firstName => `Obrigado, ${firstName}. Sua confirmação foi enviada com sucesso.`,
+        messageSuccess: firstName => `Obrigado, ${firstName}. Sua mensagem foi enviada com carinho.`,
+        genericError: 'Não foi possível enviar o formulário. Tente novamente em alguns minutos.',
+        networkError: 'Erro de conexão. Verifique sua internet e tente novamente.',
+        invalidResponse: 'O serviço respondeu de forma inesperada. Tente novamente.'
+    };
+
+    document.querySelectorAll('.ajax-form').forEach(form => {
+        const submitButton = form.querySelector('button[type="submit"]');
+        const formStatus = form.querySelector('.form-status');
+        const originalButtonText = submitButton?.textContent.trim() || '';
 
         const setStatus = (text, type = 'info') => {
             if (!formStatus) return;
@@ -83,42 +108,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 '#555';
         };
 
-        form.addEventListener('submit', async function (e) {
-            e.preventDefault();
+        form.addEventListener('submit', async event => {
+            event.preventDefault();
 
-            if (!btnSubmit || btnSubmit.disabled) return;
+            if (!submitButton || submitButton.disabled) return;
 
-            const fullName = (document.getElementById('name')?.value || '').trim();
+            const fullName = (form.querySelector('[name="name"]')?.value || '').trim();
             const firstName = fullName ? fullName.split(' ')[0] : (isSpanish ? 'invitado' : 'convidado');
-
-            const submittedAtInput = document.getElementById('submitted_at');
-            const pageUrlInput = document.getElementById('page_url');
-            const userAgentInput = document.getElementById('user_agent');
+            const submittedAtInput = form.querySelector('[name="submitted_at"]');
+            const pageUrlInput = form.querySelector('[name="page_url"]');
+            const userAgentInput = form.querySelector('[name="user_agent"]');
 
             if (submittedAtInput) submittedAtInput.value = new Date().toISOString();
             if (pageUrlInput) pageUrlInput.value = window.location.href;
             if (userAgentInput) userAgentInput.value = navigator.userAgent;
 
-            btnSubmit.innerText = messages.sending;
-            btnSubmit.disabled = true;
+            submitButton.textContent = formMessages.sending;
+            submitButton.disabled = true;
             setStatus('');
 
-            const formData = new FormData(form);
-
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 15000);
+            const timeoutId = window.setTimeout(() => controller.abort(), 15000);
 
             try {
                 const response = await fetch(form.action, {
                     method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    },
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' },
                     signal: controller.signal
                 });
-
-                clearTimeout(timeoutId);
 
                 const contentType = response.headers.get('content-type') || '';
                 let data = null;
@@ -127,36 +145,35 @@ document.addEventListener('DOMContentLoaded', () => {
                     try {
                         data = await response.json();
                     } catch (jsonError) {
-                        throw new Error(messages.invalidResponse);
+                        throw new Error(formMessages.invalidResponse);
                     }
                 }
 
                 if (!response.ok) {
-                    const serverMessage =
-                        data && typeof data === 'object' && data.message
-                            ? data.message
-                            : messages.genericError;
+                    const serverMessage = data && typeof data === 'object' && data.message
+                        ? data.message
+                        : formMessages.genericError;
                     throw new Error(serverMessage);
                 }
 
-                setStatus(`${messages.success(firstName)} ${messages.successDetail}`, 'success');
+                const successMessage = form.dataset.formKind === 'message'
+                    ? formMessages.messageSuccess(firstName)
+                    : formMessages.rsvpSuccess(firstName);
+                setStatus(successMessage, 'success');
                 form.reset();
             } catch (error) {
-                clearTimeout(timeoutId);
-
-                if (error.name === 'AbortError') {
-                    setStatus(messages.networkError, 'error');
-                } else {
-                    setStatus(error.message || messages.genericError, 'error');
-                }
-
-                console.error('RSVP error:', error);
+                const errorMessage = error.name === 'AbortError'
+                    ? formMessages.networkError
+                    : (error.message || formMessages.genericError);
+                setStatus(errorMessage, 'error');
+                console.error('Form submission error:', error);
             } finally {
-                btnSubmit.innerText = messages.button;
-                btnSubmit.disabled = false;
+                window.clearTimeout(timeoutId);
+                submitButton.textContent = originalButtonText;
+                submitButton.disabled = false;
             }
         });
-    }
+    });
 
     /* CONTROLE DO VÍDEO DE FUNDO */
     const heroVideo = document.getElementById('hero-video');
@@ -232,6 +249,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const bgMusic = document.getElementById('bg-music');
     const trackTitle = document.getElementById('music-track-title');
     const trackArtist = document.getElementById('music-track-artist');
+    const musicHintMessage = document.querySelector('.music-hint-message');
+    const musicStorageKey = 'jonathanAdrianeMusicStateV3';
 
     const playlist = [
         { file: '1.mp3', title: 'Várias Queixas', artist: 'Gilsons' },
@@ -250,6 +269,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let shuffledQueue = [];
     let currentTrackIndex = null;
     let isPlaying = false;
+    let isLeavingPage = false;
+    let lastSavedSecond = -1;
 
     function shuffle(items) {
         const shuffled = [...items];
@@ -277,7 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const iconName = playing ? 'volume-2' : 'volume-x';
         musicControl.innerHTML = `<i data-lucide="${iconName}" id="music-icon"></i>`;
         musicControl.classList.toggle('playing', playing);
-        lucide.createIcons();
+        if (window.lucide) lucide.createIcons();
     }
 
     function updateTrackInformation(track) {
@@ -285,30 +306,123 @@ document.addEventListener('DOMContentLoaded', () => {
         if (trackArtist) trackArtist.textContent = track.artist;
     }
 
+    function readMusicState() {
+        try {
+            const savedState = JSON.parse(sessionStorage.getItem(musicStorageKey) || 'null');
+            const isValidTrack = Number.isInteger(savedState?.trackIndex)
+                && savedState.trackIndex >= 0
+                && savedState.trackIndex < playlist.length;
+            const isRecentState = Number.isFinite(savedState?.updatedAt)
+                && Date.now() - savedState.updatedAt < 6 * 60 * 60 * 1000;
+
+            if (!isValidTrack || !isRecentState) return null;
+
+            return {
+                trackIndex: savedState.trackIndex,
+                currentTime: Number.isFinite(savedState.currentTime) ? Math.max(0, savedState.currentTime) : 0,
+                wasPlaying: savedState.wasPlaying === true
+            };
+        } catch (error) {
+            return null;
+        }
+    }
+
+    function saveMusicState(playing = isPlaying) {
+        if (!bgMusic || currentTrackIndex === null) return;
+
+        try {
+            sessionStorage.setItem(musicStorageKey, JSON.stringify({
+                trackIndex: currentTrackIndex,
+                currentTime: Number.isFinite(bgMusic.currentTime) ? bgMusic.currentTime : 0,
+                wasPlaying: playing,
+                updatedAt: Date.now()
+            }));
+        } catch (error) {
+            // The player still works when browser storage is unavailable.
+        }
+    }
+
     function playCurrentTrack() {
         if (!bgMusic) return;
         bgMusic.play().catch(error => {
             console.log('Playback failed:', error);
+            isPlaying = false;
+            updateMusicIcon(false);
+            if (musicHintMessage) {
+                musicHintMessage.textContent = isSpanish
+                    ? 'Toca el botón para continuar la música 🎶'
+                    : 'Toque no botão para continuar a música 🎶';
+            }
         });
+    }
+
+    function loadTrack(trackIndex, shouldPlay = false, startTime = 0) {
+        if (!bgMusic || !musicWrapper || playlist.length === 0) return;
+        currentTrackIndex = trackIndex;
+        const track = playlist[currentTrackIndex];
+        const playlistBase = musicWrapper.dataset.playlistBase || 'media/playlist/';
+
+        bgMusic.src = `${playlistBase}${track.file}`;
+        updateTrackInformation(track);
+
+        const continueFromSavedPoint = () => {
+            const beginPlayback = () => {
+                if (shouldPlay) playCurrentTrack();
+            };
+
+            if (startTime <= 0.25) {
+                beginPlayback();
+                return;
+            }
+
+            const maximumTime = Number.isFinite(bgMusic.duration)
+                ? Math.max(0, bgMusic.duration - 0.25)
+                : startTime;
+            const savedTime = Math.min(startTime, maximumTime);
+            let seekFinished = false;
+
+            const finishSeek = () => {
+                if (seekFinished) return;
+                seekFinished = true;
+                beginPlayback();
+            };
+
+            bgMusic.addEventListener('seeked', finishSeek, { once: true });
+            bgMusic.currentTime = savedTime;
+            window.setTimeout(finishSeek, 1200);
+        };
+
+        bgMusic.addEventListener('loadedmetadata', continueFromSavedPoint, { once: true });
+        bgMusic.load();
     }
 
     function loadNextTrack(shouldPlay = false) {
         if (!bgMusic || !musicWrapper || playlist.length === 0) return;
         if (shuffledQueue.length === 0) refillQueue();
-
-        currentTrackIndex = shuffledQueue.shift();
-        const track = playlist[currentTrackIndex];
-        const playlistBase = musicWrapper.dataset.playlistBase || 'media/playlist/';
-
-        bgMusic.src = `${playlistBase}${track.file}`;
-        bgMusic.load();
-        updateTrackInformation(track);
-
-        if (shouldPlay) playCurrentTrack();
+        loadTrack(shuffledQueue.shift(), shouldPlay, 0);
     }
 
     if (musicWrapper && musicControl && musicNext && bgMusic) {
-        loadNextTrack(false);
+        const savedMusicState = readMusicState();
+        const navigationEntry = performance.getEntriesByType('navigation')[0];
+        const pageWasReloaded = navigationEntry?.type === 'reload'
+            || (performance.navigation && performance.navigation.type === 1);
+
+        if (pageWasReloaded) {
+            currentTrackIndex = savedMusicState?.trackIndex ?? null;
+
+            try {
+                sessionStorage.removeItem(musicStorageKey);
+            } catch (error) {
+                // The player still works when browser storage is unavailable.
+            }
+
+            loadNextTrack(savedMusicState?.wasPlaying === true);
+        } else if (savedMusicState) {
+            loadTrack(savedMusicState.trackIndex, savedMusicState.wasPlaying, savedMusicState.currentTime);
+        } else {
+            loadNextTrack(false);
+        }
 
         musicControl.addEventListener('click', () => {
             if (isPlaying) {
@@ -325,11 +439,22 @@ document.addEventListener('DOMContentLoaded', () => {
         bgMusic.addEventListener('play', () => {
             isPlaying = true;
             updateMusicIcon(true);
+            saveMusicState(true);
         });
 
         bgMusic.addEventListener('pause', () => {
+            if (isLeavingPage) return;
             isPlaying = false;
             updateMusicIcon(false);
+            saveMusicState(false);
+        });
+
+        bgMusic.addEventListener('timeupdate', () => {
+            const currentSecond = Math.floor(bgMusic.currentTime);
+            if (currentSecond !== lastSavedSecond) {
+                lastSavedSecond = currentSecond;
+                saveMusicState(isPlaying);
+            }
         });
 
         bgMusic.addEventListener('ended', () => {
@@ -341,6 +466,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 playCurrentTrack();
             }
         }, { once: true });
+
+        const preserveMusicBeforeLeaving = () => {
+            if (isLeavingPage) return;
+            saveMusicState(isPlaying);
+            isLeavingPage = true;
+        };
+
+        document.addEventListener('click', event => {
+            const link = event.target.closest('a[href]');
+            if (!link || link.target === '_blank' || link.hasAttribute('download')) return;
+
+            try {
+                const destination = new URL(link.href, window.location.href);
+                const staysOnCurrentDocument = destination.origin === window.location.origin
+                    && destination.pathname === window.location.pathname
+                    && destination.search === window.location.search;
+
+                if (destination.origin === window.location.origin && !staysOnCurrentDocument) {
+                    preserveMusicBeforeLeaving();
+                }
+            } catch (error) {
+                // Invalid or non-navigation links do not affect the music state.
+            }
+        }, { capture: true });
+
+        window.addEventListener('beforeunload', preserveMusicBeforeLeaving);
+        window.addEventListener('pagehide', preserveMusicBeforeLeaving);
     }
     // --- SCROLL DOWN INDICATOR ---
     const scrollDownBtn = document.querySelector('.scroll-down');
