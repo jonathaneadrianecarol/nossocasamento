@@ -7,6 +7,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Lato:wght@400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="../gifts.css">
+        <link rel="stylesheet" href="../shared-music.css">
         <script src="https://unpkg.com/lucide@latest">
         </script>
         <style>
@@ -71,6 +72,7 @@
     <body class="gift-page">
         <nav class="gift-nav">
             <a href="../index.html">Jonathan & Adriane</a>
+            <a class="gift-back" href="../index.html">← Voltar ao site</a>
             <a href="../es/regalos/index.html">ES</a>
         </nav>
         <header class="gift-hero">
@@ -230,6 +232,23 @@
             </div>
         </main>
         <footer class="gift-footer">Com carinho, Jonathan & Adriane</footer>
+        <div class="music-wrapper" data-playlist-base="../media/playlist/">
+            <div class="music-controls">
+                <button type="button" id="music-next" class="music-control music-next" title="Próxima música" aria-label="Tocar a próxima música">
+                    <i data-lucide="skip-forward"></i>
+                </button>
+                <button type="button" id="music-control" class="music-control" title="Tocar ou pausar música" aria-label="Tocar ou pausar música">
+                    <i data-lucide="volume-x" id="music-icon"></i>
+                </button>
+            </div>
+            <div class="music-hint" aria-live="polite">
+                <span class="music-hint-message">A música acompanha você por todo o site 🎶</span>
+                <strong class="music-track-title" id="music-track-title">Playlist do casamento</strong>
+                <span class="music-track-artist" id="music-track-artist"></span>
+            </div>
+        </div>
+        <audio id="bg-music" preload="metadata"></audio>
+        <script src="../script.js"></script>
         <script>lucide.createIcons()</script>
     </body>
 </html>
