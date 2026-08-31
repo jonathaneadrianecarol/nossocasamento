@@ -251,6 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const trackArtist = document.getElementById('music-track-artist');
     const musicHintMessage = document.querySelector('.music-hint-message');
     const musicStorageKey = 'jonathanAdrianeMusicStateV3';
+    const musicStartedKey = 'jonathanAdrianeMusicStartedV1';
 
     const playlist = [
         { file: '1.mp3', title: 'Várias Queixas', artist: 'Gilsons' },
@@ -342,18 +343,36 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function hasMusicStarted() {
+        try {
+            return sessionStorage.getItem(musicStartedKey) === 'true';
+        } catch (error) {
+            return false;
+        }
+    }
+
+    function markMusicStarted() {
+        try {
+            sessionStorage.setItem(musicStartedKey, 'true');
+        } catch (error) {
+            // The player still works when browser storage is unavailable.
+        }
+    }
+
     function playCurrentTrack() {
         if (!bgMusic) return;
-        bgMusic.play().catch(error => {
-            console.log('Playback failed:', error);
-            isPlaying = false;
-            updateMusicIcon(false);
-            if (musicHintMessage) {
-                musicHintMessage.textContent = isSpanish
-                    ? 'Toca el botón para continuar la música 🎶'
-                    : 'Toque no botão para continuar a música 🎶';
-            }
-        });
+        bgMusic.play()
+            .then(markMusicStarted)
+            .catch(error => {
+                console.log('Playback failed:', error);
+                isPlaying = false;
+                updateMusicIcon(false);
+                if (musicHintMessage) {
+                    musicHintMessage.textContent = isSpanish
+                        ? 'Toca el botón para continuar la música 🎶'
+                        : 'Toque no botão para continuar a música 🎶';
+                }
+            });
     }
 
     function loadTrack(trackIndex, shouldPlay = false, startTime = 0) {
@@ -362,6 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const track = playlist[currentTrackIndex];
         const playlistBase = musicWrapper.dataset.playlistBase || 'media/playlist/';
 
+        bgMusic.autoplay = shouldPlay;
         bgMusic.src = `${playlistBase}${track.file}`;
         updateTrackInformation(track);
 
@@ -404,6 +424,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (musicWrapper && musicControl && musicNext && bgMusic) {
         const savedMusicState = readMusicState();
+        const musicWasStarted = hasMusicStarted();
         const navigationEntry = performance.getEntriesByType('navigation')[0];
         const pageWasReloaded = navigationEntry?.type === 'reload'
             || (performance.navigation && performance.navigation.type === 1);
@@ -417,11 +438,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 // The player still works when browser storage is unavailable.
             }
 
-            loadNextTrack(savedMusicState?.wasPlaying === true);
+            loadNextTrack(musicWasStarted);
         } else if (savedMusicState) {
-            loadTrack(savedMusicState.trackIndex, savedMusicState.wasPlaying, savedMusicState.currentTime);
+            loadTrack(savedMusicState.trackIndex, musicWasStarted || savedMusicState.wasPlaying, savedMusicState.currentTime);
         } else {
-            loadNextTrack(false);
+            loadNextTrack(musicWasStarted);
         }
 
         musicControl.addEventListener('click', () => {
@@ -484,6 +505,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     && destination.search === window.location.search;
 
                 if (destination.origin === window.location.origin && !staysOnCurrentDocument) {
+                    markMusicStarted();
+                    if (bgMusic.paused) playCurrentTrack();
                     preserveMusicBeforeLeaving(true);
                 }
             } catch (error) {
