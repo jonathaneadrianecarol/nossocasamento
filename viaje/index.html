@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../shared-music.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <header class="hero">
@@ -152,5 +154,23 @@
     </main>
 
     <footer>Con cariño, Jonathan & Adriane</footer>
+    <div class="music-wrapper" data-playlist-base="../media/playlist/">
+        <div class="music-controls">
+            <button type="button" id="music-next" class="music-control music-next" title="Siguiente canción" aria-label="Reproducir la siguiente canción">
+                <i data-lucide="skip-forward"></i>
+            </button>
+            <button type="button" id="music-control" class="music-control" title="Reproducir o pausar música" aria-label="Reproducir o pausar música">
+                <i data-lucide="volume-x" id="music-icon"></i>
+            </button>
+        </div>
+        <div class="music-hint" aria-live="polite">
+            <span class="music-hint-message">La música te acompaña por todo el sitio 🎶</span>
+            <strong class="music-track-title" id="music-track-title">Playlist del casamiento</strong>
+            <span class="music-track-artist" id="music-track-artist"></span>
+        </div>
+    </div>
+    <audio id="bg-music" preload="metadata"></audio>
+    <script src="../script.js"></script>
+    <script>lucide.createIcons()</script>
 </body>
 </html>
