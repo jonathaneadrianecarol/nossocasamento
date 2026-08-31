@@ -22,6 +22,22 @@
     text-decoration: none
 }
 
+.gift-nav .gift-back {
+    padding: .45rem .85rem;
+    border: 1px solid #ffffff99;
+    border-radius: 999px;
+    background: #201b1766;
+    font-weight: 700;
+    backdrop-filter: blur(4px)
+}
+
+.gift-nav .gift-back:hover,
+.gift-nav .gift-back:focus-visible {
+    background: #ffffff;
+    color: #6f473d;
+    outline: none
+}
+
 .gift-hero {
     min-height: 65vh;
     display: grid;
@@ -127,6 +143,17 @@
     text-decoration: none;
     opacity: .75
 }
+.payment-card .payment-alert {
+    margin: 1rem 0 0;
+    padding: .85rem 1rem;
+    border-left: 4px solid #b45a3c;
+    border-radius: 6px;
+    background: #fff3ec;
+    color: #8a3f28;
+    font-weight: 700;
+    line-height: 1.5;
+    text-align: left
+}
 
 .gift-notes {
     display: grid;
@@ -156,6 +183,17 @@
 }
 
 @media (max-width:560px) {
+    .gift-nav {
+        align-items: center;
+        gap: .55rem;
+        padding: 1rem 4%;
+        font-size: .82rem
+    }
+
+    .gift-nav .gift-back {
+        padding: .4rem .65rem
+    }
+
     .gift-grid,.gift-notes {
         grid-template-columns: 1fr
     }
