@@ -467,9 +467,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, { once: true });
 
-        const preserveMusicBeforeLeaving = () => {
+        const preserveMusicBeforeLeaving = (resumeOnNextPage = isPlaying) => {
             if (isLeavingPage) return;
-            saveMusicState(isPlaying);
+            saveMusicState(resumeOnNextPage);
             isLeavingPage = true;
         };
 
@@ -484,15 +484,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     && destination.search === window.location.search;
 
                 if (destination.origin === window.location.origin && !staysOnCurrentDocument) {
-                    preserveMusicBeforeLeaving();
+                    preserveMusicBeforeLeaving(true);
                 }
             } catch (error) {
                 // Invalid or non-navigation links do not affect the music state.
             }
         }, { capture: true });
 
-        window.addEventListener('beforeunload', preserveMusicBeforeLeaving);
-        window.addEventListener('pagehide', preserveMusicBeforeLeaving);
+        window.addEventListener('beforeunload', () => preserveMusicBeforeLeaving());
+        window.addEventListener('pagehide', () => preserveMusicBeforeLeaving());
     }
     // --- SCROLL DOWN INDICATOR ---
     const scrollDownBtn = document.querySelector('.scroll-down');
