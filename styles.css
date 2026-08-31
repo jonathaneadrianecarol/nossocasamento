@@ -950,7 +950,7 @@ blockquote footer {
     text-align: center;
 }
 
-.ajax-form button:disabled {
+.formsubmit-form button:disabled {
     cursor: wait;
     opacity: 0.68;
 }
