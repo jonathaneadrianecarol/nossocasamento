@@ -131,10 +131,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const timeoutId = window.setTimeout(() => controller.abort(), 15000);
 
             try {
+                const formData = Object.fromEntries(new FormData(form).entries());
                 const response = await fetch(form.action, {
                     method: 'POST',
-                    body: new FormData(form),
-                    headers: { 'Accept': 'application/json' },
+                    body: JSON.stringify(formData),
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
                     signal: controller.signal
                 });
 
@@ -162,7 +166,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 setStatus(successMessage, 'success');
                 form.reset();
             } catch (error) {
-                const errorMessage = error.name === 'AbortError'
+                const isNetworkError = error.name === 'AbortError' || error instanceof TypeError;
+                const errorMessage = isNetworkError
                     ? formMessages.networkError
                     : (error.message || formMessages.genericError);
                 setStatus(errorMessage, 'error');
