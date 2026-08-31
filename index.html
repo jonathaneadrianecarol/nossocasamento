@@ -26,7 +26,7 @@
                 <li><a href="#details">Detalhes</a></li>
                 <li><a href="presentes/index.html" class="nav-new-section">Presentes</a></li>
                 <li><a href="viagem/index.html" class="nav-new-section">Viagem</a></li>
-                <li><a href="#rsvp">RSVP</a></li>
+                <li><a href="#rsvp" class="nav-new-section">Confirmar presença</a></li>
                 <li><a href="es/index.html" style="font-weight: 700;">🇪🇸 ES</a></li>
             </ul>
             <div class="hamburger">
@@ -47,7 +47,11 @@
             <p class="date" style="margin-top: 20rem; font-size: 2rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
                 Contamos com você!
             </p>
-            <a href="#rsvp" class="btn btn-primary">Confirmar Presença</a>
+            <div class="hero-news" aria-label="Novidades do site">
+                <span class="hero-news-badge">Novidade</span>
+                <span>Você já pode confirmar sua presença e ver as opções de presentes.</span>
+            </div>
+            <a href="#rsvp" class="btn btn-primary">Você vai?</a>
         </div>
         <!-- Scroll Down Indicator -->
         <div class="scroll-down">
@@ -159,7 +163,8 @@
                     <p>Cerimonia e festa</p>
                     <p>No mesmo local</p>
                 </div>
-                <div class="detail-card detail-card-action">
+                <div class="detail-card detail-card-action featured-update">
+                    <span class="update-badge">Novidade</span>
                     <i data-lucide="gift" class="detail-icon"></i>
                     <h3>Lista de Presentes</h3>
                     <p>Preparamos algumas op&ccedil;&otilde;es com carinho para quem desejar contribuir com os nossos sonhos.</p>
@@ -214,7 +219,7 @@
     </section>
 
     <!-- Lista de Presentes -->
-    <section id="gifts" class="section gifts" style="background-color: #f9f9f9; text-align: center;">
+    <section id="gifts" class="section gifts featured-section" style="background-color: #f9f9f9; text-align: center;">
         <div class="container">
             <h2 class="section-title">Lista de Presentes 🎁</h2>
             <div class="gift-message" style="max-width: 600px; margin: 0 auto; padding: 2rem;">
@@ -231,56 +236,98 @@
         </div>
     </section>
 
-    <!-- RSVP -->
+    <!-- Confirmação e mensagem -->
     <section id="rsvp" class="section rsvp">
-        <div class="container">
-            <h2 class="section-title">RSVP</h2>
-    
-            <p class="rsvp-text">
-                Por favor, confirme sua presença na nossa cerimônia de casamento até 1 de Abril de 2026.<br><br>
-                <strong>Importante:</strong> Pedimos a gentileza de preencher uma confirmação individual para cada pessoa, mesmo sendo da mesma família ou casal.
-            </p>
-    
-            <form id="rsvp-form"
-                  class="rsvp-form"
-                  action="https://formsubmit.co/ajax/jonathaneadrianecarol@gmail.com"
-                  method="POST">
-                
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_subject" value="Nova Confirmação de Presença!">
-                <input type="hidden" name="language" value="pt-BR">
-                <input type="hidden" name="source_page" value="site-pt">
-                <input type="hidden" id="submitted_at" name="submitted_at" value="">
-                <input type="hidden" id="page_url" name="page_url" value="">
-                <input type="hidden" id="user_agent" name="user_agent" value="">
-    
-                <div class="form-group">
-                    <label for="name">Nome Completo (Apenas uma pessoa por envio)</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-    
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-    
-                <div class="form-group">
-                    <label for="phone">Telefone (com código do país)</label>
-                    <input type="tel" id="phone" name="phone" placeholder="+55 11 99999-9999" required>
-                </div>
-    
-                <div class="form-group">
-                    <label for="message">Mensagem (Opcional)</label>
-                    <textarea id="message" name="message" rows="4"></textarea>
-                </div>
-    
-                <button type="submit" id="btn-submit" class="btn btn-primary btn-block">
-                    Enviar Confirmação
+        <div class="container rsvp-container">
+            <span class="section-kicker">Queremos saber de você</span>
+            <h2 class="section-title">Você vai poder celebrar com a gente?</h2>
+            <p class="rsvp-choice-intro">Escolha a opção que combina com você.</p>
+
+            <div class="attendance-choice" role="group" aria-label="Confirmação de presença">
+                <button type="button" class="attendance-option attendance-yes" data-rsvp-choice="yes" aria-controls="rsvp-yes-panel" aria-expanded="false">
+                    <i data-lucide="party-popper" aria-hidden="true"></i>
+                    <span>Sim, estarei com vocês!</span>
                 </button>
-    
-                <div id="form-status" style="margin-top: 1rem; font-size: 0.95rem;"></div>
-            </form>
+                <button type="button" class="attendance-option attendance-no" data-rsvp-choice="no" aria-controls="rsvp-no-panel" aria-expanded="false">
+                    <i data-lucide="heart" aria-hidden="true"></i>
+                    <span>Queria muito, mas não vou conseguir</span>
+                </button>
+            </div>
+
+            <div id="rsvp-yes-panel" class="rsvp-panel" hidden>
+                <h3>Que alegria! Confirme seus dados</h3>
+                <p class="rsvp-text">
+                    <strong>Importante:</strong> envie uma confirmação por pessoa, mesmo para casais ou pessoas da mesma família.
+                </p>
+
+                <form id="rsvp-form"
+                      class="rsvp-form ajax-form"
+                      action="https://formsubmit.co/ajax/jonathaneadrianecarol@gmail.com"
+                      method="POST"
+                      data-form-kind="rsvp">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_subject" value="Nova Confirmação de Presença!">
+                    <input type="hidden" name="language" value="pt-BR">
+                    <input type="hidden" name="source_page" value="site-pt">
+                    <input type="hidden" name="attendance" value="Confirmou presença">
+                    <input type="hidden" name="submitted_at" value="">
+                    <input type="hidden" name="page_url" value="">
+                    <input type="hidden" name="user_agent" value="">
+
+                    <div class="form-group">
+                        <label for="name">Nome Completo (Apenas uma pessoa por envio)</label>
+                        <input type="text" id="name" name="name" autocomplete="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" autocomplete="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Telefone (com código do país)</label>
+                        <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+55 11 99999-9999" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensagem (Opcional)</label>
+                        <textarea id="message" name="message" rows="4"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Enviar confirmação</button>
+                    <div class="form-status" role="status" aria-live="polite"></div>
+                </form>
+            </div>
+
+            <div id="rsvp-no-panel" class="rsvp-panel message-panel" hidden>
+                <i data-lucide="heart-handshake" class="message-panel-icon" aria-hidden="true"></i>
+                <h3>Deixe-nos um carinho</h3>
+                <p>Mesmo de longe, sua mensagem fará parte deste momento.</p>
+
+                <form id="affection-form"
+                      class="rsvp-form ajax-form"
+                      action="https://formsubmit.co/ajax/jonathaneadrianecarol@gmail.com"
+                      method="POST"
+                      data-form-kind="message">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_subject" value="Mensagem carinhosa de quem não poderá comparecer">
+                    <input type="hidden" name="language" value="pt-BR">
+                    <input type="hidden" name="source_page" value="site-pt-ausencia">
+                    <input type="hidden" name="attendance" value="Não poderá comparecer">
+                    <input type="hidden" name="submitted_at" value="">
+                    <input type="hidden" name="page_url" value="">
+                    <input type="hidden" name="user_agent" value="">
+
+                    <div class="form-group">
+                        <label for="affection-name">Seu nome</label>
+                        <input type="text" id="affection-name" name="name" autocomplete="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="affection-message">Sua mensagem</label>
+                        <textarea id="affection-message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Enviar mensagem</button>
+                    <div class="form-status" role="status" aria-live="polite"></div>
+                </form>
+            </div>
         </div>
     </section>
 
@@ -295,7 +342,8 @@
                     <p>Em breve... <br>Divulgaremos todos os horários e detalhes do nosso dia especial.</p>
                 </div>
                 <!-- Seção em destaque de aviso -->
-                <div class="detail-card" style="background-color: #fffaf0;">
+                <div class="detail-card featured-update featured-travel" style="background-color: #fffaf0;">
+                    <span class="update-badge">Novidade</span>
                     <i data-lucide="map" class="detail-icon" style="color: #e67e22;"></i>
                     <h3>Dicas de Viagem e Hospedagem</h3>
                     <p>
@@ -309,10 +357,11 @@
                         Ver guia de hospedagem
                     </a>
                 </div>
-                <div class="detail-card">
+                <div class="detail-card detail-card-action">
                     <i data-lucide="check-circle" class="detail-icon"></i>
                     <h3>Confirmação de Presença</h3>
-                    <p>Mais adiante abriremos a confirmação oficial por aqui.</p>
+                    <p>A confirmação já está aberta. Conte para nós se você poderá celebrar com a gente.</p>
+                    <a href="#rsvp" class="btn btn-primary detail-card-button">Responder agora</a>
                 </div>
             </div>
         </div>
