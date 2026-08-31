@@ -84,20 +84,23 @@ document.addEventListener('DOMContentLoaded', () => {
         messageSuccess: firstName => `Gracias, ${firstName}. Tu mensaje fue enviado con cariño.`,
         genericError: 'No fue posible enviar el formulario. Inténtalo nuevamente en unos minutos.',
         networkError: 'Error de conexión. Verifica tu internet y vuelve a intentarlo.',
-        invalidResponse: 'El servicio respondió de forma inesperada. Inténtalo nuevamente.'
+        invalidResponse: 'El servicio respondió de forma inesperada. Inténtalo nuevamente.',
+        rsvpReturnSuccess: 'Tu confirmaci\u00f3n fue enviada correctamente.',
+        messageReturnSuccess: 'Tu mensaje fue enviado con cari\u00f1o.'
     } : {
         sending: 'Enviando...',
         rsvpSuccess: firstName => `Obrigado, ${firstName}. Sua confirmação foi enviada com sucesso.`,
         messageSuccess: firstName => `Obrigado, ${firstName}. Sua mensagem foi enviada com carinho.`,
         genericError: 'Não foi possível enviar o formulário. Tente novamente em alguns minutos.',
         networkError: 'Erro de conexão. Verifique sua internet e tente novamente.',
-        invalidResponse: 'O serviço respondeu de forma inesperada. Tente novamente.'
+        invalidResponse: 'O serviço respondeu de forma inesperada. Tente novamente.',
+        rsvpReturnSuccess: 'Sua confirma\u00e7\u00e3o foi enviada com sucesso.',
+        messageReturnSuccess: 'Sua mensagem foi enviada com carinho.'
     };
 
-    document.querySelectorAll('.ajax-form').forEach(form => {
+    document.querySelectorAll('.formsubmit-form').forEach(form => {
         const submitButton = form.querySelector('button[type="submit"]');
         const formStatus = form.querySelector('.form-status');
-        const originalButtonText = submitButton?.textContent.trim() || '';
 
         const setStatus = (text, type = 'info') => {
             if (!formStatus) return;
@@ -108,13 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 '#555';
         };
 
-        form.addEventListener('submit', async event => {
-            event.preventDefault();
-
-            if (!submitButton || submitButton.disabled) return;
-
-            const fullName = (form.querySelector('[name="name"]')?.value || '').trim();
-            const firstName = fullName ? fullName.split(' ')[0] : (isSpanish ? 'invitado' : 'convidado');
+        form.addEventListener('submit', () => {
             const submittedAtInput = form.querySelector('[name="submitted_at"]');
             const pageUrlInput = form.querySelector('[name="page_url"]');
             const userAgentInput = form.querySelector('[name="user_agent"]');
@@ -123,62 +120,51 @@ document.addEventListener('DOMContentLoaded', () => {
             if (pageUrlInput) pageUrlInput.value = window.location.href;
             if (userAgentInput) userAgentInput.value = navigator.userAgent;
 
-            submitButton.textContent = formMessages.sending;
-            submitButton.disabled = true;
-            setStatus('');
+            const returnUrl = new URL(window.location.href);
+            returnUrl.searchParams.set('sent', form.dataset.formKind || 'rsvp');
+            returnUrl.hash = 'rsvp';
 
-            const controller = new AbortController();
-            const timeoutId = window.setTimeout(() => controller.abort(), 15000);
-
-            try {
-                const formData = Object.fromEntries(new FormData(form).entries());
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: JSON.stringify(formData),
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    signal: controller.signal
-                });
-
-                const contentType = response.headers.get('content-type') || '';
-                let data = null;
-
-                if (contentType.includes('application/json')) {
-                    try {
-                        data = await response.json();
-                    } catch (jsonError) {
-                        throw new Error(formMessages.invalidResponse);
-                    }
-                }
-
-                if (!response.ok) {
-                    const serverMessage = data && typeof data === 'object' && data.message
-                        ? data.message
-                        : formMessages.genericError;
-                    throw new Error(serverMessage);
-                }
-
-                const successMessage = form.dataset.formKind === 'message'
-                    ? formMessages.messageSuccess(firstName)
-                    : formMessages.rsvpSuccess(firstName);
-                setStatus(successMessage, 'success');
-                form.reset();
-            } catch (error) {
-                const isNetworkError = error.name === 'AbortError' || error instanceof TypeError;
-                const errorMessage = isNetworkError
-                    ? formMessages.networkError
-                    : (error.message || formMessages.genericError);
-                setStatus(errorMessage, 'error');
-                console.error('Form submission error:', error);
-            } finally {
-                window.clearTimeout(timeoutId);
-                submitButton.textContent = originalButtonText;
-                submitButton.disabled = false;
+            let nextInput = form.querySelector('[name="_next"]');
+            if (!nextInput) {
+                nextInput = document.createElement('input');
+                nextInput.type = 'hidden';
+                nextInput.name = '_next';
+                form.appendChild(nextInput);
             }
+            nextInput.value = returnUrl.toString();
+
+            if (submitButton) submitButton.textContent = formMessages.sending;
+            setStatus(formMessages.sending);
         });
     });
+
+    const sentFormKind = new URLSearchParams(window.location.search).get('sent');
+    if (sentFormKind === 'rsvp' || sentFormKind === 'message') {
+        const selectedChoice = sentFormKind === 'message' ? 'no' : 'yes';
+
+        choiceButtons.forEach(button => {
+            const isSelected = button.dataset.rsvpChoice === selectedChoice;
+            button.classList.toggle('is-selected', isSelected);
+            button.setAttribute('aria-expanded', String(isSelected));
+        });
+
+        Object.entries(choicePanels).forEach(([choice, panel]) => {
+            if (panel) panel.hidden = choice !== selectedChoice;
+        });
+
+        const submittedForm = document.querySelector(`[data-form-kind="${sentFormKind}"]`);
+        const submittedStatus = submittedForm?.querySelector('.form-status');
+        if (submittedStatus) {
+            submittedStatus.textContent = sentFormKind === 'message'
+                ? formMessages.messageReturnSuccess
+                : formMessages.rsvpReturnSuccess;
+            submittedStatus.style.color = '#2e7d32';
+        }
+
+        const cleanUrl = new URL(window.location.href);
+        cleanUrl.searchParams.delete('sent');
+        window.history.replaceState({}, '', cleanUrl.pathname + cleanUrl.search + cleanUrl.hash);
+    }
 
     /* CONTROLE DO VÍDEO DE FUNDO */
     const heroVideo = document.getElementById('hero-video');
