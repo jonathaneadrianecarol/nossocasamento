@@ -712,6 +712,28 @@ ul {
     font-size: 1.2rem;
 }
 
+.wedding-color-palette {
+    width: min(100%, 280px);
+    margin: 1.5rem auto;
+    text-align: center;
+}
+
+.wedding-color-palette img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(75, 57, 39, 0.12);
+}
+
+.wedding-color-palette figcaption {
+    margin-top: 0.65rem;
+    color: #6b625a;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+}
+
 .dress-code-card .dress-code-closing {
     margin-bottom: 0;
     color: var(--text-color);
