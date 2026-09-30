@@ -787,6 +787,172 @@ ul {
     background-image: radial-gradient(circle at 50% 0, rgba(212, 175, 55, 0.12), transparent 46%);
 }
 
+/* Fotos dos convidados */
+.photo-upload-section {
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 12% 18%, rgba(212, 175, 55, 0.16), transparent 30%),
+        radial-gradient(circle at 88% 82%, rgba(166, 93, 78, 0.12), transparent 32%),
+        #fffaf5;
+}
+
+.photo-upload-container {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+    align-items: center;
+    gap: clamp(3rem, 7vw, 7rem);
+    max-width: 1080px;
+}
+
+.photo-upload-copy {
+    max-width: 660px;
+}
+
+.photo-upload-title {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.photo-upload-title::after {
+    left: 0;
+    transform: none;
+}
+
+.photo-upload-intro {
+    color: #5f5750;
+    font-size: 1.12rem;
+    line-height: 1.8;
+}
+
+.photo-upload-steps {
+    display: grid;
+    gap: 0.85rem;
+    margin: 2rem 0;
+    padding: 0;
+    list-style: none;
+}
+
+.photo-upload-steps li {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    color: #504943;
+    line-height: 1.5;
+}
+
+.photo-upload-steps li span {
+    display: inline-grid;
+    flex: 0 0 2rem;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    border: 1px solid rgba(166, 93, 78, 0.4);
+    border-radius: 50%;
+    background: var(--white);
+    color: #87483d;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.photo-upload-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+}
+
+.photo-upload-button svg {
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.photo-upload-note {
+    margin-top: 0.9rem;
+    color: #756d66;
+    font-size: 0.84rem;
+    line-height: 1.5;
+}
+
+.photo-upload-qr-card {
+    justify-self: center;
+    width: min(100%, 360px);
+    padding: 1.35rem 1.35rem 1.6rem;
+    border: 1px solid rgba(166, 93, 78, 0.2);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 22px 55px rgba(97, 64, 52, 0.14);
+    text-align: center;
+}
+
+.photo-upload-qr-frame {
+    margin-bottom: 1rem;
+    padding: 0.6rem;
+    border-radius: 14px;
+    background: var(--white);
+}
+
+.photo-upload-qr-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.photo-upload-qr-card strong,
+.photo-upload-qr-card span {
+    display: block;
+}
+
+.photo-upload-qr-card strong {
+    margin-bottom: 0.25rem;
+    color: var(--heading-color);
+    font-family: var(--font-heading);
+    font-size: 1.18rem;
+}
+
+.photo-upload-qr-card span {
+    color: #756d66;
+    font-size: 0.92rem;
+}
+
+@media (max-width: 768px) {
+    .photo-upload-container {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: center;
+    }
+
+    .photo-upload-copy {
+        max-width: none;
+    }
+
+    .photo-upload-title {
+        text-align: center;
+    }
+
+    .photo-upload-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .photo-upload-steps {
+        max-width: 440px;
+        margin-right: auto;
+        margin-left: auto;
+        text-align: left;
+    }
+
+    .photo-upload-button {
+        width: 100%;
+        max-width: 360px;
+        padding-right: 1rem;
+        padding-left: 1rem;
+    }
+
+    .photo-upload-qr-card {
+        width: min(100%, 320px);
+    }
+}
+
 /* Quote Section */
 .quote-section {
     background-color: var(--primary-color);
