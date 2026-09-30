@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>Fotos do casamento | Jonathan &amp; Adriane</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --paper: #fffaf5;
+            --ink: #413b36;
+            --primary: #a65d4e;
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            width: 100%;
+            min-height: 100%;
+            margin: 0;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: Arial, sans-serif;
+        }
+
+        body { min-height: 100vh; }
+
+        .portal-shell {
+            display: grid;
+            min-height: 100vh;
+            grid-template-rows: auto minmax(720px, 1fr) auto;
+        }
+
+        .portal-bar {
+            display: flex;
+            min-height: 54px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: .7rem clamp(1rem, 4vw, 2.5rem);
+            border-bottom: 1px solid rgba(166, 93, 78, .16);
+            background: rgba(255, 255, 255, .94);
+        }
+
+        .brand {
+            font-family: Georgia, serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        .back-link {
+            color: var(--primary);
+            font-size: .88rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .portal-frame {
+            width: 100%;
+            min-height: 720px;
+            border: 0;
+            background: var(--paper);
+        }
+
+        .portal-help {
+            margin: 0;
+            padding: .8rem 1rem 1rem;
+            color: #746b64;
+            background: var(--paper);
+            font-size: .78rem;
+            text-align: center;
+        }
+
+        .portal-help a { color: var(--primary); }
+
+        @media (max-width: 600px) {
+            .portal-shell { grid-template-rows: auto minmax(760px, 1fr) auto; }
+            .portal-frame { min-height: 760px; }
+            .brand { font-size: .95rem; }
+        }
+    </style>
+</head>
+<body>
+    <main class="portal-shell">
+        <header class="portal-bar">
+            <span class="brand">Jonathan &amp; Adriane</span>
+            <a class="back-link" id="back-link" href="../index.html">Voltar ao site</a>
+        </header>
+
+        <iframe
+            class="portal-frame"
+            id="upload-portal"
+            title="Portal para enviar fotos e vídeos do casamento"
+            credentialless
+            referrerpolicy="no-referrer"
+            allow="clipboard-read; clipboard-write"
+        ></iframe>
+
+        <p class="portal-help" id="portal-help">
+            Se o portal não carregar, abra esta página em uma janela anônima.
+        </p>
+    </main>
+
+    <script>
+        const APP_URL = 'https://script.google.com/macros/s/AKfycbwvod0KVhyDXJ4BvCkZm0IuGs2ZI04WOBZ7rBfDHnCdKQFC9OaAfTk9ADAR83FcRn4l/exec';
+        const params = new URLSearchParams(window.location.search);
+        const language = params.get('lang') === 'es' ? 'es' : 'pt';
+        const frame = document.getElementById('upload-portal');
+        const backLink = document.getElementById('back-link');
+        const help = document.getElementById('portal-help');
+
+        document.documentElement.lang = language === 'es' ? 'es' : 'pt-BR';
+        document.title = language === 'es'
+            ? 'Fotos de la boda | Jonathan & Adriane'
+            : 'Fotos do casamento | Jonathan & Adriane';
+
+        backLink.href = language === 'es' ? '../es/index.html' : '../index.html';
+        backLink.textContent = language === 'es' ? 'Volver al sitio' : 'Voltar ao site';
+        help.textContent = language === 'es'
+            ? 'Si el portal no carga, abre esta página en una ventana privada.'
+            : 'Se o portal não carregar, abra esta página em uma janela anônima.';
+        frame.title = language === 'es'
+            ? 'Portal para subir fotos y videos de la boda'
+            : 'Portal para enviar fotos e vídeos do casamento';
+        frame.src = APP_URL + '?lang=' + language;
+    </script>
+</body>
+</html>
